@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Pallavi Singh - Life Coach & Storyteller</title>
+    <meta name="description" content="Meet Pallavi Singh, a life coach and mentor from Jaipur with over a decade of experience helping 500+ individuals transform their lives through coaching, storytelling, and mentorship.">
+    <meta name="author" content="Pallavi Singh">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="About Pallavi Singh - Life Coach & Storyteller" />
+    <meta property="og:description" content="Meet Pallavi Singh, a life coach and mentor from Jaipur with over a decade of experience helping 500+ individuals transform their lives." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="assets/images/pallavi-logo.png" />
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="About Pallavi Singh - Life Coach & Storyteller" />
+    <meta name="twitter:description" content="Meet Pallavi Singh, a life coach and mentor from Jaipur with over a decade of experience helping 500+ individuals transform their lives." />
+    <meta name="twitter:image" content="assets/images/pallavi-logo.png" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/images/pallavi-logo.png">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* About Page Specific Styles */
+        .about-hero {
+            background: linear-gradient(135deg, rgba(26, 83, 92, 0.9), rgba(168, 213, 186, 0.8));
+            color: white;
+            text-align: center;
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .about-hero::before {
+            display: none;
+        }
+        
+        .about-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+        
+        .about-hero-text {
+            flex: 1;
+            order: 2;
+        }
+        
+        .about-hero-image {
+            flex: 0 0 300px;
+            text-align: center;
+            order: 1;
+        }
+        
+        .about-hero h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .about-hero .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        
+        .about-hero .location {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            font-weight: 500;
+        }
+        
+        .hero-image-container {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 6px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            backdrop-filter: blur(10px);
+        }
+        
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .story-section {
+            padding: 80px 0;
+            background: rgba(255, 255, 255, 0.7);
+        }
+        
+        .story-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .story-block {
+            margin-bottom: 80px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            min-height: 300px;
+        }
+        
+        .story-block:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        .story-block::before {
+            display: none;
+        }
+        
+        .story-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #A8D5BA, #1A535C);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 10px 30px rgba(26, 83, 92, 0.2);
+        }
+        
+        .story-text {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(168, 213, 186, 0.2);
+            position: relative;
+        }
+        
+        .story-text::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: -10px;
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-right: 15px solid rgba(255, 255, 255, 0.9);
+        }
+        
+        .story-block:nth-child(even) .story-text::before {
+            left: auto;
+            right: -10px;
+            border-right: none;
+            border-left: 15px solid rgba(255, 255, 255, 0.9);
+        }
+        
+        .story-text h2 {
+            color: #1A535C;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+            position: relative;
+        }
+        
+        .story-text h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, #A8D5BA, #1A535C);
+            border-radius: 2px;
+        }
+        
+        .story-text p {
+            color: #2E2E2E;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+        
+        .story-text p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .story-text ul {
+            color: #2E2E2E;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            margin: 20px 0;
+            padding-left: 20px;
+        }
+        
+        .story-text li {
+            margin-bottom: 8px;
+        }
+        
+        .methods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .method-item {
+            background: #F8F9FA;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid #E9ECEF;
+            transition: all 0.3s ease;
+        }
+        
+        .method-item:hover {
+            border-color: #A8D5BA;
+            transform: translateY(-2px);
+        }
+        
+        .method-item i {
+            font-size: 2rem;
+            color: #1A535C;
+            margin-bottom: 10px;
+        }
+        
+        .method-item h4 {
+            color: #1A535C;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .stats-section {
+            background: linear-gradient(135deg, #1A535C 0%, #2C7A7B 25%, #A8D5BA 75%, #1A535C 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stats-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 60%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+            z-index: 1;
+        }
+        
+        .stats-section::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: rotate 20s linear infinite;
+            z-index: 1;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .stat-item {
+            text-align: center;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+            padding: 35px 20px;
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: slideInUp 0.8s ease-out forwards;
+        }
+        
+        @keyframes slideInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .stat-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .stat-item:hover::before {
+            left: 100%;
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-15px) scale(1.05);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.1));
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.2),
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+        
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+            display: block;
+            background: linear-gradient(135deg, #ffffff, #f0f8ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+            position: relative;
+            z-index: 3;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            letter-spacing: 0.3px;
+            position: relative;
+            z-index: 3;
+        }
+        
+        .stat-item:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+        
+        .stat-item:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .stat-item:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+        
+        .stat-item:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+        
+        .cta-section {
+            background: rgba(248, 249, 250, 0.7);
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .cta-content {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .cta-content h2 {
+            color: #1A535C;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .cta-content p {
+            color: #666;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        @media (max-width: 768px) {
+            .about-hero-content {
+                flex-direction: column;
+                gap: 40px;
+                text-align: center;
+            }
+            
+            .about-hero-image {
+                flex: none;
+            }
+            
+            .hero-image-container {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .about-hero h1 {
+                font-size: 3rem;
+            }
+            
+            .about-hero .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .story-block {
+                flex-direction: column !important;
+                gap: 30px;
+                margin-bottom: 50px;
+                min-height: auto;
+            }
+            
+            .story-block::before {
+                display: none;
+            }
+            
+            .story-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+            
+            .story-text {
+                padding: 30px 20px;
+            }
+            
+            .story-text::before {
+                display: none;
+            }
+            
+            .story-text h2 {
+                font-size: 1.5rem;
+            }
+            
+            .story-text p {
+                font-size: 1rem;
+            }
+            
+            .methods-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .about-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-image-container {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="assets/images/pallavi-logo.png" alt="Pallavi Singh" class="logo-image">
+                <h2 class="logo-text">Pallavi Singh</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link active">About Pallavi</a></li>
+                <li class="nav-dropdown">
+                    <a href="#services" class="nav-link dropdown-toggle">Mentorship <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="coaching-mentoring.html" class="dropdown-item">Coaching & Mentoring</a></li>
+                        <li><a href="habit-mastery.html" class="dropdown-item">Habit Mastery</a></li>
+                        <li><a href="overcome-anxiety.html" class="dropdown-item">Overcome Anxiety</a></li>
+                        <li><a href="relationship-mentoring.html" class="dropdown-item">Relationship Mentoring</a></li>
+                        <li><a href="storytelling.html" class="dropdown-item">Storytelling</a></li>
+                        <li><a href="public-speaking.html" class="dropdown-item">Public Speaking</a></li>
+                    </ul>
+                </li>
+                <li><a href="story-tree-community.html" class="nav-link">The Story Tree</a></li>
+                <li><a href="wisdom-vault.html" class="nav-link">Wisdom Vault</a></li>
+                <li><a href="collaborate.html" class="nav-link">Collaborate</a></li>
+                <li><a href="connect.html" class="nav-link">Connect</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- About Hero Section -->
+    <section class="dedicated-hero">
+        <div class="dedicated-hero-content">
+            <h1>About Pallavi Singh</h1>
+            <p class="hero-subtitle">Life Coach & Mentor from Jaipur, India<br>Transforming lives through the power of storytelling and personalized guidance</p>
+            <div class="hero-buttons">
+                <a href="#story" class="btn btn-primary">Read My Story</a>
+                <a href="#contact" class="btn btn-secondary">Connect With Me</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Sections -->
+    <section class="story-section">
+        <div class="story-content">
+            <!-- Who I Am -->
+            <div class="story-block">
+                <div class="story-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="story-text">
+                    <h2>Who I Am</h2>
+                    <p>I'm Pallavi Singh, a life coach and mentor based in Jaipur. For me, coaching isn't just a profession—it is a purpose, a calling, and a way of life.</p>
+                </div>
+            </div>
+
+            <!-- From Struggles to Strength -->
+            <div class="story-block">
+                <div class="story-icon">
+                    <i class="fas fa-link"></i>
+                </div>
+                <div class="story-text">
+                    <h2>From Struggles to Strength</h2>
+                    <p>Like many, my journey didn't begin with clarity—it began with struggle. I've known the weight of anxiety, the silence of self-doubt, and the challenges of relationships that sometimes leave us questioning our worth. I know what it feels like to stand at life's crossroads, uncertain of which path to choose, hoping for a guiding light.</p>
+                    <p><strong>But what I discovered changed everything: transformation begins within.</strong></p>
+                </div>
+            </div>
+
+            <!-- My Turning Point -->
+            <div class="story-block">
+                <div class="story-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="story-text">
+                    <h2>My Turning Point</h2>
+                    <p>No external achievement, no validation, no circumstance can define us unless we allow it. It is our inner strength, our resilience, and our habits that carve the life we dream of. That realization became the turning point of my story—and the reason I chose to dedicate my life to guiding others through theirs.</p>
+                </div>
+            </div>
+
+            <!-- A Decade of Impact -->
+            <div class="story-block">
+                <div class="story-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="story-text">
+                    <h2>A Decade of Impact</h2>
+                    <p>For more than a decade, I have had the honor of walking alongside people in their journeys—over 500 individuals who dared to rewrite their stories and reclaim their lives. Some came to me with overwhelming fears, others with dreams they didn't know how to chase. Together, we uncovered their strengths, dissolved limiting beliefs, and built practices that allowed them to step into their most authentic selves.</p>
+                </div>
+            </div>
+
+            <!-- My Coaching Approach -->
+            <div class="story-block">
+                <div class="story-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <div class="story-text">
+                    <h2>My Coaching Approach</h2>
+                    <p>My coaching is rooted in compassion and practicality. I believe in listening deeply, understanding the unspoken, and offering guidance that is not only inspiring but also actionable.</p>
+                    <p><strong>My methods weave together:</strong></p>
+                    <div class="methods-grid">
+                        <div class="method-item">
+                            <i class="fas fa-brain"></i>
+                            <h4>Mindset Transformation</h4>
+                        </div>
+                        <div class="method-item">
+                            <i class="fas fa-repeat"></i>
+                            <h4>Habit Mastery</h4>
+                        </div>
+                        <div class="method-item">
+                            <i class="fas fa-heart"></i>
+                            <h4>Relationship Mentoring</h4>
+                        </div>
+                        <div class="method-item">
+                            <i class="fas fa-flask"></i>
+                            <h4>Science-backed Growth</h4>
+                        </div>
+                    </div>
+                    <p>So that every individual walks away with clarity, courage, and the tools they need to move forward.</p>
+                </div>
+            </div>
+
+            <!-- My Mission & Vision -->
+            <div class="story-block">
+                <div class="story-icon">
+                    <i class="fas fa-bullseye"></i>
+                </div>
+                <div class="story-text">
+                    <h2>My Mission & Vision</h2>
+                    <p><strong>My mission is clear and profound:</strong></p>
+                    <ul>
+                        <li>To help people rediscover the power that already lives within them.</li>
+                        <li>To heal the invisible wounds of the past.</li>
+                        <li>To empower them to unlock their fullest potential and live with purpose.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Beyond Coaching -->
+            <div class="story-block">
+                <div class="story-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <div class="story-text">
+                    <h2>Beyond Coaching</h2>
+                    <p>But who I am extends beyond coaching sessions. I am a seeker of stories, a believer in human resilience, and someone who finds beauty in life's simple moments.</p>
+                    <p>I cherish the quiet wisdom of books, the grounding calm of reflection, and the magic of conversations where souls connect. I hold on to one truth deeply: even the smallest moments can carry the greatest lessons.</p>
+                </div>
+            </div>
+
+            <!-- A Gentle Reminder -->
+            <div class="story-block">
+                <div class="story-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <div class="story-text">
+                    <h2>A Gentle Reminder</h2>
+                    <p style="font-size: 1.3rem; font-weight: 500; color: #1A535C; text-align: center; font-style: italic;">"You are not defined by your struggles; you are shaped by how you rise from them."</p>
+                </div>
+            </div>
+
+            <!-- Let's Begin the Journey -->
+            <div class="story-block">
+                <div class="story-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <div class="story-text">
+                    <h2>Let's Begin the Journey</h2>
+                    <p>If you're ready to break free from what holds you back and step into your truest, strongest, and most authentic self, I invite you to begin this journey with me. Together, we won't just shape your path—we'll shape your story.</p>
+                    <p style="text-align: center; font-size: 1.2rem; font-weight: 600; color: #1A535C; margin-top: 30px;">Let's begin.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <span class="stat-number">500+</span>
+                <span class="stat-label">Lives Transformed</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">10+</span>
+                <span class="stat-label">Years Experience</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">95%</span>
+                <span class="stat-label">Success Rate</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">Jaipur</span>
+                <span class="stat-label">Based in India</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Ready to Start Your Journey?</h2>
+            <p>Let's work together to transform your life and create the story you've always dreamed of.</p>
+            <div class="cta-buttons">
+                <a href="connect.html" class="btn btn-primary">Connect With Me</a>
+                <a href="coaching-mentoring.html" class="btn btn-secondary">Explore Services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="assets/images/pallavi-logo.png" alt="Pallavi Singh" class="logo-image">
+                        <h3 class="logo-text">Pallavi Singh</h3>
+                    </div>
+                    <p>Transforming lives through the power of storytelling and coaching.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Pallavi</a></li>
+                        <li><a href="coaching-mentoring.html">Coaching & Mentoring</a></li>
+                        <li><a href="connect.html">Connect</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Mentorship</h4>
+                    <ul>
+                        <li><a href="coaching-mentoring.html">Coaching & Mentoring</a></li>
+                        <li><a href="habit-mastery.html">Habit Mastery</a></li>
+                        <li><a href="overcome-anxiety.html">Overcome Anxiety</a></li>
+                        <li><a href="relationship-mentoring.html">Relationship Mentoring</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Pallavi Singh. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habit Mastery | Pallavi Singh - Life Coach & Storyteller</title>
+    <meta name="description" content="Master your habits and create lasting positive change with Pallavi Singh's proven habit transformation system. Build positive habits that stick and transform your life.">
+    <meta name="author" content="Pallavi Singh">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Habit Mastery | Pallavi Singh - Life Coach" />
+    <meta property="og:description" content="Master your habits and create lasting positive change with Pallavi Singh's proven habit transformation system." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="assets/images/pallavi-logo.png" />
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Habit Mastery | Pallavi Singh - Life Coach" />
+    <meta name="twitter:description" content="Master your habits and create lasting positive change with Pallavi Singh's proven habit transformation system." />
+    <meta name="twitter:image" content="assets/images/pallavi-logo.png" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/images/pallavi-logo.png">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* Service Page Specific Styles */
+        .service-hero {
+            background: linear-gradient(135deg, rgba(26, 83, 92, 0.9), rgba(168, 213, 186, 0.8));
+            color: white;
+            text-align: center;
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('./assets/images/img.png') center/cover;
+            opacity: 0.1;
+            z-index: 1;
+        }
+        
+        .service-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .service-hero h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .service-hero .hero-subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        
+        .service-overview {
+            padding: 80px 0;
+            background: rgba(255, 255, 255, 0.7);
+        }
+        
+        .service-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .service-text h2 {
+            color: #1A535C;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .service-text p {
+            color: #2E2E2E;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .service-text h3 {
+            color: #1A535C;
+            font-size: 1.8rem;
+            margin: 40px 0 30px 0;
+            text-align: center;
+        }
+        
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .step {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(168, 213, 186, 0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .step:hover {
+            transform: translateY(-5px);
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #A8D5BA, #1A535C);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 20px;
+        }
+        
+        .step h4 {
+            color: #1A535C;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+        
+        .step p {
+            color: #666;
+            line-height: 1.6;
+            text-align: center;
+        }
+        
+        .benefits-section {
+            padding: 80px 0;
+            background: rgba(248, 249, 250, 0.7);
+        }
+        
+        .benefits-section h2 {
+            color: #1A535C;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .benefit-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(168, 213, 186, 0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .benefit-card i {
+            font-size: 3rem;
+            color: #1A535C;
+            margin-bottom: 20px;
+        }
+        
+        .benefit-card h3 {
+            color: #1A535C;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+        
+        .benefit-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .packages-section {
+            padding: 80px 0;
+            background: rgba(255, 255, 255, 0.7);
+        }
+        
+        .packages-section h2 {
+            color: #1A535C;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .package-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(168, 213, 186, 0.2);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        
+        .package-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .package-card.featured {
+            border: 3px solid #A8D5BA;
+            transform: scale(1.05);
+        }
+        
+        .featured-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #A8D5BA, #1A535C);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .package-card h3 {
+            color: #1A535C;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        
+        
+        .package-card ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 30px;
+        }
+        
+        .package-card li {
+            padding: 10px 0;
+            color: #666;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .package-card li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #A8D5BA;
+            font-weight: bold;
+        }
+        
+        .testimonials-section {
+            padding: 80px 0;
+            background: rgba(248, 249, 250, 0.7);
+        }
+        
+        .testimonials-section h2 {
+            color: #1A535C;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .testimonial-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(168, 213, 186, 0.2);
+        }
+        
+        .testimonial-content p {
+            color: #2E2E2E;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        
+        .client-info h4 {
+            color: #1A535C;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        .client-info span {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .contact-section {
+            padding: 80px 0;
+            background: rgba(255, 255, 255, 0.7);
+        }
+        
+        .contact-section h2 {
+            color: #1A535C;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .contact-section > p {
+            color: #666;
+            text-align: center;
+            font-size: 1.2rem;
+            margin-bottom: 50px;
+        }
+        
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .contact-form {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #1A535C;
+            font-weight: 600;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #E9ECEF;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #A8D5BA;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .contact-item i {
+            font-size: 1.5rem;
+            color: #1A535C;
+            width: 30px;
+        }
+        
+        .contact-item h3 {
+            color: #1A535C;
+            margin-bottom: 5px;
+        }
+        
+        /* Enhanced Button Styles */
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            border-radius: 35px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.4s ease;
+            border: 3px solid transparent;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #1A535C, #2C7A7B, #A8D5BA);
+            color: white;
+            box-shadow: 0 6px 20px rgba(26, 83, 92, 0.4), 0 0 30px rgba(26, 83, 92, 0.2);
+            border: 3px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(26, 83, 92, 0.5), 0 0 50px rgba(26, 83, 92, 0.3);
+            background: linear-gradient(135deg, #2C7A7B, #1A535C, #2C7A7B);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #A8D5BA, #2C7A7B);
+            color: white;
+            box-shadow: 0 6px 20px rgba(168, 213, 186, 0.4), 0 0 30px rgba(168, 213, 186, 0.2);
+            border: 3px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(168, 213, 186, 0.5), 0 0 50px rgba(168, 213, 186, 0.3);
+            background: linear-gradient(135deg, #2C7A7B, #A8D5BA, #2C7A7B);
+        }
+        
+        .btn-outline {
+            background: linear-gradient(135deg, rgba(26, 83, 92, 0.1), rgba(168, 213, 186, 0.1));
+            color: #1A535C;
+            border: 3px solid #1A535C;
+            box-shadow: 0 4px 15px rgba(26, 83, 92, 0.2);
+        }
+        
+        .btn-outline:hover {
+            background: linear-gradient(135deg, #1A535C, #2C7A7B);
+            color: white;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(26, 83, 92, 0.4);
+            border-color: #A8D5BA;
+        }
+        
+        .contact-item p {
+            color: #666;
+        }
+        
+        @media (max-width: 768px) {
+            .service-hero h1 {
+                font-size: 3rem;
+            }
+            
+            .service-hero .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .process-steps,
+            .benefits-grid,
+            .packages-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .package-card.featured {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="assets/images/pallavi-logo.png" alt="Pallavi Singh" class="logo-image">
+                <h2 class="logo-text">Pallavi Singh</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link">About Pallavi</a></li>
+                <li class="nav-dropdown">
+                    <a href="#services" class="nav-link dropdown-toggle">Mentorship <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="coaching-mentoring.html" class="dropdown-item">Coaching & Mentoring</a></li>
+                        <li><a href="habit-mastery.html" class="dropdown-item active">Habit Mastery</a></li>
+                        <li><a href="overcome-anxiety.html" class="dropdown-item">Overcome Anxiety</a></li>
+                        <li><a href="relationship-mentoring.html" class="dropdown-item">Relationship Mentoring</a></li>
+                        <li><a href="storytelling.html" class="dropdown-item">Storytelling</a></li>
+                        <li><a href="public-speaking.html" class="dropdown-item">Public Speaking</a></li>
+                    </ul>
+                </li>
+                <li><a href="story-tree-community.html" class="nav-link">The Story Tree</a></li>
+                <li><a href="wisdom-vault.html" class="nav-link">Wisdom Vault</a></li>
+                <li><a href="collaborate.html" class="nav-link">Collaborate</a></li>
+                <li><a href="connect.html" class="nav-link">Connect</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="dedicated-hero">
+        <div class="dedicated-hero-content">
+            <h1>Master Your Habits, Master Your Life</h1>
+            <p class="hero-subtitle">Break free from negative patterns and build empowering routines that lead to lasting success and growth.</p>
+            <div class="hero-buttons">
+                <a href="connect.html" class="btn btn-primary">Start Your Journey</a>
+                <a href="#learn-more" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Overview -->
+    <section id="learn-more" class="service-overview">
+        <div class="container">
+            <div class="service-content">
+                <div class="service-text">
+                    <h2>What is Habit Mastery?</h2>
+                    <p>Habit Mastery is a comprehensive system designed to help you break free from limiting patterns and create positive habits that support your transformation journey. Through proven techniques and personalized guidance, you'll learn how to build habits that stick and create lasting change in your life.</p>
+                    
+                    <h3>The Habit Mastery Process</h3>
+                    <div class="process-steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <h4>Habit Audit</h4>
+                            <p>Identify current habits and understand their impact on your life.</p>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <h4>Goal Setting</h4>
+                            <p>Define clear, achievable goals and the habits needed to reach them.</p>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <h4>Habit Design</h4>
+                            <p>Create personalized habit systems that work for your lifestyle.</p>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <h4>Implementation & Support</h4>
+                            <p>Build your new habits with ongoing support and accountability.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits-section">
+        <div class="container">
+            <h2>What You'll Achieve</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <i class="fas fa-brain"></i>
+                    <h3>Mental Clarity</h3>
+                    <p>Clear your mind and focus on what truly matters to you.</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="fas fa-dumbbell"></i>
+                    <h3>Physical Wellness</h3>
+                    <p>Build healthy habits for your body and overall well-being.</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="fas fa-clock"></i>
+                    <h3>Time Management</h3>
+                    <p>Master your time and create space for what's important.</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Productivity Boost</h3>
+                    <p>Increase your efficiency and achieve more with less effort.</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Stress Reduction</h3>
+                    <p>Reduce stress through consistent, positive daily routines.</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="fas fa-star"></i>
+                    <h3>Confidence Building</h3>
+                    <p>Build confidence through consistent action and progress.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Packages Section -->
+    <section class="packages-section">
+        <div class="container">
+            <h2>Habit Mastery Programs</h2>
+            <div class="packages-grid">
+                <div class="package-card">
+                    <h3>Habit Assessment</h3>
+                    <ul>
+                        <li>30-minute habit audit</li>
+                        <li>Current habit analysis</li>
+                        <li>Goal identification</li>
+                        <li>Next steps roadmap</li>
+                    </ul>
+                    <a href="connect.html" class="btn btn-outline">Get Started</a>
+                </div>
+                <div class="package-card featured">
+                    <div class="featured-badge">Most Popular</div>
+                    <h3>21-Day Habit Challenge</h3>
+                    <ul>
+                        <li>21-day habit building program</li>
+                        <li>Daily accountability check-ins</li>
+                        <li>Habit tracking tools</li>
+                        <li>Weekly group sessions</li>
+                        <li>Resource library access</li>
+                    </ul>
+                    <a href="connect.html" class="btn btn-primary">Join Challenge</a>
+                </div>
+                <div class="package-card">
+                    <h3>90-Day Transformation</h3>
+                    <ul>
+                        <li>90-day comprehensive program</li>
+                        <li>Multiple habit systems</li>
+                        <li>1-on-1 coaching sessions</li>
+                        <li>Progress tracking & reviews</li>
+                        <li>Lifetime habit tools</li>
+                        <li>Community support</li>
+                    </ul>
+                    <a href="connect.html" class="btn btn-outline">Transform Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="container">
+            <h2>Success Stories</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"Pallavi's habit mastery program helped me build a morning routine that changed my entire day. I'm more productive and happier than ever."</p>
+                        <div class="client-info">
+                            <h4>Meera Kapoor</h4>
+                            <span>Software Developer</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"I struggled with consistency for years. Through the 21-day challenge, I finally built the habits I needed to achieve my goals."</p>
+                        <div class="client-info">
+                            <h4>Arjun Singh</h4>
+                            <span>Fitness Trainer</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"The habit mastery system is life-changing. I went from chaotic days to a structured routine that supports my success."</p>
+                        <div class="client-info">
+                            <h4>Kavya Reddy</h4>
+                            <span>Business Owner</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2>Ready to Master Your Habits?</h2>
+            <p>Start your habit transformation journey today with a free assessment session.</p>
+            <div class="contact-content">
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">What habits would you like to work on?</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Book Free Assessment</button>
+                    </form>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h3>Email</h3>
+                            <p>pallavi@thestorytree.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="assets/images/pallavi-logo.png" alt="Pallavi Singh" class="logo-image">
+                        <h3 class="logo-text">Pallavi Singh</h3>
+                    </div>
+                    <p>Transforming lives through the power of storytelling and coaching.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Pallavi</a></li>
+                        <li><a href="coaching-mentoring.html">Coaching & Mentoring</a></li>
+                        <li><a href="connect.html">Connect</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Mentorship</h4>
+                    <ul>
+                        <li><a href="coaching-mentoring.html">Coaching & Mentoring</a></li>
+                        <li><a href="habit-mastery.html">Habit Mastery</a></li>
+                        <li><a href="overcome-anxiety.html">Overcome Anxiety</a></li>
+                        <li><a href="relationship-mentoring.html">Relationship Mentoring</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Pallavi Singh. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
