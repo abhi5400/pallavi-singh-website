@@ -90,6 +90,235 @@ html {
     transform: translateX(3px);
 }
 
+/* Coming Soon Page Styles */
+.coming-soon-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(26, 83, 92, 0.9), rgba(168, 213, 186, 0.8));
+    position: relative;
+    overflow: visible;
+    padding: 40px 0;
+}
+
+.coming-soon-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("./assets/images/img.png") repeat;
+    background-size: 200px 200px;
+    background-position: center;
+    opacity: 0.05;
+    z-index: 1;
+}
+
+.coming-soon-content {
+    text-align: center;
+    max-width: 800px;
+    padding: 60px 20px;
+    position: relative;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+}
+
+.coming-soon-icon {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, #A8D5BA, #1A535C);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 30px;
+    font-size: 3rem;
+    color: white;
+    box-shadow: 0 15px 40px rgba(26, 83, 92, 0.3);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 15px 40px rgba(26, 83, 92, 0.3);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 20px 50px rgba(26, 83, 92, 0.4);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 15px 40px rgba(26, 83, 92, 0.3);
+    }
+}
+
+.coming-soon-content h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3.5rem;
+    color: #1A535C;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.coming-soon-content h2 {
+    font-size: 2.5rem;
+    color: #2E2E2E;
+    margin-bottom: 30px;
+    font-weight: 500;
+}
+
+.coming-soon-description {
+    font-size: 1.3rem;
+    color: #2E2E2E;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+
+.coming-soon-subtitle {
+    font-size: 1.1rem;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    font-style: italic;
+}
+
+.coming-soon-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    margin: 40px 0;
+    padding: 30px 0;
+}
+
+.feature-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+    background: rgba(168, 213, 186, 0.1);
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.feature-item:hover {
+    background: rgba(168, 213, 186, 0.2);
+    border-color: #A8D5BA;
+    transform: translateY(-5px);
+}
+
+.feature-item i {
+    font-size: 2.5rem;
+    color: #1A535C;
+    margin-bottom: 10px;
+}
+
+.feature-item span {
+    font-size: 1.1rem;
+    color: #2E2E2E;
+    font-weight: 500;
+}
+
+.coming-soon-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin: 40px 0;
+    flex-wrap: wrap;
+    z-index: 3;
+    position: relative;
+}
+
+.coming-soon-note {
+    margin-top: 40px;
+    padding: 20px;
+    background: rgba(26, 83, 92, 0.1);
+    border-radius: 10px;
+    border-left: 4px solid #1A535C;
+    z-index: 3;
+    position: relative;
+}
+
+.coming-soon-note p {
+    color: #1A535C;
+    font-size: 1rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.coming-soon-note i {
+    font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+    .coming-soon-content {
+        padding: 40px 20px;
+        margin: 20px;
+    }
+    
+    .coming-soon-icon {
+        width: 100px;
+        height: 100px;
+        font-size: 2.5rem;
+    }
+    
+    .coming-soon-content h1 {
+        font-size: 2.8rem;
+    }
+    
+    .coming-soon-content h2 {
+        font-size: 2rem;
+    }
+    
+    .coming-soon-description {
+        font-size: 1.1rem;
+    }
+    
+    .coming-soon-features {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .coming-soon-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .coming-soon-features {
+        grid-template-columns: 1fr;
+    }
+    
+    .coming-soon-content h1 {
+        font-size: 2.2rem;
+    }
+    
+    .coming-soon-content h2 {
+        font-size: 1.6rem;
+    }
+}
+
+/* Ensure footer is visible on coming soon page */
+body:has(.coming-soon-section) .footer {
+    position: relative;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+}
+
 /* Ensure sections take full viewport height */
 .page-section .container {
     width: 100%;
@@ -442,6 +671,34 @@ html {
     min-height: 100vh;
 }
 
+/* Hero Video Background */
+.hero-video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.hero-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.hero-video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: 2;
+}
+
 /* Animated gradient background */
 .hero::before {
     content: '';
@@ -450,8 +707,8 @@ html {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(168, 213, 186, 0.5) 0%, rgba(26, 83, 92, 0.5) 100%);
-    animation: gradientShift 15s ease-in-out infinite;
+    background: transparent;
+    z-index: 3;
 }
 
 /* Floating particles background */
@@ -462,12 +719,8 @@ html {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: 
-        radial-gradient(circle at 20% 20%, rgba(168, 213, 186, 0.3) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(26, 83, 92, 0.3) 0%, transparent 50%),
-        radial-gradient(circle at 40% 60%, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
-    animation: floatingParticles 20s ease-in-out infinite;
-    z-index: 1;
+    background: transparent;
+    z-index: 4;
 }
 
 /* Subtle gradient animation keyframes */
@@ -497,14 +750,14 @@ html {
     max-width: 800px;
     margin: 0 auto;
     position: relative;
-    z-index: 2;
+    z-index: 5;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    min-height: 60vh;
+    justify-content: flex-end;
+    min-height: 80vh;
     width: 100%;
-    padding: 30px 0 20px 0;
+    padding: 30px 0 100px 0;
 }
 
 .hero-title {
@@ -518,7 +771,7 @@ html {
     width: 100%;
     margin-top: 10px;
     position: relative;
-    z-index: 3;
+    z-index: 6;
 }
 
 /* Animated text reveals for title lines */
@@ -646,7 +899,7 @@ html {
     transform: translateY(30px);
     animation: fadeInUp 1s ease-out 1.4s forwards;
     position: relative;
-    z-index: 3;
+    z-index: 6;
 }
 
 .hero-buttons {
@@ -665,7 +918,7 @@ html {
     transform: translateY(30px);
     animation: fadeInUp 1s ease-out 1.7s forwards;
     position: relative;
-    z-index: 3;
+    z-index: 6;
 }
 
 .hero-visual {
@@ -678,7 +931,7 @@ html {
     transform: scale(0.8) translateY(30px);
     animation: fadeInScale 1s ease-out 2s forwards;
     position: relative;
-    z-index: 3;
+    z-index: 6;
 }
 
 .hero-image-container {
@@ -723,7 +976,7 @@ html {
     right: 0;
     bottom: 0;
     pointer-events: none;
-    z-index: 2;
+    z-index: 7;
     overflow: hidden;
 }
 
@@ -6825,4 +7078,32 @@ html {
     #bookNowPopup .popup-form-container {
         max-height: 98vh;
     }
+}
+
+/* Scroll Indicator Styles */
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 8;
+}
+
+.scroll-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.scroll-dot:hover,
+.scroll-dot.active {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(255, 255, 255, 0.9);
+    transform: scale(1.2);
 }

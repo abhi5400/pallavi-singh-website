@@ -62,8 +62,18 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero Section with Video Background -->
     <section id="hero" class="hero page-section">
+        <!-- Video Background -->
+        <div class="hero-video-container">
+            <video class="hero-video" autoplay muted loop playsinline>
+                <source src="assets/images/hero_video.mp4" type="video/mp4">
+                <!-- Fallback for browsers that don't support video -->
+                Your browser does not support the video tag.
+            </video>
+            <div class="hero-video-overlay"></div>
+        </div>
+        
         <!-- Floating Elements -->
         <div class="hero-floating-elements">
             <div class="floating-element"></div>
@@ -86,20 +96,6 @@
                     <a href="#about" class="btn btn-secondary">Learn More</a>
                 </div>
             </div>
-            <div class="hero-visual">
-                <div class="hero-image-container">
-                    <img src="assets/images/pallavi-logo.png" alt="Pallavi Singh" class="hero-image">
-                </div>
-            </div>
-        </div>
-        <div class="scroll-indicator">
-            <div class="scroll-dot active" data-section="hero"></div>
-            <div class="scroll-dot" data-section="about"></div>
-            <div class="scroll-dot" data-section="services"></div>
-            <div class="scroll-dot" data-section="community"></div>
-            <div class="scroll-dot" data-section="blog"></div>
-            <div class="scroll-dot" data-section="events"></div>
-            <div class="scroll-dot" data-section="contact"></div>
         </div>
     </section>
 
