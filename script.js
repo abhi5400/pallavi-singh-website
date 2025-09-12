@@ -48,6 +48,38 @@ document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', 
     navMenu.classList.remove('active');
 }));
 
+// Service Card Flip Functionality
+function flipCard(card) {
+    card.classList.toggle('flipped');
+    if (navigator.vibrate) {
+        navigator.vibrate(50);
+    }
+}
+
+// Service Card Animation Observer
+function observeServiceCards() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animationDelay = `${Math.random() * 0.5}s`;
+                entry.target.style.animationPlayState = 'running';
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+
+    document.querySelectorAll('.service-card').forEach(card => {
+        observer.observe(card);
+    });
+}
+
+// Initialize service card animations when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    observeServiceCards();
+});
+
 // FAQ Accordion Functionality
 document.addEventListener('DOMContentLoaded', function() {
     const faqItems = document.querySelectorAll('.faq-item');

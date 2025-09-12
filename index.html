@@ -64,12 +64,21 @@
 
     <!-- Hero Section -->
     <section id="hero" class="hero page-section">
+        <!-- Floating Elements -->
+        <div class="hero-floating-elements">
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+        </div>
+        
         <div class="container">
             <div class="hero-content">
                 <h1 class="hero-title">
                     <span class="title-line">Transform Your Life</span>
                     <span class="title-line">Through the Power of</span>
-                    <span class="title-accent">Storytelling & Coaching</span>
+                    <span class="title-line title-accent">Storytelling & Coaching</span>
                 </h1>
                 <p class="hero-subtitle">Discover your authentic voice, overcome obstacles, and create lasting change with personalized guidance from Pallavi Singh.</p>
                 <div class="hero-buttons">
@@ -106,11 +115,14 @@
             </div>
             <div class="about-content">
                 <div class="about-text">
-                    <h3>Who I Am</h3>
-                    <p>I'm Pallavi Singh, a certified life coach and storyteller passionate about helping people discover their authentic voice and create meaningful change in their lives. With years of experience in coaching, mentoring, and storytelling, I've helped hundreds of individuals overcome obstacles and achieve their goals.</p>
+                    <h3>✨ About Me ✨</h3>
+                    <p>Khamagani! From the vibrant Pink City of Jaipur, where heritage and colours breathe life into everyday stories, I'm Pallavi — a banker turned hotelier, and today, a coach by calling.</p>
                     
-                    <h3>My Approach</h3>
-                    <p>I believe that every person has a unique story worth telling and the power to transform their life. Through personalized coaching sessions, storytelling workshops, and mentorship programs, I help you uncover your strengths, overcome limiting beliefs, and create the life you truly desire.</p>
+                    <p>My journey with coaching didn't begin in a seminar hall. It began with my natural curiosity about people and their stories — the why behind habits, relationships, and human behaviour. Through my years as a banker and later as a hotelier, one thread remained constant: training and coaching, where I discovered the joy of helping people grow.</p>
+                    
+                    <div class="read-more-container">
+                        <a href="about.html" class="btn btn-outline read-more-btn">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
                     
                     <div class="about-stats">
                         <div class="stat">
@@ -145,53 +157,190 @@
                 <p>Comprehensive coaching and mentoring programs designed for your unique journey</p>
             </div>
             <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-users"></i>
+                <div class="service-card" onclick="flipCard(this)">
+                    <div class="service-card-front">
+                        <div class="service-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Coaching & Mentoring</h3>
+                        <p>Personalized one-on-one coaching sessions to help you overcome challenges and achieve your goals.</p>
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div class="progress-fill"></div>
+                            </div>
+                            <div class="progress-text">Success Rate: 95%</div>
+                        </div>
+                        <a href="coaching-mentoring.html" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
                     </div>
-                    <h3>Coaching & Mentoring</h3>
-                    <p>Personalized one-on-one coaching sessions to help you overcome challenges and achieve your goals.</p>
-                    <a href="coaching-mentoring.html" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    <div class="service-card-back">
+                        <div class="service-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Coaching & Mentoring</h3>
+                        <p>Transform your life with personalized guidance and support.</p>
+                        <ul class="service-features">
+                            <li>One-on-one sessions</li>
+                            <li>Goal setting & planning</li>
+                            <li>Accountability support</li>
+                            <li>Progress tracking</li>
+                        </ul>
+                        <a href="coaching-mentoring.html" class="service-link">Get Started <i class="fas fa-arrow-right"></i></a>
+                    </div>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-repeat"></i>
+                
+                <div class="service-card" onclick="flipCard(this)">
+                    <div class="service-card-front">
+                        <div class="service-icon">
+                            <i class="fas fa-repeat"></i>
+                        </div>
+                        <h3>Habit Mastery</h3>
+                        <p>Build positive habits and break negative patterns to create lasting behavioral change.</p>
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div class="progress-fill"></div>
+                            </div>
+                            <div class="progress-text">Habit Success: 90%</div>
+                        </div>
+                        <a href="habit-mastery.html" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
                     </div>
-                    <h3>Habit Mastery</h3>
-                    <p>Build positive habits and break negative patterns to create lasting behavioral change.</p>
-                    <a href="habit-mastery.html" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    <div class="service-card-back">
+                        <div class="service-icon">
+                            <i class="fas fa-repeat"></i>
+                        </div>
+                        <h3>Habit Mastery</h3>
+                        <p>Create lasting change through proven habit formation techniques.</p>
+                        <ul class="service-features">
+                            <li>Habit formation strategies</li>
+                            <li>Behavioral change plans</li>
+                            <li>Daily tracking systems</li>
+                            <li>Motivation techniques</li>
+                        </ul>
+                        <a href="habit-mastery.html" class="service-link">Get Started <i class="fas fa-arrow-right"></i></a>
+                    </div>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-heart"></i>
+                
+                <div class="service-card" onclick="flipCard(this)">
+                    <div class="service-card-front">
+                        <div class="service-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3>Overcome Anxiety</h3>
+                        <p>Learn effective techniques to manage anxiety and build emotional resilience.</p>
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div class="progress-fill"></div>
+                            </div>
+                            <div class="progress-text">Anxiety Reduction: 88%</div>
+                        </div>
+                        <a href="overcome-anxiety.html" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
                     </div>
-                    <h3>Overcome Anxiety</h3>
-                    <p>Learn effective techniques to manage anxiety and build emotional resilience.</p>
-                    <a href="overcome-anxiety.html" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    <div class="service-card-back">
+                        <div class="service-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3>Overcome Anxiety</h3>
+                        <p>Find peace and build resilience with proven anxiety management techniques.</p>
+                        <ul class="service-features">
+                            <li>Breathing techniques</li>
+                            <li>Mindfulness practices</li>
+                            <li>Cognitive restructuring</li>
+                            <li>Stress management tools</li>
+                        </ul>
+                        <a href="overcome-anxiety.html" class="service-link">Get Started <i class="fas fa-arrow-right"></i></a>
+                    </div>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-handshake"></i>
+                
+                <div class="service-card" onclick="flipCard(this)">
+                    <div class="service-card-front">
+                        <div class="service-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3>Relationship Mentoring</h3>
+                        <p>Improve your relationships through better communication and emotional intelligence.</p>
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div class="progress-fill"></div>
+                            </div>
+                            <div class="progress-text">Relationship Improvement: 92%</div>
+                        </div>
+                        <a href="relationship-mentoring.html" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
                     </div>
-                    <h3>Relationship Mentoring</h3>
-                    <p>Improve your relationships through better communication and emotional intelligence.</p>
-                    <a href="relationship-mentoring.html" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    <div class="service-card-back">
+                        <div class="service-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3>Relationship Mentoring</h3>
+                        <p>Strengthen your connections and build meaningful relationships.</p>
+                        <ul class="service-features">
+                            <li>Communication skills</li>
+                            <li>Conflict resolution</li>
+                            <li>Emotional intelligence</li>
+                            <li>Boundary setting</li>
+                        </ul>
+                        <a href="relationship-mentoring.html" class="service-link">Get Started <i class="fas fa-arrow-right"></i></a>
+                    </div>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-book-open"></i>
+                
+                <div class="service-card" onclick="flipCard(this)">
+                    <div class="service-card-front">
+                        <div class="service-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <h3>Storytelling</h3>
+                        <p>Discover the power of storytelling to connect, inspire, and create meaningful change.</p>
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div class="progress-fill"></div>
+                            </div>
+                            <div class="progress-text">Story Impact: 96%</div>
+                        </div>
+                        <a href="storytelling.html" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
                     </div>
-                    <h3>Storytelling</h3>
-                    <p>Discover the power of storytelling to connect, inspire, and create meaningful change.</p>
-                    <a href="storytelling.html" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    <div class="service-card-back">
+                        <div class="service-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <h3>Storytelling</h3>
+                        <p>Harness the transformative power of your personal story.</p>
+                        <ul class="service-features">
+                            <li>Story structure & narrative</li>
+                            <li>Personal brand storytelling</li>
+                            <li>Public speaking preparation</li>
+                            <li>Audience engagement</li>
+                        </ul>
+                        <a href="storytelling.html" class="service-link">Get Started <i class="fas fa-arrow-right"></i></a>
+                    </div>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-microphone"></i>
+                
+                <div class="service-card" onclick="flipCard(this)">
+                    <div class="service-card-front">
+                        <div class="service-icon">
+                            <i class="fas fa-microphone"></i>
+                        </div>
+                        <h3>Public Speaking</h3>
+                        <p>Build confidence and master the art of public speaking and presentation skills.</p>
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div class="progress-fill"></div>
+                            </div>
+                            <div class="progress-text">Confidence Boost: 94%</div>
+                        </div>
+                        <a href="public-speaking.html" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
                     </div>
-                    <h3>Public Speaking</h3>
-                    <p>Build confidence and master the art of public speaking and presentation skills.</p>
-                    <a href="public-speaking.html" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    <div class="service-card-back">
+                        <div class="service-icon">
+                            <i class="fas fa-microphone"></i>
+                        </div>
+                        <h3>Public Speaking</h3>
+                        <p>Overcome fear and become a confident, compelling speaker.</p>
+                        <ul class="service-features">
+                            <li>Confidence building</li>
+                            <li>Presentation skills</li>
+                            <li>Voice & body language</li>
+                            <li>Audience connection</li>
+                        </ul>
+                        <a href="public-speaking.html" class="service-link">Get Started <i class="fas fa-arrow-right"></i></a>
+                    </div>
                 </div>
             </div>
         </div>
