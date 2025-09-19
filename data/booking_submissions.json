@@ -1,0 +1,26 @@
+[
+    {
+        "first_name": "Alice",
+        "last_name": "Johnson",
+        "email": "alice@example.com",
+        "service_type": "habit-mastery",
+        "session_type": "discovery",
+        "preferred_date": "2025-09-21",
+        "preferred_time": "morning",
+        "timezone": "UTC+5:30",
+        "goals": "I want to develop better daily habits and routines.",
+        "experience_level": "some",
+        "additional_notes": "Available on weekends",
+        "terms_accepted": true,
+        "newsletter_subscription": true,
+        "submission_date": "2025-09-11 04:47:50",
+        "ip_address": "127.0.0.1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36",
+        "status": "pending",
+        "scheduled_date": null,
+        "session_notes": null,
+        "id": 1,
+        "created_at": "2025-09-14 04:47:50",
+        "updated_at": "2025-09-14 04:47:50"
+    }
+]

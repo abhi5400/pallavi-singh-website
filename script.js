@@ -1,29 +1,41 @@
-// Initialize Scrollify for smooth section transitions
+// Initialize Scrollify for smooth section transitions (guarded)
 $(document).ready(function() {
-    $.scrollify({
-        section: ".page-section",
-        easing: "jswing",
-        scrollSpeed: 800,
-        standardScrollElements: ".normal-scroll",
-        offset: 0,
-        overflowScroll: true,
-        scrollbars: true,
-        touchScroll: false,
-        before: function() {
-            $(".page-section").removeClass("active");
-            $(".scroll-dot").removeClass("active");
-            current = $.scrollify.current();
-            current.addClass("active");
-            const currentId = current.attr('id');
-            $(`.scroll-dot[data-section="${currentId}"]`).addClass("active");
-        },
-    });
+    try {
+        if ($ && $.scrollify && typeof $.scrollify === 'function') {
+            $.scrollify({
+                section: ".page-section",
+                easing: "jswing",
+                scrollSpeed: 800,
+                standardScrollElements: ".normal-scroll",
+                offset: 0,
+                overflowScroll: true,
+                scrollbars: true,
+                touchScroll: true,
+                before: function() {
+                    $(".page-section").removeClass("active");
+                    $(".scroll-dot").removeClass("active");
+                    const current = $.scrollify.current();
+                    if (current && current.addClass) {
+                        current.addClass("active");
+                        const currentId = current.attr('id');
+                        $(`.scroll-dot[data-section="${currentId}"]`).addClass("active");
+                    }
+                },
+            });
+        } else {
+            console.warn('Scrollify not available; using native scrolling.');
+        }
+    } catch (err) {
+        console.warn('Failed to initialize Scrollify:', err);
+    }
     
-    // Override navigation link clicks to use Scrollify
+    // Override navigation link clicks to use Scrollify when available
     $('.nav-link').on('click', function(e) {
-        e.preventDefault();
         const target = $(this).attr('href');
-        $.scrollify.move(target);
+        if ($ && $.scrollify && typeof $.scrollify === 'function') {
+            e.preventDefault();
+            $.scrollify.move(target);
+        }
     });
     
     // Scroll indicator click events
@@ -47,6 +59,241 @@ document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', 
     hamburger.classList.remove('active');
     navMenu.classList.remove('active');
 }));
+
+// Dynamic Quotes System
+class DynamicQuotes {
+    constructor() {
+        this.quotes = [
+            {
+                text: "You are not defined by your struggles; you are shaped by how you rise from them.",
+                author: "Pallavi Singh"
+            },
+            {
+                text: "Every story has the power to transform, every conversation can heal, and every moment is an opportunity to grow.",
+                author: "Pallavi Singh"
+            },
+            {
+                text: "The journey of self-discovery begins with a single step of courage and a willingness to embrace your authentic self.",
+                author: "Pallavi Singh"
+            },
+            {
+                text: "Habits are the bridge between your dreams and your reality. Build them with intention, and they will carry you forward.",
+                author: "Pallavi Singh"
+            },
+            {
+                text: "In the silence between words, in the pause between breaths, that's where transformation lives.",
+                author: "Pallavi Singh"
+            },
+            {
+                text: "Your voice is your superpower. When you speak your truth, you give others permission to do the same.",
+                author: "Pallavi Singh"
+            },
+            {
+                text: "The most beautiful stories are not about perfection, but about the courage to be imperfectly human.",
+                author: "Pallavi Singh"
+            },
+            {
+                text: "Every challenge is a teacher, every setback is a setup for a comeback, and every ending is a new beginning.",
+                author: "Pallavi Singh"
+            }
+        ];
+        
+        this.currentIndex = 0;
+        this.autoRotateInterval = null;
+        this.autoRotateDelay = 5000; // 5 seconds
+        
+        this.init();
+    }
+    
+    init() {
+        this.quoteText = document.getElementById('quoteText');
+        this.quoteAuthor = document.getElementById('quoteAuthor');
+        this.quoteCard = document.getElementById('quoteCard');
+        this.quoteProgress = document.getElementById('quoteProgress');
+        this.prevBtn = document.getElementById('prevQuote');
+        this.nextBtn = document.getElementById('nextQuote');
+        this.dotsContainer = document.getElementById('quoteDots');
+        
+        if (!this.quoteText) return; // Exit if quotes section doesn't exist
+        
+        this.createDots();
+        this.showQuote(this.currentIndex);
+        this.bindEvents();
+        this.startAutoRotate();
+        this.startProgressBar();
+    }
+    
+    createDots() {
+        this.dotsContainer.innerHTML = '';
+        this.quotes.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.className = 'quote-dot';
+            if (index === this.currentIndex) {
+                dot.classList.add('active');
+            }
+            dot.addEventListener('click', () => this.goToQuote(index));
+            this.dotsContainer.appendChild(dot);
+        });
+    }
+    
+    showQuote(index) {
+        const quote = this.quotes[index];
+        
+        // Add card flip animation
+        this.quoteCard.style.transform = 'rotateY(90deg)';
+        
+        setTimeout(() => {
+            // Remove active class from current elements
+            this.quoteText.classList.remove('active');
+            this.quoteAuthor.classList.remove('active');
+            
+            // Update content
+            this.quoteText.textContent = quote.text;
+            this.quoteAuthor.textContent = quote.author;
+            
+            // Update dots
+            document.querySelectorAll('.quote-dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+            
+            // Flip card back
+            this.quoteCard.style.transform = 'rotateY(0deg)';
+            
+            // Add active class back with delay
+            setTimeout(() => {
+                this.quoteText.classList.add('active');
+                this.quoteAuthor.classList.add('active');
+            }, 200);
+        }, 300);
+        
+        // Reset progress bar
+        this.resetProgressBar();
+    }
+    
+    nextQuote() {
+        this.currentIndex = (this.currentIndex + 1) % this.quotes.length;
+        this.showQuote(this.currentIndex);
+        this.resetAutoRotate();
+    }
+    
+    prevQuote() {
+        this.currentIndex = (this.currentIndex - 1 + this.quotes.length) % this.quotes.length;
+        this.showQuote(this.currentIndex);
+        this.resetAutoRotate();
+    }
+    
+    goToQuote(index) {
+        this.currentIndex = index;
+        this.showQuote(this.currentIndex);
+        this.resetAutoRotate();
+    }
+    
+    startAutoRotate() {
+        this.autoRotateInterval = setInterval(() => {
+            this.nextQuote();
+        }, this.autoRotateDelay);
+    }
+    
+    stopAutoRotate() {
+        if (this.autoRotateInterval) {
+            clearInterval(this.autoRotateInterval);
+            this.autoRotateInterval = null;
+        }
+    }
+    
+    resetAutoRotate() {
+        this.stopAutoRotate();
+        this.startAutoRotate();
+    }
+    
+    startProgressBar() {
+        this.progressInterval = setInterval(() => {
+            const progress = this.quoteProgress;
+            progress.style.width = '100%';
+        }, 100);
+    }
+    
+    resetProgressBar() {
+        if (this.progressInterval) {
+            clearInterval(this.progressInterval);
+        }
+        this.quoteProgress.style.width = '0%';
+        this.startProgressBar();
+    }
+    
+    bindEvents() {
+        this.nextBtn.addEventListener('click', () => this.nextQuote());
+        this.prevBtn.addEventListener('click', () => this.prevQuote());
+        
+        // Card click to advance
+        this.quoteCard.addEventListener('click', () => this.nextQuote());
+        
+        // Pause auto-rotate on hover
+        const quotesSection = document.querySelector('.quotes-section');
+        if (quotesSection) {
+            quotesSection.addEventListener('mouseenter', () => {
+                this.stopAutoRotate();
+                if (this.progressInterval) {
+                    clearInterval(this.progressInterval);
+                }
+            });
+            quotesSection.addEventListener('mouseleave', () => {
+                this.startAutoRotate();
+                this.resetProgressBar();
+            });
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                this.prevQuote();
+            } else if (e.key === 'ArrowRight') {
+                this.nextQuote();
+            } else if (e.key === ' ') {
+                e.preventDefault();
+                this.nextQuote();
+            }
+        });
+        
+        // Touch/swipe support
+        let startX = 0;
+        let startY = 0;
+        
+        this.quoteCard.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+        });
+        
+        this.quoteCard.addEventListener('touchend', (e) => {
+            if (!startX || !startY) return;
+            
+            const endX = e.changedTouches[0].clientX;
+            const endY = e.changedTouches[0].clientY;
+            
+            const diffX = startX - endX;
+            const diffY = startY - endY;
+            
+            if (Math.abs(diffX) > Math.abs(diffY)) {
+                if (diffX > 50) {
+                    this.nextQuote();
+                } else if (diffX < -50) {
+                    this.prevQuote();
+                }
+            }
+            
+            startX = 0;
+            startY = 0;
+        });
+    }
+}
+
+// Initialize Dynamic Quotes when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    new DynamicQuotes();
+    // Hero intro reveal
+    const hero = document.querySelector('.hero-content');
+    if (hero) requestAnimationFrame(() => hero.classList.add('show'));
+});
 
 // Service Card Flip Functionality
 function flipCard(card) {
@@ -78,6 +325,29 @@ function observeServiceCards() {
 // Initialize service card animations when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     observeServiceCards();
+    // Generic section/card intersection reveals
+    if ('IntersectionObserver' in window) {
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('is-visible');
+                    sectionObserver.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+
+        document.querySelectorAll('.page-section').forEach(s => sectionObserver.observe(s));
+        const cardObserver = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('is-visible');
+                    cardObserver.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.2, rootMargin: '0px 0px -10% 0px' });
+
+        document.querySelectorAll('.blog-card, .service-card, .event-card').forEach(c => cardObserver.observe(c));
+    }
 });
 
 // FAQ Accordion Functionality
@@ -144,21 +414,81 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         const href = this.getAttribute('href');
         const target = document.querySelector(href);
-        
-        // If it's a page section, let Scrollify handle it
-        if (target && target.classList.contains('page-section')) {
+
+        // Do not interfere with Join Now modal trigger
+        if (href === '#join-form') {
             return;
         }
-        
-        // For internal elements, use smooth scroll
+
+        // If it's a page section, route via Scrollify for consistent behavior
+        if (target && target.classList.contains('page-section')) {
+            e.preventDefault();
+            if (typeof $.scrollify === 'function') {
+                $.scrollify.move(href);
+            } else if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+            return;
+        }
+
+        // For other internal anchors, use smooth scroll
         e.preventDefault();
         if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     });
+});
+
+// Ensure Join Now always opens the modal, even if other handlers interfere
+document.addEventListener('click', function(e) {
+    const trigger = e.target.closest('a[href="#join-form"], .join-now-btn');
+    if (!trigger) return;
+    e.preventDefault();
+    const modal = document.getElementById('join-form-modal');
+    if (modal) {
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        // focus first input if available
+        const form = document.getElementById('joinForm');
+        if (form) {
+            const firstInput = form.querySelector('input');
+            if (firstInput) setTimeout(() => firstInput.focus(), 300);
+        }
+    }
+});
+
+// Explicit hero button bindings to guarantee behavior
+document.addEventListener('DOMContentLoaded', function() {
+    const readMoreBtn = document.getElementById('heroReadMore');
+    if (readMoreBtn) {
+        readMoreBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const href = '#about';
+            const target = document.querySelector(href);
+            if (typeof $.scrollify === 'function') {
+                $.scrollify.move(href);
+            } else if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    }
+
+    const joinNowBtn = document.getElementById('heroJoinNow');
+    if (joinNowBtn) {
+        joinNowBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const modal = document.getElementById('join-form-modal');
+            if (modal) {
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+                const form = document.getElementById('joinForm');
+                if (form) {
+                    const firstInput = form.querySelector('input');
+                    if (firstInput) setTimeout(() => firstInput.focus(), 300);
+                }
+            }
+        });
+    }
 });
 
 // Contact form handling
@@ -827,7 +1157,6 @@ window.addEventListener('resize', function() {
     });
 });
 
-// Add loading state to buttons
 document.querySelectorAll('.btn').forEach(button => {
     button.addEventListener('click', function() {
         if (this.type === 'submit') return; // Don't add loading to form submit buttons

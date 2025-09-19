@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Welcome | Pallavi Singh Coaching</title>
+	<link rel="icon" type="image/x-icon" href="assets/images/pallavi-logo.png">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<style>
+		* { margin: 0; padding: 0; box-sizing: border-box; }
+		html, body { height: 100%; }
+		body { font-family: 'Inter', sans-serif; background: #0f2c32; color: #fff; overflow: hidden; }
+
+		.welcome-container { position: relative; height: 100%; width: 100%; display: flex; align-items: center; justify-content: center; }
+
+		/* Layered gradient + vignette */
+		.bg-gradient { position: absolute; inset: 0; background:
+			radial-gradient(1200px 600px at 12% 18%, rgba(168,213,186,.22), transparent 40%),
+			radial-gradient(900px 500px at 88% 78%, rgba(78,205,196,.18), transparent 45%),
+			linear-gradient(135deg, #102e34 0%, #1a535c 55%, #0e262b 100%);
+			animation: floatBg 14s ease-in-out infinite; filter: saturate(1.05);
+		}
+		.bg-vignette { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,.35) 100%); }
+		@keyframes floatBg { 0%,100%{transform: translateY(0)} 50%{transform: translateY(-10px)} }
+
+		/* Constellation particles */
+		.particles { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+		.particle { position: absolute; width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,.15); animation: rise 12s linear infinite; filter: blur(0.5px); }
+		.particle:nth-child(2){ left: 14%; animation-duration: 13s; width: 7px; height: 7px; }
+		.particle:nth-child(3){ left: 26%; animation-duration: 10s; width: 6px; height: 6px; }
+		.particle:nth-child(4){ left: 38%; animation-duration: 11s; width: 8px; height: 8px; }
+		.particle:nth-child(5){ left: 53%; animation-duration: 12.5s; width: 9px; height: 9px; }
+		.particle:nth-child(6){ left: 67%; animation-duration: 9.5s; width: 6px; height: 6px; }
+		.particle:nth-child(7){ left: 79%; animation-duration: 14s; width: 8px; height: 8px; }
+		.particle:nth-child(8){ left: 91%; animation-duration: 12.8s; width: 7px; height: 7px; }
+		@keyframes rise { 0%{ transform: translateY(20px); opacity:.2 } 50%{ opacity:.6 } 100%{ transform: translateY(-110vh); opacity:0 } }
+
+		/* Welcome card */
+		.welcome-card { position: relative; z-index: 2; text-align: center; padding: 56px 32px; width: min(760px, 92%); border-radius: 28px; background: rgba(255,255,255,.08); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,.14); box-shadow: 0 24px 72px rgba(0,0,0,.28); animation: popIn .9s ease-out both .2s; }
+		@keyframes popIn { 0%{ transform: translateY(20px) scale(.96); opacity:0 } 100%{ transform: translateY(0) scale(1); opacity:1 } }
+
+		.logo { width: 96px; height: 96px; border-radius: 50%; background: rgba(255,255,255,.12); display: grid; place-items: center; margin: 0 auto 18px auto; position: relative; }
+		.logo::after { content:''; position: absolute; inset:-6px; border-radius: 50%; background: conic-gradient(from 180deg, #A8D5BA, #4ECDC4, #1A535C, #A8D5BA); filter: blur(10px); opacity:.35; animation: glow 4s linear infinite; }
+		@keyframes glow { 0%{ transform: rotate(0)} 100%{ transform: rotate(360deg)} }
+		.logo img { width: 62px; height: 62px; object-fit: contain; filter: drop-shadow(0 6px 10px rgba(0,0,0,.25)); }
+
+		.brand { font-family: 'Dancing Script', cursive; font-size: clamp(2.2rem, 6vw, 3.1rem); color: #A8D5BA; letter-spacing: .4px; text-shadow: 0 3px 10px rgba(0,0,0,.32); margin-bottom: 6px; }
+		.tagline { font-size: 1.05rem; opacity: .92; margin-bottom: 16px; }
+
+		/* Keyword carousel */
+		.keywords { display:flex; gap:10px; justify-content:center; align-items:center; flex-wrap:wrap; margin: 8px auto 18px auto; max-width: 680px; opacity:.95; }
+		.pill { padding: 6px 12px; border-radius: 999px; font-size:.85rem; background: rgba(255,255,255,.10); border:1px solid rgba(255,255,255,.18); backdrop-filter: blur(6px); }
+
+		.quote { font-style: italic; font-size: 1.05rem; line-height: 1.7; color: #e9f7f1; opacity: .96; margin: 12px auto 22px auto; max-width: 62ch; min-height: 2.2em; transition: opacity .4s ease; }
+
+		.progress { position: relative; height: 8px; background: rgba(255,255,255,.16); border-radius: 999px; overflow: hidden; margin: 16px 0 8px 0; }
+		.bar { position: absolute; inset: 0; width: 0%; background: linear-gradient(90deg, #A8D5BA, #4ECDC4, #1A535C); animation: load 4.8s ease-in-out forwards; }
+		@keyframes load { 0%{ width:0% } 50%{ width:72% } 100%{ width:100% } }
+		.progress-text { font-size: .88rem; letter-spacing: .3px; opacity: .82; min-height: 1.2em; }
+
+		.actions { display: flex; gap: 14px; justify-content: center; margin-top: 18px; }
+		.btn { padding: 12px 20px; border-radius: 999px; border: 1px solid rgba(255,255,255,.25); background: rgba(255,255,255,.08); color: #fff; cursor: pointer; transition: all .25s ease; font-weight: 600; font-size: .95rem; }
+		.btn:hover { transform: translateY(-2px); background: rgba(255,255,255,.16); }
+		.btn-primary { background: linear-gradient(135deg, #A8D5BA, #1A535C); border: none; }
+		.btn-primary:hover { filter: brightness(1.06); }
+
+		.footer-note { margin-top: 12px; font-size: .84rem; opacity: .72; }
+
+		/* Parallax mouse layer */
+		.parallax { position:absolute; inset:0; pointer-events:none; }
+		.spark { position:absolute; width: 120px; height: 120px; border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,.12), transparent 60%); mix-blend-mode: screen; transform: translate(-50%, -50%); }
+
+		/* Reduced motion accessibility */
+		@media (prefers-reduced-motion: reduce) {
+			.bg-gradient, .logo::after, .bar, .particle, .parallax, .spark { animation: none !important; transition: none !important; }
+		}
+	</style>
+</head>
+<body>
+	<div class="welcome-container" role="main" aria-label="Welcome">
+		<div class="bg-gradient"></div>
+		<div class="bg-vignette"></div>
+		<div class="parallax" aria-hidden="true">
+			<div class="spark" id="spark1" style="top:20%; left:25%"></div>
+			<div class="spark" id="spark2" style="top:70%; left:75%"></div>
+		</div>
+		<div class="particles" aria-hidden="true">
+			<div class="particle" style="left:10%"></div>
+			<div class="particle" style="left:18%"></div>
+			<div class="particle" style="left:26%"></div>
+			<div class="particle" style="left:38%"></div>
+			<div class="particle" style="left:53%"></div>
+			<div class="particle" style="left:67%"></div>
+			<div class="particle" style="left:79%"></div>
+			<div class="particle" style="left:91%"></div>
+		</div>
+
+		<div class="welcome-card" aria-live="polite">
+			<div class="logo" aria-hidden="true">
+				<img src="assets/images/pallavi-logo.png" alt="Pallavi Singh Coaching">
+			</div>
+			<div class="brand">Pallavi Singh</div>
+			<div class="tagline">Transform your life through storytelling & coaching</div>
+
+			<div class="keywords" id="keywords">
+				<span class="pill">Habit Mastery</span>
+				<span class="pill">Confidence</span>
+				<span class="pill">Authentic Voice</span>
+				<span class="pill">Clarity</span>
+				<span class="pill">Storytelling</span>
+			</div>
+
+			<div class="quote" id="quote">“The stories we tell ourselves shape the habits we build—and the lives we live. Welcome to your next chapter.”</div>
+
+			<div class="progress"><div class="bar" id="bar"></div></div>
+			<div class="progress-text" id="progressText">Warming up your experience…</div>
+
+			<div class="footer-note">This welcome will auto-continue. <span id="forceHint" style="opacity:.6"></span></div>
+		</div>
+	</div>
+
+	<script>
+	(function(){
+		var WELCOME_FLAG = 'ps_first_visit_done';
+		var qs = new URLSearchParams(location.search);
+		var forceWelcome = qs.get('welcome') === '1';
+		var bypass = qs.get('skip') === '1';
+		var isOnWelcome = true; // this is welcome.html
+		var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+		var hint = document.getElementById('forceHint');
+		if (hint) hint.textContent = 'Add ?welcome=1 to test again or ?skip=1 to bypass';
+
+		if (bypass) {
+			try { localStorage.setItem(WELCOME_FLAG, '1'); } catch(e){}
+			location.replace('index.html');
+			return;
+		}
+
+		// Progress stages
+		var stages = [
+			{ t: 300, text: 'Finding your story…' },
+			{ t: 1200, text: 'Inviting your authentic voice…' },
+			{ t: 2200, text: 'Designing your next habit…' },
+			{ t: 3200, text: 'Setting the stage…' },
+			{ t: 4400, text: 'Ready.' }
+		];
+		var progressText = document.getElementById('progressText');
+		stages.forEach(function(s){ setTimeout(function(){ if(progressText){ progressText.textContent = s.text; } }, s.t); });
+
+		// Rotating quotes
+		var quotes = [
+			'“Excellence is a habit. Let\'s build yours.”',
+			'“Small steps, powerful stories, lasting change.”',
+			'“Your next chapter starts with a single practice.”'
+		];
+		var quoteEl = document.getElementById('quote');
+		var qi = 0;
+		setInterval(function(){
+			if (!quoteEl) return;
+			quoteEl.style.opacity = 0;
+			setTimeout(function(){
+				qi = (qi+1)%quotes.length;
+				quoteEl.textContent = quotes[qi];
+				quoteEl.style.opacity = 1;
+			}, 300);
+		}, 2600);
+
+		// Parallax mouse move
+		var p1 = document.getElementById('spark1');
+		var p2 = document.getElementById('spark2');
+		document.addEventListener('mousemove', function(e){
+			if (reducedMotion) return;
+			var x = (e.clientX / window.innerWidth - 0.5) * 30;
+			var y = (e.clientY / window.innerHeight - 0.5) * 30;
+			if (p1) p1.style.transform = 'translate(' + (x*-1) + 'px,' + (y*-1) + 'px)';
+			if (p2) p2.style.transform = 'translate(' + (x*1.4) + 'px,' + (y*1.4) + 'px)';
+		});
+
+		function finish(){ try { localStorage.setItem(WELCOME_FLAG, '1'); } catch(e){} location.replace('index.html'); }
+		var total = reducedMotion ? 1500 : 5000;
+		setTimeout(finish, total);
+	})();
+	</script>
+</body>
+</html>

@@ -407,6 +407,83 @@
             animation-delay: 0.4s;
         }
         
+        .credentials-section {
+            padding: 80px 0;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .credentials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .credential-column {
+            padding: 40px 30px;
+            border-radius: 15px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .credential-column:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .credential-column.certifications {
+            background: linear-gradient(135deg, rgba(168, 213, 186, 0.15) 0%, rgba(168, 213, 186, 0.05) 100%);
+            border: 2px solid rgba(168, 213, 186, 0.3);
+        }
+
+        .credential-column.awards {
+            background: linear-gradient(135deg, rgba(247, 184, 1, 0.15) 0%, rgba(247, 184, 1, 0.05) 100%);
+            border: 2px solid rgba(247, 184, 1, 0.3);
+        }
+
+        .credential-column.seminars {
+            background: linear-gradient(135deg, rgba(26, 83, 92, 0.15) 0%, rgba(26, 83, 92, 0.05) 100%);
+            border: 2px solid rgba(26, 83, 92, 0.3);
+        }
+
+        .credential-column h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+            color: #1A535C;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .credential-column ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .credential-column li {
+            font-family: 'Georgia', serif;
+            font-style: italic;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #333;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .credential-column li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #1A535C;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
         .cta-section {
             background: rgba(248, 249, 250, 0.7);
             padding: 80px 0;
@@ -504,6 +581,19 @@
                 grid-template-columns: repeat(2, 1fr);
                 gap: 30px;
             }
+
+            .credentials-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .credential-column {
+                padding: 30px 20px;
+            }
+
+            .credential-column h3 {
+                font-size: 1.2rem;
+            }
             
             .cta-buttons {
                 flex-direction: column;
@@ -523,6 +613,23 @@
             
             .stats-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .credentials-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .credential-column {
+                padding: 25px 15px;
+            }
+
+            .credential-column h3 {
+                font-size: 1.1rem;
+            }
+
+            .credential-column li {
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -647,19 +754,6 @@
                 </div>
             </div>
 
-            <!-- Habit Mastery Program -->
-            <div class="story-block">
-                <div class="story-image">
-                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Daily routine and habit formation" class="story-img">
-                </div>
-                <div class="story-text">
-                    <h2>Habit Mastery Program</h2>
-                    <p style="font-style: italic; color: #1A535C; font-size: 1.1rem; margin-bottom: 20px;">"We are what we repeatedly do. Excellence, then, is not an act but a habit." – Aristotle</p>
-                    <p>Habits have the power to shape us—or break us. They don't just define our routines; they define us. Habits are the lens through which others see us and, more importantly, the lens through which we see ourselves.</p>
-                    <p>Habits are influenced by genetics, nurture, and environment, the good news is—limiting habits can be reduced possibly removed from our routine and New, empowering habits can be built and seamlessly integrated into daily life.</p>
-                    <p>That's exactly why the Habit Mastery Program is designed. Over a span of 3 to 6 months, with periodic revisits every quarter after, we work together until your chosen habits become a natural, lasting part of you.</p>
-                </div>
-            </div>
 
             <!-- Public Speaking and Communication -->
             <div class="story-block">
@@ -703,6 +797,55 @@
                     <h2>Let's Begin the Journey</h2>
                     <p>If you're ready to break free from what holds you back and step into your truest, strongest, and most authentic self, I invite you to begin this journey with me. Together, we won't just shape your path—we'll shape your story.</p>
                     <p style="text-align: center; font-size: 1.2rem; font-weight: 600; color: #1A535C; margin-top: 30px;">Let's begin.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Credentials Section -->
+    <section class="credentials-section">
+        <div class="container">
+            <div class="credentials-grid">
+                <!-- Certifications & Training -->
+                <div class="credential-column certifications">
+                    <h3>CERTIFICATIONS & TRAINING</h3>
+                    <ul>
+                        <li>Jack Canfield's Train the Trainer</li>
+                        <li>EMyth Certified Business Coach</li>
+                        <li>Family Business Governance at Insead</li>
+                        <li>Pre-School/Kindergarten Montessori Teaching Diploma by NAMC (North American Montessori Centre)</li>
+                        <li>Making the Stage - Success Resources</li>
+                        <li>World's greatest speaker training - Brendan Burchard</li>
+                        <li>School of Womanly Arts - Regina Thomashauer</li>
+                        <li>Quantum Leap by Success Gyan</li>
+                        <li>Training under eminent International gurus like Jack Canfield, Brian Tracy, Anthony Robbins, Brendon Burchard & more</li>
+                    </ul>
+                </div>
+
+                <!-- Awards & Achievements -->
+                <div class="credential-column awards">
+                    <h3>AWARDS & ACHIEVEMENTS</h3>
+                    <ul>
+                        <li>Style Icon 2018 by Style Bazaar</li>
+                        <li>Naturals Woman of the year, 2014</li>
+                        <li>Extensive media coverage in publications such as Femina, The Hindu, The Indian Express, Vogue, Hello, Deccan Chronicle, Times of India & many more</li>
+                        <li>Running Ran Alps pre-school in Chennai for 10 years</li>
+                        <li>Columnist for The Hindu, answering questions from young adults</li>
+                        <li>Taught a full semester for 2nd year students at Sathyabama University</li>
+                    </ul>
+                </div>
+
+                <!-- Seminars & Events -->
+                <div class="credential-column seminars">
+                    <h3>SEMINARS & EVENTS</h3>
+                    <ul>
+                        <li>Speaker at Global Leadership Summit - 2015</li>
+                        <li>Speaker at TEDx Chennai, Sept 2012</li>
+                        <li>Speaker at various organizations including YPO, FICCI, Rotary, YIE, RCC, RYA, Chennai Sindhi Ladies Chapter, JITO</li>
+                        <li>Keynote addresses by Jack Canfield, Brian Tracy, John Foppe, John Gray, Sean Smith, Nik Halik</li>
+                        <li>Conducted Life By Design workshops for women in Malaysia and Singapore</li>
+                        <li>Keynote Speaker at over 10 universities</li>
+                    </ul>
                 </div>
             </div>
         </div>

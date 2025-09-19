@@ -1,0 +1,72 @@
+[
+    {
+        "id": 1,
+        "title": "Welcome to Your Journey of Transformation",
+        "slug": "welcome-to-your-journey-of-transformation",
+        "content": "Welcome to The Story Tree, where your journey of personal transformation begins. Life coaching is not just about solving problems; it's about discovering your true potential and creating the life you've always dreamed of.",
+        "excerpt": "Discover how life coaching can transform your life and help you achieve your goals.",
+        "author": "Pallavi Singh",
+        "status": "published",
+        "featured_image": "",
+        "categories": [
+            "life-coaching",
+            "transformation"
+        ],
+        "tags": [
+            "coaching",
+            "transformation",
+            "personal-growth"
+        ],
+        "meta_description": "Learn how life coaching can help you transform your life and achieve your goals.",
+        "views": 0,
+        "created_at": "2025-09-12 10:00:00",
+        "updated_at": "2025-09-12 10:00:00",
+        "published_at": "2025-09-12 10:00:00"
+    },
+    {
+        "id": 2,
+        "title": "Overcoming Anxiety: A Step-by-Step Guide",
+        "slug": "overcoming-anxiety-step-by-step-guide",
+        "content": "Anxiety can feel overwhelming, but with the right tools and mindset, you can learn to manage it effectively. In this comprehensive guide, we'll explore practical strategies for overcoming anxiety and building resilience.",
+        "excerpt": "Learn practical strategies to overcome anxiety and build mental resilience.",
+        "author": "Pallavi Singh",
+        "status": "published",
+        "featured_image": "",
+        "categories": [
+            "anxiety-management",
+            "mental-health"
+        ],
+        "tags": [
+            "anxiety",
+            "mental-health",
+            "resilience",
+            "wellness"
+        ],
+        "meta_description": "Discover effective strategies for managing anxiety and building mental resilience.",
+        "views": 0,
+        "created_at": "2025-09-11 14:30:00",
+        "updated_at": "2025-09-11 14:30:00",
+        "published_at": "2025-09-11 14:30:00"
+    },
+    {
+        "title": "Test",
+        "slug": "test",
+        "content": "Test",
+        "excerpt": "Test",
+        "categories": [
+            "Test"
+        ],
+        "tags": [
+            ""
+        ],
+        "featured_image": "",
+        "status": "published",
+        "author": "Pallavi Singh",
+        "published_at": "2025-09-19 09:08:49",
+        "meta_title": "",
+        "meta_description": "",
+        "id": 3,
+        "created_at": "2025-09-19 09:08:49",
+        "updated_at": "2025-09-19 09:08:49"
+    }
+]

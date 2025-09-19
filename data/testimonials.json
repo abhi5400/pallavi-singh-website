@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "client_name": "Sarah Johnson",
+        "client_title": "Marketing Manager",
+        "client_company": "Tech Solutions Inc.",
+        "content": "Pallavi's coaching completely transformed my approach to work-life balance. Her insights and guidance helped me overcome my anxiety and build confidence in both my personal and professional life. I can't recommend her enough!",
+        "rating": 5,
+        "service": "Life Coaching Sessions",
+        "image": "",
+        "status": "approved",
+        "featured": true,
+        "created_at": "2025-09-10 15:30:00",
+        "updated_at": "2025-09-10 15:30:00"
+    },
+    {
+        "id": 2,
+        "client_name": "Michael Chen",
+        "client_title": "Entrepreneur",
+        "client_company": "Startup Ventures",
+        "content": "The anxiety management program was a game-changer for me. Pallavi's techniques are practical and effective. I went from having daily panic attacks to feeling confident and in control. Thank you for giving me my life back!",
+        "rating": 5,
+        "service": "Anxiety Management Program",
+        "image": "",
+        "status": "approved",
+        "featured": true,
+        "created_at": "2025-09-09 11:20:00",
+        "updated_at": "2025-09-09 11:20:00"
+    },
+    {
+        "id": 3,
+        "client_name": "Emily Rodriguez",
+        "client_title": "Teacher",
+        "client_company": "Elementary School",
+        "content": "I was terrified of public speaking, but Pallavi's program helped me overcome my fears. Now I confidently present to large groups and even enjoy it! The transformation has been incredible.",
+        "rating": 5,
+        "service": "Public Speaking Confidence",
+        "image": "",
+        "status": "approved",
+        "featured": false,
+        "created_at": "2025-09-08 14:45:00",
+        "updated_at": "2025-09-08 14:45:00"
+    }
+]

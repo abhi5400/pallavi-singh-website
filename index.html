@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+image.png<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -28,6 +28,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <script>
+        (function(){
+            try {
+                var WELCOME_FLAG = 'ps_first_visit_done';
+                var isWelcome = localStorage.getItem(WELCOME_FLAG) === '1';
+                var isOnWelcome = /welcome\.html$/i.test(window.location.pathname);
+                if (!isWelcome && !isOnWelcome) {
+                    window.location.replace('welcome.html');
+                }
+            } catch(e) {}
+        })();
+    </script>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
@@ -92,8 +104,125 @@
                 </h1>
                 <p class="hero-subtitle">Discover your authentic voice, overcome obstacles, and create lasting change with personalized guidance from Pallavi Singh.</p>
                 <div class="hero-buttons">
-                    <button class="btn btn-primary" id="startJourneyBtn">Start Your Journey</button>
-                    <a href="#about" class="btn btn-secondary">Learn More</a>
+                    <a href="#join-form" class="btn btn-secondary join-now-btn" id="heroJoinNow">Join Now</a>
+                    <a href="#about" class="btn btn-primary read-more-btn" id="heroReadMore">Read More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Join Now Registration Form Modal -->
+    <div id="join-form-modal" class="join-form-modal" style="display: none;">
+        <div class="modal-overlay"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2>Start Your Transformation Journey</h2>
+                <p>Join our community and begin your path to personal growth and authentic living.</p>
+                <button class="modal-close" type="button">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="form-container">
+                <form id="joinForm" class="join-form" method="POST" action="process_join.php">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="full_name">Full Name *</label>
+                            <input type="text" id="full_name" name="full_name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="age">Age</label>
+                            <input type="number" id="age" name="age" min="1" max="150" placeholder="Optional">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="city">City *</label>
+                            <input type="text" id="city" name="city" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="state">State/Province *</label>
+                            <input type="text" id="state" name="state" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="contact_number">Contact Number *</label>
+                            <input type="tel" id="contact_number" name="contact_number" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="issue_challenge">What challenge or issue are you currently facing? *</label>
+                        <textarea id="issue_challenge" name="issue_challenge" rows="4" placeholder="Please describe the main challenge or issue you'd like help with..." required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="goals">What are your main goals? (Optional)</label>
+                        <textarea id="goals" name="goals" rows="3" placeholder="What would you like to achieve through coaching?"></textarea>
+                    </div>
+                    
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="terms_accepted" required>
+                            <span class="checkmark"></span>
+                            I agree to the <a href="#" target="_blank">Terms and Conditions</a> and <a href="#" target="_blank">Privacy Policy</a> *
+                        </label>
+                    </div>
+                    
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="newsletter_subscription">
+                            <span class="checkmark"></span>
+                            Subscribe to our newsletter for tips, insights, and updates
+                        </label>
+                    </div>
+                    
+                    <div class="form-submit">
+                        <button type="submit" class="btn btn-primary btn-large">
+                            <span class="btn-text">Join Now</span>
+                            <span class="btn-loading" style="display: none;">
+                                <i class="fas fa-spinner fa-spin"></i> Processing...
+                            </span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dynamic Quotes Section -->
+    <section class="quotes-section">
+        <div class="container">
+            <div class="quotes-container">
+                <div class="quote-content">
+                    <div class="quote-card" id="quoteCard">
+                        <div class="quote-icon">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                        <div class="quote-text" id="quoteText">
+                            "You are not defined by your struggles; you are shaped by how you rise from them."
+                        </div>
+                        <div class="quote-author" id="quoteAuthor">
+                            - Pallavi Singh
+                        </div>
+                        <div class="quote-progress" id="quoteProgress"></div>
+                    </div>
+                </div>
+                <div class="quote-controls">
+                    <button class="quote-btn" id="prevQuote" aria-label="Previous quote">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <div class="quote-dots" id="quoteDots"></div>
+                    <button class="quote-btn" id="nextQuote" aria-label="Next quote">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -118,6 +247,9 @@
                     
                     <div class="read-more-container">
                         <a href="about.html" class="btn btn-outline read-more-btn">Read More <i class="fas fa-arrow-right"></i></a>
+                        <a href="https://www.instagram.com/lifecoachandstorytellerpallavi/" class="btn btn-instagram" target="_blank">
+                            <i class="fab fa-instagram"></i> Follow on Instagram
+                        </a>
                     </div>
                     
                     <div class="about-stats">
@@ -342,69 +474,611 @@
         </div>
     </section>
 
-    <!-- Why Work With Me Section -->
-    <section class="why-work-with-me">
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials page-section">
         <div class="container">
-            <div class="why-work-content">
-                <!-- Left Column -->
-                <div class="why-work-left">
-                    <h4>Coaching With Heart</h4>
-                    <h2>Are You Ready to <span>Transform?</span></h2>
-                    <a href="connect.html" class="cta-btn">Book Free Consultation →</a>
+            <div class="section-decor">
+                <img src="assets/images/decor.png" alt="Decorative Botanical Garland" class="section-decor-image">
+            </div>
+            <div class="section-header">
+                <h2>Client Success Stories</h2>
+                <p>Hear from those who have transformed their lives through coaching</p>
+            </div>
+            
+            <div class="testimonials-carousel">
+                <div class="testimonials-container" id="testimonialsContainer">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p>"Pallavi's coaching helped me overcome my anxiety and build confidence I never knew I had. Her storytelling approach made everything click for me."</p>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h4>Priya Sharma</h4>
+                                    <span>Marketing Professional</span>
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p>"The habit mastery program changed my life completely. I went from struggling with consistency to building lasting positive habits."</p>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h4>Arjun Patel</h4>
+                                    <span>Software Engineer</span>
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 3 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p>"Pallavi's relationship mentoring helped me communicate better with my partner. Our relationship has never been stronger."</p>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h4>Kavya Reddy</h4>
+                                    <span>Teacher</span>
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 4 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p>"The public speaking coaching was incredible. I went from terrified to confident, and now I speak at conferences regularly."</p>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h4>Rajesh Kumar</h4>
+                                    <span>Business Consultant</span>
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 5 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p>"Pallavi's storytelling workshop helped me find my authentic voice. I can now share my story with confidence and impact."</p>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h4>Ananya Singh</h4>
+                                    <span>Entrepreneur</span>
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 6 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p>"The coaching sessions helped me identify my limiting beliefs and replace them with empowering thoughts. Life-changing!"</p>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h4>Vikram Gupta</h4>
+                                    <span>Sales Manager</span>
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 7 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p>"Pallavi's approach is so genuine and caring. She helped me navigate through a difficult career transition with grace."</p>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h4>Deepika Iyer</h4>
+                                    <span>HR Director</span>
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 8 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p>"The anxiety management techniques I learned are now part of my daily routine. I feel so much more in control of my emotions."</p>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h4>Rohit Verma</h4>
+                                    <span>Graphic Designer</span>
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 9 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p>"Pallavi's coaching helped me build better relationships with my team. I'm now a more effective and empathetic leader."</p>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h4>Shreya Joshi</h4>
+                                    <span>Project Manager</span>
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 10 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p>"The storytelling techniques helped me connect with my audience in ways I never thought possible. My presentations are now engaging and memorable."</p>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h4>Karthik Nair</h4>
+                                    <span>Marketing Director</span>
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 11 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p>"Pallavi's habit mastery program helped me finally stick to my fitness goals. I've been consistent for 6 months now!"</p>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h4>Meera Desai</h4>
+                                    <span>Fitness Instructor</span>
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 12 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p>"The relationship mentoring helped me understand my communication patterns and build deeper connections with my family."</p>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h4>Aditya Malhotra</h4>
+                                    <span>Financial Advisor</span>
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 13 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p>"Pallavi's coaching gave me the tools to overcome my fear of public speaking. I now present with confidence and clarity."</p>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h4>Dr. Sneha Agarwal</h4>
+                                    <span>Research Scientist</span>
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 14 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p>"The anxiety management techniques are so practical and effective. I use them daily and feel so much more centered."</p>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h4>Rahul Mehta</h4>
+                                    <span>Software Developer</span>
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 15 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p>"Pallavi helped me find my authentic voice through storytelling. I can now share my experiences in a way that truly resonates."</p>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h4>Isha Khanna</h4>
+                                    <span>Content Creator</span>
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 16 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p>"The habit mastery program transformed my productivity. I now have systems that actually work and stick with me long-term."</p>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h4>Manish Tiwari</h4>
+                                    <span>Operations Manager</span>
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 17 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p>"Pallavi's relationship coaching helped me understand my partner better and communicate more effectively. Our relationship is stronger than ever."</p>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h4>Pooja Shah</h4>
+                                    <span>Nurse</span>
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 18 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p>"The public speaking coaching was exactly what I needed. I went from avoiding presentations to actually enjoying them!"</p>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h4>Sanjay Agarwal</h4>
+                                    <span>Accountant</span>
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 19 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p>"Pallavi's coaching helped me identify and overcome my limiting beliefs. I now approach challenges with confidence and optimism."</p>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h4>Ritu Choudhary</h4>
+                                    <span>Marketing Specialist</span>
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 20 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p>"The storytelling workshop helped me craft my personal brand story. I can now communicate my value proposition clearly and compellingly."</p>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h4>Nikhil Jain</h4>
+                                    <span>Business Owner</span>
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 21 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p>"Pallavi's anxiety management techniques are life-changing. I feel so much more in control and at peace with myself."</p>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h4>Divya Rao</h4>
+                                    <span>Social Worker</span>
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 22 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p>"The habit mastery program helped me build a morning routine that sets me up for success every day. It's been transformative!"</p>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h4>Abhishek Singh</h4>
+                                    <span>Personal Trainer</span>
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 23 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p>"Pallavi's relationship mentoring helped me become a better listener and communicator. My relationships have improved dramatically."</p>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h4>Dr. Aishwarya Menon</h4>
+                                    <span>Therapist</span>
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 24 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p>"The public speaking coaching gave me the confidence to share my ideas with conviction. I'm now a more effective leader."</p>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h4>Varun Kapoor</h4>
+                                    <span>Team Lead</span>
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 25 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p>"Pallavi's storytelling approach helped me connect with my audience on a deeper level. My presentations are now engaging and memorable."</p>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h4>Dr. Swati Bhatia</h4>
+                                    <span>Conference Speaker</span>
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <!-- Right Column -->
-                <div class="why-work-right">
-                    <div class="feature">
-                        <div class="feature-icon">
-                            <i class="fas fa-globe-americas"></i>
-                        </div>
-                        <h3>For Everyone</h3>
-                        <p>Whether it's self-doubt, relationship struggles, or career challenges—coaching is designed to meet you where you are.</p>
-                    </div>
-
-                    <div class="feature">
-                        <div class="feature-icon">
-                            <i class="fas fa-user-cog"></i>
-                        </div>
-                        <h3>Tailored to Your Needs</h3>
-                        <p>No two journeys are the same. Sessions are personalized to your goals, helping you gain clarity and confidence.</p>
-                    </div>
-
-                    <div class="feature">
-                        <div class="feature-icon">
-                            <i class="fas fa-heart"></i>
-                        </div>
-                        <h3>A Safe Space</h3>
-                        <p>Every story is heard with compassion, every struggle is respected, and breakthroughs are celebrated without judgment.</p>
-                    </div>
-
-                    <div class="feature">
-                        <div class="feature-icon">
-                            <i class="fas fa-book-open"></i>
-                        </div>
-                        <h3>Transformation Through Storytelling</h3>
-                        <p>Learn to harness the power of your own story—reframe challenges, overcome limiting beliefs, and create lasting change.</p>
-                    </div>
+                
+                <!-- Navigation Controls -->
+                <div class="testimonials-navigation">
+                    <button class="testimonial-nav-btn" id="prevTestimonial" aria-label="Previous testimonials">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="testimonial-dots" id="testimonialDots"></div>
+                    <button class="testimonial-nav-btn" id="nextTestimonial" aria-label="Next testimonials">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Banner Section -->
-    <section class="banner">
-        <div class="banner-content">
-            <h1>Begin Your Healing & Transformation Today</h1>
-            <p>Pallavi Singh is here to guide you toward peace, clarity, and confidence.<br>
-               Book your session now.</p>
-            <div class="banner-buttons">
-                <button class="btn btn-primary" id="bookNowBtn">Book Now</button>
-                <a href="#contact" class="btn btn-secondary">Contact Us</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Video Feedbacks Section -->
+    <!-- Video Feedbacks Section (removed) -->
+    <!--
     <section class="video-feedbacks page-section">
         <div class="container">
             <div class="section-decor">
@@ -588,6 +1262,68 @@
             </div>
         </div>
     </section>
+    -->
+
+    <!-- Why Work With Me Section -->
+    <section class="why-work-with-me">
+        <div class="container">
+            <div class="why-work-content">
+                <!-- Left Column -->
+                <div class="why-work-left">
+                    <h4>Coaching With Heart</h4>
+                    <h2>Are You Ready to <span>Transform?</span></h2>
+                    <a href="connect.html" class="cta-btn">Book Free Consultation →</a>
+                </div>
+
+                <!-- Right Column -->
+                <div class="why-work-right">
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-globe-americas"></i>
+                        </div>
+                        <h3>For Everyone</h3>
+                        <p>Whether it's self-doubt, relationship struggles, or career challenges—coaching is designed to meet you where you are.</p>
+                    </div>
+
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-cog"></i>
+                        </div>
+                        <h3>Tailored to Your Needs</h3>
+                        <p>No two journeys are the same. Sessions are personalized to your goals, helping you gain clarity and confidence.</p>
+                    </div>
+
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3>A Safe Space</h3>
+                        <p>Every story is heard with compassion, every struggle is respected, and breakthroughs are celebrated without judgment.</p>
+                    </div>
+
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <h3>Transformation Through Storytelling</h3>
+                        <p>Learn to harness the power of your own story—reframe challenges, overcome limiting beliefs, and create lasting change.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Banner Section -->
+    <section class="banner">
+        <div class="banner-content">
+            <h1>Begin Your Healing & Transformation Today</h1>
+            <p>Pallavi Singh is here to guide you toward peace, clarity, and confidence.<br>
+               Start your journey today.</p>
+            <div class="banner-buttons">
+                <a href="#about" class="btn btn-primary">Learn More</a>
+            </div>
+        </div>
+    </section>
 
     <!-- Community Section -->
     <section id="community" class="community page-section">
@@ -639,37 +1375,8 @@
                 <h2>Wisdom Vault</h2>
                 <p>Insights, stories, and wisdom to inspire your journey</p>
             </div>
-            <div class="blog-grid">
-                <article class="blog-card">
-                    <div class="blog-image">
-                        <img src="assets/images/pallavi-logo.png" alt="Blog Post">
-                    </div>
-                    <div class="blog-content">
-                        <h3>The Power of Your Story</h3>
-                        <p>Discover how your personal story can be a powerful tool for transformation and connection.</p>
-                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </article>
-                <article class="blog-card">
-                    <div class="blog-image">
-                        <img src="assets/images/pallavi-logo.png" alt="Blog Post">
-                    </div>
-                    <div class="blog-content">
-                        <h3>Building Resilience Through Coaching</h3>
-                        <p>Learn how coaching can help you develop the resilience needed to overcome life's challenges.</p>
-                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </article>
-                <article class="blog-card">
-                    <div class="blog-image">
-                        <img src="assets/images/pallavi-logo.png" alt="Blog Post">
-                    </div>
-                    <div class="blog-content">
-                        <h3>Creating Meaningful Relationships</h3>
-                        <p>Explore the key principles for building and maintaining meaningful relationships in your life.</p>
-                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </article>
+            <div class="blog-grid" id="blogGrid">
+                <!-- Blog posts will be injected here -->
             </div>
             <div class="blog-cta">
                 <a href="#" class="btn btn-secondary">View All Articles</a>
@@ -734,70 +1441,6 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact page-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Connect With Me</h2>
-                <p>Ready to start your transformation journey? Let's connect!</p>
-            </div>
-            <div class="contact-content">
-                <div class="contact-form">
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                        </div>
-                        <div class="form-group">
-                            <label for="service">Service Interest</label>
-                            <select id="service" name="service">
-                                <option value="">Select a service</option>
-                                <option value="coaching">Coaching & Mentoring</option>
-                                <option value="habit-mastery">Habit Mastery</option>
-                                <option value="anxiety">Overcome Anxiety</option>
-                                <option value="relationships">Relationship Mentoring</option>
-                                <option value="storytelling">Storytelling</option>
-                                <option value="public-speaking">Public Speaking</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" rows="5" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Send Message</button>
-                    </form>
-                </div>
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <div>
-                            <h3>Email</h3>
-                            <p>pallavi@thestorytree.com</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div>
-                            <h3>Location</h3>
-                            <p>Available Worldwide (Online)</p>
-                        </div>
-                    </div>
-                    <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
 
     <!-- Footer -->
@@ -817,7 +1460,7 @@
                         <li><a href="#hero">Discover</a></li>
                         <li><a href="#about">About Pallavi</a></li>
                         <li><a href="#services">Mentorship</a></li>
-                        <li><a href="#contact">Connect</a></li>
+                        <li><a href="#about">About</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -833,7 +1476,7 @@
                     <h4>Connect</h4>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.instagram.com/lifecoachandstorytellerpallavi/" target="_blank"><i class="fab fa-instagram"></i></a>
                         <a href="#"><i class="fab fa-linkedin"></i></a>
                         <a href="#"><i class="fab fa-youtube"></i></a>
                     </div>
@@ -845,199 +1488,15 @@
         </div>
     </footer>
 
-    <!-- Book Now Popup Form -->
-    <div id="bookNowPopup" class="popup-overlay">
-        <div class="popup-form-container">
-            <div class="popup-form">
-                <div class="popup-header">
-                    <h2>Book Your Session</h2>
-                    <p>Schedule your personalized coaching session with Pallavi Singh</p>
-                    <button class="popup-close" id="closeBookNowPopup">&times;</button>
-                </div>
-                <form id="bookNowForm">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="book-first-name">First Name *</label>
-                            <input type="text" id="book-first-name" name="first-name" required placeholder="Enter your first name">
-                            <div class="error-message">Please enter your first name</div>
-                        </div>
-                        <div class="form-group">
-                            <label for="book-last-name">Last Name *</label>
-                            <input type="text" id="book-last-name" name="last-name" required placeholder="Enter your last name">
-                            <div class="error-message">Please enter your last name</div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="book-email">Email Address *</label>
-                        <input type="email" id="book-email" name="email" required placeholder="Enter your email address">
-                        <div class="error-message">Please enter a valid email address</div>
-                    </div>
-                    
-                    <div class="form-group">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="book-service">Service Type *</label>
-                        <select id="book-service" name="service" required>
-                            <option value="">Select a service</option>
-                            <option value="coaching">Coaching & Mentoring</option>
-                            <option value="habit-mastery">Habit Mastery</option>
-                            <option value="anxiety">Overcome Anxiety</option>
-                            <option value="relationships">Relationship Mentoring</option>
-                            <option value="storytelling">Storytelling</option>
-                            <option value="public-speaking">Public Speaking</option>
-                        </select>
-                        <div class="error-message">Please select a service</div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="book-session-type">Session Type *</label>
-                        <select id="book-session-type" name="session-type" required>
-                            <option value="">Select session type</option>
-                            <option value="discovery">Discovery Session (30 min - Free)</option>
-                            <option value="individual">Individual Session (60 min)</option>
-                            <option value="package-3">3-Session Package</option>
-                            <option value="package-6">6-Session Package</option>
-                            <option value="intensive">Intensive Session (90 min)</option>
-                        </select>
-                        <div class="error-message">Please select a session type</div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="book-preferred-date">Preferred Date</label>
-                            <input type="date" id="book-preferred-date" name="preferred-date" min="">
-                        </div>
-                        <div class="form-group">
-                            <label for="book-preferred-time">Preferred Time</label>
-                            <select id="book-preferred-time" name="preferred-time">
-                                <option value="">Select time</option>
-                                <option value="morning">Morning (9 AM - 12 PM)</option>
-                                <option value="afternoon">Afternoon (12 PM - 5 PM)</option>
-                                <option value="evening">Evening (5 PM - 8 PM)</option>
-                                <option value="weekend">Weekend</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="book-timezone">Timezone</label>
-                        <select id="book-timezone" name="timezone">
-                            <option value="">Select your timezone</option>
-                            <option value="EST">Eastern Time (EST)</option>
-                            <option value="CST">Central Time (CST)</option>
-                            <option value="MST">Mountain Time (MST)</option>
-                            <option value="PST">Pacific Time (PST)</option>
-                            <option value="IST">India Standard Time (IST)</option>
-                            <option value="GMT">Greenwich Mean Time (GMT)</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="book-goals">What would you like to work on? *</label>
-                        <textarea id="book-goals" name="goals" rows="4" required placeholder="Describe your goals and what you hope to achieve through this session..."></textarea>
-                        <div class="error-message">Please describe your goals (minimum 20 characters)</div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="book-experience">Previous Coaching Experience</label>
-                        <select id="book-experience" name="experience">
-                            <option value="">Select your experience level</option>
-                            <option value="none">No previous coaching experience</option>
-                            <option value="some">Some coaching experience</option>
-                            <option value="experienced">Experienced with coaching</option>
-                            <option value="professional">I am a coach myself</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="book-notes">Additional Notes (Optional)</label>
-                        <textarea id="book-notes" name="notes" rows="3" placeholder="Any additional information you'd like to share..."></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="book-terms" name="terms" required>
-                            <label for="book-terms">I agree to the <a href="#" target="_blank">Terms of Service</a> and <a href="#" target="_blank">Privacy Policy</a> *</label>
-                            <div class="error-message">Please accept the terms and conditions</div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="book-newsletter" name="newsletter" value="yes">
-                            <label for="book-newsletter">I would like to receive updates and coaching tips via email</label>
-                        </div>
-                    </div>
-                    
-                    <div class="popup-form-actions">
-                        <button type="button" class="btn btn-secondary" id="cancelBookNow">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Book My Session</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 
-    <!-- Journey Popup Form -->
-    <div id="journeyPopup" class="popup-overlay">
-        <div class="popup-form-container">
-            <div class="popup-form">
-                <div class="popup-header">
-                    <h2>Start Your Journey</h2>
-                    <p>Take the first step towards transformation</p>
-                    <button class="popup-close" id="closePopup">&times;</button>
-                </div>
-                <form id="journeyForm">
-                    <div class="form-group">
-                        <label for="journey-name">Name *</label>
-                        <input type="text" id="journey-name" name="name" required placeholder="Enter your full name">
-                        <div class="error-message">Please enter your name</div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="journey-age">Age *</label>
-                        <input type="number" id="journey-age" name="age" required placeholder="Enter your age" min="16" max="100">
-                        <div class="error-message">Please enter your age</div>
-                    </div>
-                    
-                    <div class="form-group">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="journey-city">City *</label>
-                        <input type="text" id="journey-city" name="city" required placeholder="Enter your city">
-                        <div class="error-message">Please enter your city</div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="journey-issue">Issue/Challenge (Optional)</label>
-                        <textarea id="journey-issue" name="issue" rows="3" placeholder="Share any specific issue or challenge you're facing (optional)"></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="journey-terms" name="terms" required>
-                            <label for="journey-terms">I agree to the <a href="#" target="_blank">Terms of Service</a> and <a href="#" target="_blank">Privacy Policy</a> *</label>
-                            <div class="error-message">Please accept the terms and conditions</div>
-                        </div>
-                    </div>
-                    
-                    <div class="popup-form-actions">
-                        <button type="button" class="btn btn-secondary" id="cancelJourney">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Start My Journey</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-scrollify/1.0.19/jquery.scrollify.min.js"></script>
     <script async src="//www.instagram.com/embed.js"></script>
     <script src="script.js"></script>
+    <script src="testimonials.js"></script>
+    <script src="blogs.js"></script>
+    <script src="join-form.js"></script>
 </body>
 </html>
