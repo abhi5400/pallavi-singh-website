@@ -1,8 +1,13 @@
 <?php
 /**
- * Join Form Processing - Pallavi Singh Coaching
- * Handles form submission and sends confirmation email
+ * Debug version of Join Form Processing
+ * Shows detailed error information
  */
+
+// Enable all error reporting
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('log_errors', 1);
 
 require_once 'config/database_json.php';
 
@@ -17,14 +22,16 @@ header('Content-Type: application/json');
 // Only allow POST requests
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
-    echo json_encode(['success' => false, 'message' => 'Method not allowed']);
+    echo json_encode(['success' => false, 'message' => 'Method not allowed', 'debug' => 'Wrong HTTP method']);
     exit;
 }
 
 // Initialize response
-$response = ['success' => false, 'message' => ''];
+$response = ['success' => false, 'message' => '', 'debug' => []];
 
 try {
+    $response['debug'][] = 'Starting form processing...';
+    
     // Get and sanitize form data
     $full_name = Database::sanitizeInput($_POST['full_name'] ?? '');
     $ageRaw = $_POST['age'] ?? '';
@@ -38,6 +45,9 @@ try {
     $terms_accepted = isset($_POST['terms_accepted']);
     $newsletter_subscription = isset($_POST['newsletter_subscription']);
     
+    $response['debug'][] = 'Form data sanitized successfully';
+    $response['debug'][] = "Name: $full_name, Email: $email";
+    
     // Validate required fields
     $errors = [];
     
@@ -45,7 +55,6 @@ try {
         $errors[] = 'Full name is required';
     }
     
-    // Age is optional; validate only if provided
     if ($age !== null) {
         if ($age < 1 || $age > 150) {
             $errors[] = 'Age must be between 1 and 150';
@@ -78,15 +87,25 @@ try {
     
     if (!empty($errors)) {
         $response['message'] = implode(', ', $errors);
+        $response['debug'][] = 'Validation failed: ' . implode(', ', $errors);
         echo json_encode($response);
         exit;
     }
     
+    $response['debug'][] = 'Validation passed';
+    
     // Get database instance
-    $db = Database::getInstance();
+    try {
+        $db = Database::getInstance();
+        $response['debug'][] = 'Database instance created';
+    } catch (Exception $e) {
+        $response['debug'][] = 'Database error: ' . $e->getMessage();
+        throw $e;
+    }
     
     // Generate unique form ID
     $form_id = 'JOIN-' . date('Ymd') . '-' . strtoupper(substr(uniqid(), -6));
+    $response['debug'][] = "Generated form ID: $form_id";
     
     // Prepare data for storage
     $joinData = [
@@ -107,32 +126,54 @@ try {
         'status' => 'new'
     ];
     
+    $response['debug'][] = 'Join data prepared';
+    
     // Save to database
-    $joinId = $db->insert('join_submissions', $joinData);
+    try {
+        $joinId = $db->insert('join_submissions', $joinData);
+        $response['debug'][] = "Data inserted with ID: $joinId";
+    } catch (Exception $e) {
+        $response['debug'][] = 'Insert error: ' . $e->getMessage();
+        throw $e;
+    }
     
     if ($joinId) {
         // If newsletter subscription is selected, add to newsletter
         if ($newsletter_subscription) {
-            $newsletterData = [
-                'email' => $email,
-                'first_name' => explode(' ', $full_name)[0],
-                'last_name' => implode(' ', array_slice(explode(' ', $full_name), 1)),
-                'source' => 'join_form',
-                'subscription_date' => date('Y-m-d H:i:s'),
-                'ip_address' => Database::getClientIP(),
-                'status' => 'active',
-                'unsubscribe_token' => bin2hex(random_bytes(16))
-            ];
-            
-            // Check if email already exists in newsletter
-            $existingNewsletter = $db->where('newsletter_subscriptions', ['email' => $email]);
-            if (empty($existingNewsletter)) {
-                $db->insert('newsletter_subscriptions', $newsletterData);
+            try {
+                $newsletterData = [
+                    'email' => $email,
+                    'first_name' => explode(' ', $full_name)[0],
+                    'last_name' => implode(' ', array_slice(explode(' ', $full_name), 1)),
+                    'source' => 'join_form',
+                    'subscription_date' => date('Y-m-d H:i:s'),
+                    'ip_address' => Database::getClientIP(),
+                    'status' => 'active',
+                    'unsubscribe_token' => bin2hex(random_bytes(16))
+                ];
+                
+                // Check if email already exists in newsletter
+                $existingNewsletter = $db->where('newsletter_subscriptions', ['email' => $email]);
+                if (empty($existingNewsletter)) {
+                    $newsletterId = $db->insert('newsletter_subscriptions', $newsletterData);
+                    $response['debug'][] = "Newsletter subscription added with ID: $newsletterId";
+                } else {
+                    $response['debug'][] = "Email already exists in newsletter";
+                }
+            } catch (Exception $e) {
+                $response['debug'][] = 'Newsletter error: ' . $e->getMessage();
+                // Don't fail the whole process for newsletter issues
             }
         }
         
         // Send confirmation email
-        $emailSent = sendConfirmationEmail($email, $full_name, $form_id, $issue_challenge);
+        try {
+            $emailSent = sendConfirmationEmail($email, $full_name, $form_id, $issue_challenge);
+            $response['debug'][] = "Email sent: " . ($emailSent ? 'Yes' : 'No');
+        } catch (Exception $e) {
+            $response['debug'][] = 'Email error: ' . $e->getMessage();
+            // Don't fail the whole process for email issues
+        }
         
         // Prepare success response
         $response['success'] = true;
@@ -140,19 +181,22 @@ try {
         $response['form_id'] = $form_id;
         $response['redirect_url'] = 'thank_you.php?id=' . $form_id;
         
-        // Log the submission
-        error_log("Join form submitted: Form ID {$form_id}, Email: {$email}, Name: {$full_name}");
+        $response['debug'][] = 'Success response prepared';
         
     } else {
         $response['message'] = 'Failed to save your information. Please try again.';
+        $response['debug'][] = 'Insert returned false/null';
     }
     
 } catch (Exception $e) {
-    error_log("Join form error: " . $e->getMessage());
+    $response['debug'][] = 'Exception caught: ' . $e->getMessage();
+    $response['debug'][] = 'File: ' . $e->getFile();
+    $response['debug'][] = 'Line: ' . $e->getLine();
+    $response['debug'][] = 'Trace: ' . $e->getTraceAsString();
     $response['message'] = 'An error occurred while processing your request. Please try again.';
 }
 
-echo json_encode($response);
+echo json_encode($response, JSON_PRETTY_PRINT);
 
 /**
  * Send confirmation email
@@ -228,8 +272,6 @@ function sendConfirmationEmail($email, $name, $formId, $issue) {
  */
 function sendEmail($to, $subject, $message, $isHtml = false) {
     // For development, we'll log emails instead of sending them
-    // In production, integrate with SMTP service like PHPMailer
-    
     $headers = [
         'From: ' . (defined('ADMIN_EMAIL') ? ADMIN_EMAIL : 'noreply@pallavisingh.com'),
         'Reply-To: ' . (defined('ADMIN_EMAIL') ? ADMIN_EMAIL : 'noreply@pallavisingh.com'),

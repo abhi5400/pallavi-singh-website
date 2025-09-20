@@ -24,7 +24,7 @@ image.png<!DOCTYPE html>
     
     <!-- Stylesheets -->
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800;900&family=Merriweather:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -48,10 +48,10 @@ image.png<!DOCTYPE html>
                 <h2 class="logo-text">Pallavi Singh</h2>
             </div>
             <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Discover</a></li>
+                <li><a href="index.html" class="nav-link">Home</a></li>
                 <li><a href="about.html" class="nav-link">About Pallavi</a></li>
                 <li class="nav-dropdown">
-                    <a href="mentorship.html" class="nav-link dropdown-toggle">Mentorship <i class="fas fa-chevron-down"></i></a>
+                    <a href="mentorship.html" class="nav-link dropdown-toggle">Services <i class="fas fa-chevron-down"></i></a>
                     <ul class="dropdown-menu">
                         <li><a href="coaching-mentoring.html" class="dropdown-item">Coaching & Mentoring</a></li>
                         <li><a href="habit-mastery.html" class="dropdown-item">Habit Mastery</a></li>
@@ -97,14 +97,20 @@ image.png<!DOCTYPE html>
         
         <div class="container">
             <div class="hero-content">
-                <h1 class="hero-title">
-                    <span class="title-line">Transform Your Life</span>
-                    <span class="title-line">Through the Power of</span>
-                    <span class="title-line title-accent">Storytelling & Coaching</span>
-                </h1>
-                <p class="hero-subtitle">Discover your authentic voice, overcome obstacles, and create lasting change with personalized guidance from Pallavi Singh.</p>
+                <h1 class="hero-title">Evolve.</h1>
+                <div class="hero-subtitle">
+                    <div class="sliding-text-container">
+                        <div class="sliding-text-wrapper">
+                            <p class="sliding-text-item active">Every Life chapter begins with change.</p>
+                            <p class="sliding-text-item">Every voice longs to be heard.</p>
+                            <p class="sliding-text-item">Every habit holds a hidden power.</p>
+                            <p class="sliding-text-item">Every story seeks its rise.</p>
+                            <p class="sliding-text-item">Let's gently rewrite, bravely redesign… and rise higher."</p>
+                        </div>
+                    </div>
+                </div>
                 <div class="hero-buttons">
-                    <a href="#join-form" class="btn btn-secondary join-now-btn" id="heroJoinNow">Join Now</a>
+                    <a href="#join-form" class="btn btn-secondary join-now-btn" id="heroJoinNow">🌙 Step Into Your Story</a>
                     <a href="#about" class="btn btn-primary read-more-btn" id="heroReadMore">Read More</a>
                 </div>
             </div>
@@ -254,7 +260,7 @@ image.png<!DOCTYPE html>
                     
                     <div class="about-stats">
                         <div class="stat">
-                            <span class="stat-number">500+</span>
+                            <span class="stat-number">3000+</span>
                             <span class="stat-label">Lives Transformed</span>
                         </div>
                         <div class="stat">
@@ -1095,7 +1101,7 @@ image.png<!DOCTYPE html>
                             <div style="padding:16px;">
                                 <a href="https://www.instagram.com/p/CHIJ5g0H42V/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==" style="background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;" target="_blank">
                                     <div style="display: flex; flex-direction: row; align-items: center;">
-                                        <div style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;"></div>
+                                        <div style="background-color0: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;"></div>
                                         <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;">
                                             <div style="background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;"></div>
                                             <div style="background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;"></div>
@@ -1459,7 +1465,7 @@ image.png<!DOCTYPE html>
                     <ul>
                         <li><a href="#hero">Discover</a></li>
                         <li><a href="#about">About Pallavi</a></li>
-                        <li><a href="#services">Mentorship</a></li>
+                        <li><a href="#services">Services</a></li>
                         <li><a href="#about">About</a></li>
                     </ul>
                 </div>
@@ -1495,6 +1501,7 @@ image.png<!DOCTYPE html>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-scrollify/1.0.19/jquery.scrollify.min.js"></script>
     <script async src="//www.instagram.com/embed.js"></script>
     <script src="script.js"></script>
+    <script src="hero-sliding-text.js"></script>
     <script src="testimonials.js"></script>
     <script src="blogs.js"></script>
     <script src="join-form.js"></script>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Test Form</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 20px auto; padding: 20px; }
+        .form-container { background: #f8f9fa; padding: 30px; border-radius: 10px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input, textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        button { background: #1A535C; color: white; padding: 15px 30px; border: none; border-radius: 5px; cursor: pointer; }
+        .result { margin-top: 20px; padding: 15px; border-radius: 5px; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .debug { background: #d1ecf1; color: #0c5460; font-family: monospace; white-space: pre-wrap; }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>🔧 Debug Test Form</h1>
+        <p>This will show detailed debug information about what's happening during form submission.</p>
+        
+        <form id="testForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Full Name *</label>
+                    <input type="text" name="full_name" value="Abhijeet Jha" required>
+                </div>
+                <div class="form-group">
+                    <label>Age</label>
+                    <input type="number" name="age" value="25">
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>City *</label>
+                    <input type="text" name="city" value="Jaipur" required>
+                </div>
+                <div class="form-group">
+                    <label>State *</label>
+                    <input type="text" name="state" value="Rajasthan" required>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Contact Number *</label>
+                    <input type="tel" name="contact_number" value="07891307864" required>
+                </div>
+                <div class="form-group">
+                    <label>Email *</label>
+                    <input type="email" name="email" value="abhijeetjha5400@gmail.com" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Challenge/Issue *</label>
+                <textarea name="issue_challenge" required>I am testing the form submission system to debug any issues.</textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>Goals (Optional)</label>
+                <textarea name="goals">Testing form goals field.</textarea>
+            </div>
+            
+            <div class="form-group">
+                <label><input type="checkbox" name="terms_accepted" checked> I accept terms *</label>
+            </div>
+            
+            <div class="form-group">
+                <label><input type="checkbox" name="newsletter_subscription" checked> Subscribe to newsletter</label>
+            </div>
+            
+            <button type="submit">Submit & Debug</button>
+        </form>
+        
+        <div id="result"></div>
+    </div>
+
+    <script>
+        document.getElementById('testForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '<div class="debug">Submitting form...</div>';
+            
+            try {
+                const formData = new FormData(this);
+                const response = await fetch('debug_process_join.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                let html = '';
+                if (result.success) {
+                    html += '<div class="result success"><h3>✅ SUCCESS!</h3><p>' + result.message + '</p>';
+                    if (result.form_id) html += '<p>Form ID: ' + result.form_id + '</p>';
+                    if (result.redirect_url) html += '<p><a href="' + result.redirect_url + '" target="_blank">View Thank You Page</a></p>';
+                    html += '</div>';
+                } else {
+                    html += '<div class="result error"><h3>❌ FAILED!</h3><p>' + result.message + '</p></div>';
+                }
+                
+                if (result.debug && result.debug.length > 0) {
+                    html += '<div class="result debug"><h3>🔍 Debug Info:</h3>' + result.debug.join('\\n') + '</div>';
+                }
+                
+                resultDiv.innerHTML = html;
+                
+            } catch (error) {
+                resultDiv.innerHTML = '<div class="result error"><h3>💥 ERROR!</h3><p>' + error.message + '</p></div>';
+            }
+        });
+    </script>
+</body>
+</html>
