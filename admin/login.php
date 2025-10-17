@@ -4,7 +4,7 @@
  * Separate login page for better organization
  */
 
-require_once '../config/database_json.php';
+require_once '../config/database.php';
 
 // Simple authentication
 if (session_status() === PHP_SESSION_NONE) {

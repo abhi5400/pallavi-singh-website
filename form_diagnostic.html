@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Diagnostic - Pallavi Singh</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-form {
+            margin: 20px 0;
+        }
+        .test-form input, .test-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .test-form button {
+            background: #1A535C;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .test-form button:hover {
+            background: #A8D5BA;
+        }
+        .result {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+    </style>
+</head>
+<body>
+    <h1>Form Submission Diagnostic Tool</h1>
+    <p>This page helps diagnose form submission issues on your website.</p>
+
+    <!-- Test Contact Form -->
+    <div class="test-section">
+        <h2>Test Contact Form</h2>
+        <form class="test-form" id="contactTestForm">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <input type="text" name="phone" placeholder="Your Phone">
+            <input type="text" name="subject" placeholder="Subject" required>
+            <textarea name="message" placeholder="Your Message" required></textarea>
+            <button type="submit">Test Contact Form</button>
+        </form>
+        <div id="contactResult"></div>
+    </div>
+
+    <!-- Test Join Form -->
+    <div class="test-section">
+        <h2>Test Join Form</h2>
+        <form class="test-form" id="joinTestForm">
+            <input type="text" name="full_name" placeholder="Full Name" required>
+            <input type="number" name="age" placeholder="Age">
+            <input type="text" name="city" placeholder="City" required>
+            <input type="text" name="state" placeholder="State" required>
+            <input type="tel" name="contact_number" placeholder="Contact Number" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <textarea name="issue_challenge" placeholder="Challenge/Issue" required></textarea>
+            <textarea name="goals" placeholder="Goals (Optional)"></textarea>
+            <label>
+                <input type="checkbox" name="terms_accepted" required>
+                I agree to terms and conditions
+            </label>
+            <button type="submit">Test Join Form</button>
+        </form>
+        <div id="joinResult"></div>
+    </div>
+
+    <!-- Test Waitlist Form -->
+    <div class="test-section">
+        <h2>Test Waitlist Form</h2>
+        <form class="test-form" id="waitlistTestForm">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <button type="submit">Test Waitlist Form</button>
+        </form>
+        <div id="waitlistResult"></div>
+    </div>
+
+    <!-- Server Test -->
+    <div class="test-section">
+        <h2>Server Configuration Test</h2>
+        <button onclick="testServer()">Test Server Configuration</button>
+        <div id="serverResult"></div>
+    </div>
+
+    <script>
+        // Test Contact Form
+        document.getElementById('contactTestForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const resultDiv = document.getElementById('contactResult');
+            resultDiv.innerHTML = '<div class="info">Testing contact form...</div>';
+            
+            const formData = new FormData(this);
+            
+            fetch('process_contact.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    resultDiv.innerHTML = '<div class="success">✅ Contact form test successful: ' + data.message + '</div>';
+                } else {
+                    resultDiv.innerHTML = '<div class="error">❌ Contact form test failed: ' + data.message + '</div>';
+                    if (data.debug) {
+                        resultDiv.innerHTML += '<div class="info">Debug info: ' + data.debug + '</div>';
+                    }
+                }
+            })
+            .catch(error => {
+                resultDiv.innerHTML = '<div class="error">❌ Contact form test error: ' + error.message + '</div>';
+            });
+        });
+
+        // Test Join Form
+        document.getElementById('joinTestForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const resultDiv = document.getElementById('joinResult');
+            resultDiv.innerHTML = '<div class="info">Testing join form...</div>';
+            
+            const formData = new FormData(this);
+            
+            fetch('process_join.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    resultDiv.innerHTML = '<div class="success">✅ Join form test successful: ' + data.message + '</div>';
+                } else {
+                    resultDiv.innerHTML = '<div class="error">❌ Join form test failed: ' + data.message + '</div>';
+                    if (data.debug) {
+                        resultDiv.innerHTML += '<div class="info">Debug info: ' + data.debug + '</div>';
+                    }
+                }
+            })
+            .catch(error => {
+                resultDiv.innerHTML = '<div class="error">❌ Join form test error: ' + error.message + '</div>';
+            });
+        });
+
+        // Test Waitlist Form
+        document.getElementById('waitlistTestForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const resultDiv = document.getElementById('waitlistResult');
+            resultDiv.innerHTML = '<div class="info">Testing waitlist form...</div>';
+            
+            const formData = new FormData(this);
+            
+            fetch('process_waitlist.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    resultDiv.innerHTML = '<div class="success">✅ Waitlist form test successful: ' + data.message + '</div>';
+                } else {
+                    resultDiv.innerHTML = '<div class="error">❌ Waitlist form test failed: ' + data.message + '</div>';
+                    if (data.debug) {
+                        resultDiv.innerHTML += '<div class="info">Debug info: ' + data.debug + '</div>';
+                    }
+                }
+            })
+            .catch(error => {
+                resultDiv.innerHTML = '<div class="error">❌ Waitlist form test error: ' + error.message + '</div>';
+            });
+        });
+
+        // Test Server Configuration
+        function testServer() {
+            const resultDiv = document.getElementById('serverResult');
+            resultDiv.innerHTML = '<div class="info">Testing server configuration...</div>';
+            
+            fetch('test_forms.php')
+            .then(response => response.text())
+            .then(data => {
+                resultDiv.innerHTML = '<div class="info">Server test results:</div><pre>' + data + '</pre>';
+            })
+            .catch(error => {
+                resultDiv.innerHTML = '<div class="error">❌ Server test error: ' + error.message + '</div>';
+            });
+        }
+    </script>
+</body>
+</html>

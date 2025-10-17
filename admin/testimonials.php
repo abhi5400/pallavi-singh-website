@@ -22,7 +22,7 @@ $error = '';
 // Handle form submissions
 if ($_POST) {
     try {
-        $db = Database::getInstance();
+        $db = JsonDatabase::getInstance();
         
         if (isset($_POST['create_testimonial'])) {
             $testimonialData = [
@@ -73,12 +73,14 @@ if ($_POST) {
 
 // Get testimonials data
 try {
-    $db = Database::getInstance();
+    $db = JsonDatabase::getInstance();
     $allTestimonials = $db->getData('testimonials');
     
     // Sort by created_at descending
     usort($allTestimonials, function($a, $b) {
-        return strtotime($b['created_at']) - strtotime($a['created_at']);
+        $dateA = $a['created_at'] ?? '1970-01-01';
+        $dateB = $b['created_at'] ?? '1970-01-01';
+        return strtotime($dateB) - strtotime($dateA);
     });
     
     // Get service types
@@ -189,7 +191,7 @@ ob_start();
                     <span class="service-badge"><?php echo htmlspecialchars($testimonial['service_type']); ?></span>
                 </div>
                 <div class="testimonial-date">
-                    <?php echo date('M j, Y', strtotime($testimonial['created_at'])); ?>
+                    <?php echo $testimonial['created_at'] ? date('M j, Y', strtotime($testimonial['created_at'])) : 'N/A'; ?>
                 </div>
             </div>
         </div>

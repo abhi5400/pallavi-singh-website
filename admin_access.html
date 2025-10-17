@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel Access - Pallavi Singh</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1A535C, #A8D5BA);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+        }
+        h1 {
+            color: #1A535C;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.2rem;
+        }
+        .admin-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #A8D5BA, #1A535C);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(26, 83, 92, 0.3);
+        }
+        .admin-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(26, 83, 92, 0.4);
+        }
+        .credentials {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #A8D5BA;
+        }
+        .credentials h3 {
+            color: #1A535C;
+            margin-top: 0;
+        }
+        .credential-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+        }
+        .credential-label {
+            font-weight: bold;
+            color: #1A535C;
+        }
+        .credential-value {
+            font-family: monospace;
+            background: #e9ecef;
+            padding: 5px 10px;
+            border-radius: 3px;
+        }
+        .features {
+            text-align: left;
+            margin: 30px 0;
+        }
+        .features h3 {
+            color: #1A535C;
+            text-align: center;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .feature-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+        .feature-item:hover {
+            border-color: #A8D5BA;
+            transform: translateY(-2px);
+        }
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        .status {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 2px solid #c3e6cb;
+        }
+        .status h3 {
+            margin-top: 0;
+            color: #155724;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Admin Panel</h1>
+        <p class="subtitle">Pallavi Singh Coaching - Website Management</p>
+        
+        <div class="status">
+            <h3>✅ Admin Panel Ready</h3>
+            <p>The admin panel is running and ready to use!</p>
+        </div>
+        
+        <a href="http://127.0.0.1:8080/admin/" class="admin-link" target="_blank">
+            🚀 Access Admin Panel
+        </a>
+        
+        <div class="credentials">
+            <h3>🔐 Login Credentials</h3>
+            <div class="credential-item">
+                <span class="credential-label">Username:</span>
+                <span class="credential-value">admin</span>
+            </div>
+            <div class="credential-item">
+                <span class="credential-label">Password:</span>
+                <span class="credential-value">admin123</span>
+            </div>
+        </div>
+        
+        <div class="features">
+            <h3>📋 Admin Panel Features</h3>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">📊</div>
+                    <h4>Dashboard</h4>
+                    <p>Overview of all submissions and analytics</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">👥</div>
+                    <h4>Clients</h4>
+                    <p>Manage client information and submissions</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📧</div>
+                    <h4>Newsletter</h4>
+                    <p>Manage newsletter subscriptions</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📝</div>
+                    <h4>Blog</h4>
+                    <p>Manage blog posts and content</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">⭐</div>
+                    <h4>Testimonials</h4>
+                    <p>Manage client testimonials</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📅</div>
+                    <h4>Events</h4>
+                    <p>Manage events and workshops</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">💰</div>
+                    <h4>Payments</h4>
+                    <p>Track payments and transactions</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📊</div>
+                    <h4>Analytics</h4>
+                    <p>View detailed analytics and reports</p>
+                </div>
+            </div>
+        </div>
+        
+        <div style="margin-top: 30px; padding: 20px; background: #fff3cd; border-radius: 10px; border: 2px solid #ffeaa7;">
+            <h3 style="color: #856404; margin-top: 0;">⚠️ Security Note</h3>
+            <p style="color: #856404; margin-bottom: 0;">Remember to change the default admin password in production!</p>
+        </div>
+    </div>
+</body>
+</html>
+

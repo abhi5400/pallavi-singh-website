@@ -1,0 +1,30 @@
+[
+    {
+        "timestamp": "2025-09-29 06:30:58",
+        "to": "abhijeetjha5400@gmail.com",
+        "subject": "Welcome to Pallavi Singh Coaching - Form Confirmation",
+        "message_preview": "\n    \n    \n    \n        \n        \n            body { font-family: Arial, sans-serif; line-height: 1....",
+        "headers": [
+            "From: pallavi@thestorytree.com",
+            "Reply-To: pallavi@thestorytree.com",
+            "X-Mailer: PHP\/8.4.10",
+            "MIME-Version: 1.0",
+            "Content-type: text\/html; charset=UTF-8"
+        ],
+        "status": "logged"
+    },
+    {
+        "timestamp": "2025-09-29 06:31:33",
+        "to": "test@example.com",
+        "subject": "Welcome to Pallavi Singh Coaching - Form Confirmation",
+        "message_preview": "\n    \n    \n    \n        \n        \n            body { font-family: Arial, sans-serif; line-height: 1....",
+        "headers": [
+            "From: pallavi@thestorytree.com",
+            "Reply-To: pallavi@thestorytree.com",
+            "X-Mailer: PHP\/8.4.10",
+            "MIME-Version: 1.0",
+            "Content-type: text\/html; charset=UTF-8"
+        ],
+        "status": "logged"
+    }
+]

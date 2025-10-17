@@ -76,12 +76,21 @@ if ($_POST) {
 
 // Get media data
 try {
-    $db = Database::getInstance();
+    $db = JsonDatabase::getInstance();
     $allMedia = $db->getData('media_library');
+    
+    // Generate URLs for media files
+    foreach ($allMedia as &$media) {
+        if (!isset($media['url']) && isset($media['file_path'])) {
+            $media['url'] = '/' . $media['file_path'];
+        }
+    }
     
     // Sort by created_at descending
     usort($allMedia, function($a, $b) {
-        return strtotime($b['created_at']) - strtotime($a['created_at']);
+        $dateA = $a['created_at'] ?? '1970-01-01';
+        $dateB = $b['created_at'] ?? '1970-01-01';
+        return strtotime($dateB) - strtotime($dateA);
     });
     
     // Get media categories
@@ -208,7 +217,7 @@ ob_start();
                 </div>
                 <div class="meta-item">
                     <span class="meta-label">Uploaded:</span>
-                    <span class="meta-value"><?php echo date('M j, Y', strtotime($media['created_at'])); ?></span>
+                    <span class="meta-value"><?php echo $media['created_at'] ? date('M j, Y', strtotime($media['created_at'])) : 'N/A'; ?></span>
                 </div>
             </div>
             
@@ -261,7 +270,7 @@ ob_start();
             <?php echo htmlspecialchars($media['file_type']); ?>
         </div>
         <div class="list-column">
-            <?php echo date('M j, Y', strtotime($media['created_at'])); ?>
+            <?php echo $media['created_at'] ? date('M j, Y', strtotime($media['created_at'])) : 'N/A'; ?>
         </div>
         <div class="list-column">
             <div class="list-actions">

@@ -22,17 +22,54 @@ $currentPage = basename($_SERVER['PHP_SELF']);
             <a href="dashboard.php" class="nav-link <?php echo $currentPage === 'dashboard.php' ? 'active' : ''; ?>">
                 📊 Dashboard
             </a>
-            <a href="#" class="nav-link">
-                📧 Contacts
+            <a href="analytics.php" class="nav-link <?php echo $currentPage === 'analytics.php' ? 'active' : ''; ?>">
+                📈 Analytics
             </a>
-            <a href="#" class="nav-link">
-                📅 Bookings
-            </a>
-            <a href="#" class="nav-link">
-                🌟 Journeys
-            </a>
-            <a href="#" class="nav-link">
-                📬 Newsletter
+            
+            <!-- Forms Section -->
+            <div class="nav-dropdown">
+                <a href="forms.php" class="nav-link dropdown-toggle <?php echo in_array($currentPage, ['forms.php', 'contact-forms.php', 'join-forms.php', 'booking-forms.php', 'journey-forms.php', 'waitlist-forms.php']) ? 'active' : ''; ?>">
+                    📋 Forms <span class="dropdown-arrow">▼</span>
+                </a>
+                <div class="dropdown-menu">
+                    <a href="forms.php" class="dropdown-item">📊 Forms Overview</a>
+                    <a href="contact-forms.php" class="dropdown-item">📧 Contact Forms</a>
+                    <a href="join-forms.php" class="dropdown-item">🤝 Join Forms</a>
+                    <a href="newsletter.php" class="dropdown-item">📬 Newsletter</a>
+                    <a href="booking-forms.php" class="dropdown-item">📅 Bookings</a>
+                    <a href="journey-forms.php" class="dropdown-item">🌟 Journeys</a>
+                    <a href="waitlist-forms.php" class="dropdown-item">⏳ Waitlist</a>
+                </div>
+            </div>
+            
+            <!-- Content Management -->
+            <div class="nav-dropdown">
+                <a href="#" class="nav-link dropdown-toggle <?php echo in_array($currentPage, ['blog.php', 'media.php', 'testimonials.php', 'services.php', 'events.php']) ? 'active' : ''; ?>">
+                    📝 Content <span class="dropdown-arrow">▼</span>
+                </a>
+                <div class="dropdown-menu">
+                    <a href="blog.php" class="dropdown-item">📝 Blog Posts</a>
+                    <a href="media.php" class="dropdown-item">🖼️ Media Library</a>
+                    <a href="testimonials.php" class="dropdown-item">⭐ Testimonials</a>
+                    <a href="services.php" class="dropdown-item">🎯 Services</a>
+                    <a href="events.php" class="dropdown-item">📅 Events</a>
+                </div>
+            </div>
+            
+            <!-- Client Management -->
+            <div class="nav-dropdown">
+                <a href="#" class="nav-link dropdown-toggle <?php echo in_array($currentPage, ['clients.php', 'sessions.php', 'users.php']) ? 'active' : ''; ?>">
+                    👥 Clients <span class="dropdown-arrow">▼</span>
+                </a>
+                <div class="dropdown-menu">
+                    <a href="clients.php" class="dropdown-item">👥 Client List</a>
+                    <a href="sessions.php" class="dropdown-item">🕐 Sessions</a>
+                    <a href="users.php" class="dropdown-item">👤 Users</a>
+                </div>
+            </div>
+            
+            <a href="settings.php" class="nav-link <?php echo $currentPage === 'settings.php' ? 'active' : ''; ?>">
+                ⚙️ Settings
             </a>
         </div>
         
@@ -76,6 +113,72 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 .nav-menu {
     display: flex;
     gap: 20px;
+    align-items: center;
+}
+
+.nav-dropdown {
+    position: relative;
+}
+
+.dropdown-toggle {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.dropdown-arrow {
+    font-size: 0.8em;
+    transition: transform 0.3s ease;
+}
+
+.nav-dropdown:hover .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    border: 1px solid rgba(0,0,0,0.1);
+    min-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.nav-dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-item {
+    display: block;
+    padding: 12px 20px;
+    color: #666;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.dropdown-item:last-child {
+    border-bottom: none;
+    border-radius: 0 0 10px 10px;
+}
+
+.dropdown-item:first-child {
+    border-radius: 10px 10px 0 0;
+}
+
+.dropdown-item:hover {
+    background: linear-gradient(135deg, #1A535C, #4ECDC4);
+    color: white;
+    transform: translateX(5px);
 }
 
 .nav-link {

@@ -4,7 +4,7 @@
  * Comprehensive dashboard with analytics and management tools
  */
 
-require_once '../config/database_json.php';
+require_once '../config/database.php';
 
 // Check authentication
 if (session_status() === PHP_SESSION_NONE) {
@@ -22,39 +22,19 @@ try {
     
     // Get counts
     $contactCount = $db->count('contact_submissions');
-    $bookingCount = $db->count('booking_submissions');
-    $journeyCount = $db->count('journey_submissions');
-    $newsletterCount = $db->count('newsletter_subscriptions', ['status' => 'active']);
+    $joinCount = $db->count('join_submissions');
+    $newsletterCount = $db->count('newsletter_subscriptions', 'status = ?', ['active']);
     
     // Get recent submissions
-    $allContacts = $db->getData('contact_submissions');
-    $allBookings = $db->getData('booking_submissions');
-    $allJourneys = $db->getData('journey_submissions');
-    
-    // Sort by submission_date descending and get first 5
-    usort($allContacts, function($a, $b) {
-        return strtotime($b['submission_date']) - strtotime($a['submission_date']);
-    });
-    usort($allBookings, function($a, $b) {
-        return strtotime($b['submission_date']) - strtotime($a['submission_date']);
-    });
-    usort($allJourneys, function($a, $b) {
-        return strtotime($b['submission_date']) - strtotime($a['submission_date']);
-    });
-    
-    $recentContacts = array_slice($allContacts, 0, 5);
-    $recentBookings = array_slice($allBookings, 0, 5);
-    $recentJourneys = array_slice($allJourneys, 0, 5);
+    $recentContacts = $db->select('contact_submissions', '', [], 'submission_date DESC', '5');
+    $recentJoins = $db->select('join_submissions', '', [], 'submission_date DESC', '5');
     
     // Calculate growth metrics
     $today = date('Y-m-d');
     $yesterday = date('Y-m-d', strtotime('-1 day'));
     
-    $todayContacts = $db->count('contact_submissions', ['submission_date' => $today]);
-    $yesterdayContacts = $db->count('contact_submissions', ['submission_date' => $yesterday]);
-    
-    $todayBookings = $db->count('booking_submissions', ['submission_date' => $today]);
-    $yesterdayBookings = $db->count('booking_submissions', ['submission_date' => $yesterday]);
+    $todayContacts = $db->count('contact_submissions', 'DATE(submission_date) = ?', [$today]);
+    $todayJoins = $db->count('join_submissions', 'DATE(submission_date) = ?', [$today]);
     
 } catch (Exception $e) {
     $error = "Database error: " . $e->getMessage();
@@ -83,16 +63,10 @@ ob_start();
         <div class="stat-change positive">+<?php echo $todayContacts; ?> today</div>
     </div>
     <div class="stat-card">
-        <div class="stat-icon">📅</div>
-        <div class="stat-number"><?php echo $bookingCount; ?></div>
-        <div class="stat-label">Booking Requests</div>
-        <div class="stat-change positive">+<?php echo $todayBookings; ?> today</div>
-    </div>
-    <div class="stat-card">
         <div class="stat-icon">🌟</div>
-        <div class="stat-number"><?php echo $journeyCount; ?></div>
-        <div class="stat-label">Journey Signups</div>
-        <div class="stat-change">Active journeys</div>
+        <div class="stat-number"><?php echo $joinCount; ?></div>
+        <div class="stat-label">Join Submissions</div>
+        <div class="stat-change positive">+<?php echo $todayJoins; ?> today</div>
     </div>
     <div class="stat-card">
         <div class="stat-icon">📬</div>
@@ -110,9 +84,9 @@ ob_start();
             <div class="action-icon">📧</div>
             <div class="action-text">View Contacts</div>
         </a>
-        <a href="bookings.php" class="action-btn">
-            <div class="action-icon">📅</div>
-            <div class="action-text">Manage Bookings</div>
+        <a href="users.php" class="action-btn">
+            <div class="action-icon">👥</div>
+            <div class="action-text">View Submissions</div>
         </a>
         <a href="analytics.php" class="action-btn">
             <div class="action-icon">📈</div>
@@ -163,58 +137,25 @@ ob_start();
     
     <div class="dashboard-widget fade-in">
         <div class="widget-header">
-            <h3>📅 Recent Booking Requests</h3>
-            <a href="bookings.php" class="widget-link">View All</a>
+            <h3>🌟 Recent Join Submissions</h3>
+            <a href="users.php" class="widget-link">View All</a>
         </div>
         <div class="widget-content">
-            <?php if (!empty($recentBookings)): ?>
+            <?php if (!empty($recentJoins)): ?>
                 <div class="activity-list">
-                    <?php foreach ($recentBookings as $booking): ?>
-                    <div class="activity-item">
-                        <div class="activity-icon">📅</div>
-                        <div class="activity-content">
-                            <div class="activity-title"><?php echo htmlspecialchars($booking['first_name'] . ' ' . $booking['last_name']); ?></div>
-                            <div class="activity-subtitle"><?php echo ucfirst(str_replace('-', ' ', $booking['service_type'])); ?></div>
-                            <div class="activity-meta">
-                                <?php echo ucfirst(str_replace('-', ' ', $booking['session_type'])); ?>
-                                • <?php echo date('M j, H:i', strtotime($booking['submission_date'])); ?>
-                            </div>
-                        </div>
-                        <div class="activity-status">
-                            <span class="status-badge <?php echo $booking['status']; ?>"><?php echo ucfirst($booking['status']); ?></span>
-                        </div>
-                    </div>
-                    <?php endforeach; ?>
-                </div>
-            <?php else: ?>
-                <div class="empty-widget">
-                    <div class="empty-icon">📅</div>
-                    <div class="empty-text">No booking requests yet</div>
-                </div>
-            <?php endif; ?>
-        </div>
-    </div>
-    
-    <div class="dashboard-widget fade-in">
-        <div class="widget-header">
-            <h3>🌟 Recent Journey Signups</h3>
-            <a href="journeys.php" class="widget-link">View All</a>
-        </div>
-        <div class="widget-content">
-            <?php if (!empty($recentJourneys)): ?>
-                <div class="activity-list">
-                    <?php foreach ($recentJourneys as $journey): ?>
+                    <?php foreach ($recentJoins as $join): ?>
                     <div class="activity-item">
                         <div class="activity-icon">🌟</div>
                         <div class="activity-content">
-                            <div class="activity-title"><?php echo htmlspecialchars($journey['name']); ?></div>
-                            <div class="activity-subtitle">Age <?php echo $journey['age']; ?> • <?php echo htmlspecialchars($journey['city']); ?></div>
+                            <div class="activity-title"><?php echo htmlspecialchars($join['full_name']); ?></div>
+                            <div class="activity-subtitle"><?php echo htmlspecialchars($join['email']); ?></div>
                             <div class="activity-meta">
-                                Started journey • <?php echo date('M j, H:i', strtotime($journey['submission_date'])); ?>
+                                <?php echo htmlspecialchars($join['city'] . ', ' . $join['state']); ?>
+                                • <?php echo date('M j, H:i', strtotime($join['submission_date'])); ?>
                             </div>
                         </div>
                         <div class="activity-status">
-                            <span class="status-badge <?php echo $journey['status']; ?>"><?php echo ucfirst($journey['status']); ?></span>
+                            <span class="status-badge <?php echo $join['status']; ?>"><?php echo ucfirst($join['status']); ?></span>
                         </div>
                     </div>
                     <?php endforeach; ?>
@@ -222,7 +163,7 @@ ob_start();
             <?php else: ?>
                 <div class="empty-widget">
                     <div class="empty-icon">🌟</div>
-                    <div class="empty-text">No journey signups yet</div>
+                    <div class="empty-text">No join submissions yet</div>
                 </div>
             <?php endif; ?>
         </div>

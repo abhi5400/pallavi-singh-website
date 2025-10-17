@@ -57,10 +57,30 @@ $userInitials = strtoupper(substr($user['full_name'], 0, 1));
                 </div>
                 
                 <div class="nav-section">
-                    <div class="nav-section-title">Submissions</div>
-                    <a href="newsletter.php" class="nav-item <?php echo $currentPage === 'newsletter' ? 'active' : ''; ?>">
-                        <i class="fas fa-newspaper"></i>
-                        <span>Newsletter</span>
+                    <div class="nav-section-title">Forms</div>
+                    <a href="forms.php" class="nav-item <?php echo $currentPage === 'forms' ? 'active' : ''; ?>">
+                        <i class="fas fa-clipboard-list"></i>
+                        <span>Forms Overview</span>
+                    </a>
+                    <a href="contact-forms.php" class="nav-item <?php echo $currentPage === 'contact-forms' ? 'active' : ''; ?>">
+                        <i class="fas fa-envelope"></i>
+                        <span>Contact Forms</span>
+                    </a>
+                    <a href="join-forms.php" class="nav-item <?php echo $currentPage === 'join-forms' ? 'active' : ''; ?>">
+                        <i class="fas fa-handshake"></i>
+                        <span>Join Forms</span>
+                    </a>
+                    <a href="booking-forms.php" class="nav-item <?php echo $currentPage === 'booking-forms' ? 'active' : ''; ?>">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>Bookings</span>
+                    </a>
+                    <a href="journey-forms.php" class="nav-item <?php echo $currentPage === 'journey-forms' ? 'active' : ''; ?>">
+                        <i class="fas fa-star"></i>
+                        <span>Journeys</span>
+                    </a>
+                    <a href="waitlist-forms.php" class="nav-item <?php echo $currentPage === 'waitlist-forms' ? 'active' : ''; ?>">
+                        <i class="fas fa-clock"></i>
+                        <span>Waitlist</span>
                     </a>
                 </div>
                 
@@ -73,10 +93,6 @@ $userInitials = strtoupper(substr($user['full_name'], 0, 1));
                     <a href="sessions.php" class="nav-item <?php echo $currentPage === 'sessions' ? 'active' : ''; ?>">
                         <i class="fas fa-clock"></i>
                         <span>Sessions</span>
-                    </a>
-                    <a href="payments.php" class="nav-item <?php echo $currentPage === 'payments' ? 'active' : ''; ?>">
-                        <i class="fas fa-credit-card"></i>
-                        <span>Payments</span>
                     </a>
                 </div>
                 

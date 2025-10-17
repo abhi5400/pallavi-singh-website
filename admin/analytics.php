@@ -18,7 +18,7 @@ if (!isset($_SESSION['admin_logged_in'])) {
 
 // Get analytics data
 try {
-    $db = Database::getInstance();
+    $db = JsonDatabase::getInstance();
     
     // Get counts
     $contactCount = $db->count('contact_submissions');

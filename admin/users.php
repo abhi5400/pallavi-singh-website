@@ -22,7 +22,7 @@ $error = '';
 // Handle form submissions
 if ($_POST) {
     try {
-        $db = Database::getInstance();
+        $db = JsonDatabase::getInstance();
         
         if (isset($_POST['add_user'])) {
             $userData = [
@@ -66,7 +66,7 @@ if ($_POST) {
 
 // Get users data
 try {
-    $db = Database::getInstance();
+    $db = JsonDatabase::getInstance();
     $allUsers = $db->getData('admin_users');
     
     // Sort by created_at descending

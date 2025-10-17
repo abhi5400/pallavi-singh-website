@@ -1,46 +1,50 @@
 <?php
 /**
- * Database Configuration for Pallavi Singh Coaching Website
+ * MySQL Database Configuration for Pallavi Singh Coaching Website
  * 
- * This file contains the database connection settings and utility functions
+ * This file provides MySQL database connection and operations
  */
 
 // Database configuration
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'pallavi_coaching_db');
-define('DB_USER', 'root'); // Change this to your database username
-define('DB_PASS', ''); // Change this to your database password
+define('DB_NAME', 'pallavi_singh');
+define('DB_USER', 'root'); // Change this to your MySQL username
+define('DB_PASS', ''); // Change this to your MySQL password
 define('DB_CHARSET', 'utf8mb4');
 
-// Email configuration
-define('SMTP_HOST', 'smtp.gmail.com'); // Change to your SMTP server
-define('SMTP_PORT', 587);
-define('SMTP_USERNAME', 'your-email@gmail.com'); // Change to your email
-define('SMTP_PASSWORD', 'your-app-password'); // Change to your app password
-define('FROM_EMAIL', 'noreply@pallavi-coaching.com');
-define('FROM_NAME', 'Pallavi Singh Coaching');
-
-// Site configuration
-define('SITE_URL', 'https://your-domain.com'); // Change to your domain
-define('ADMIN_EMAIL', 'pallavi@thestorytree.com');
-
 class Database {
-    private $connection;
     private static $instance = null;
+    private $connection;
+    private $useJson = false;
+    private $jsonDb;
     
     private function __construct() {
-        try {
-            $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=" . DB_CHARSET;
-            $options = [
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                PDO::ATTR_EMULATE_PREPARES => false,
-            ];
-            
-            $this->connection = new PDO($dsn, DB_USER, DB_PASS, $options);
-        } catch (PDOException $e) {
-            error_log("Database connection failed: " . $e->getMessage());
-            throw new Exception("Database connection failed");
+        // Check if PDO MySQL is available
+        if (class_exists('PDO') && in_array('mysql', PDO::getAvailableDrivers())) {
+            try {
+                $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=" . DB_CHARSET;
+                $options = [
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                    PDO::ATTR_EMULATE_PREPARES => false,
+                ];
+                
+                $this->connection = new PDO($dsn, DB_USER, DB_PASS, $options);
+                $this->useJson = false;
+                error_log("MySQL database connection successful");
+            } catch (PDOException $e) {
+                error_log("MySQL connection failed, falling back to JSON: " . $e->getMessage());
+                $this->useJson = true;
+            }
+        } else {
+            error_log("PDO MySQL driver not available, using JSON database");
+            $this->useJson = true;
+        }
+        
+        if ($this->useJson) {
+            // Initialize JSON database
+            require_once __DIR__ . '/database_json.php';
+            $this->jsonDb = JsonDatabase::getInstance();
         }
     }
     
@@ -53,6 +57,167 @@ class Database {
     
     public function getConnection() {
         return $this->connection;
+    }
+    
+    /**
+     * Execute a query with parameters
+     */
+    public function query($sql, $params = []) {
+        if ($this->useJson) {
+            // For JSON database, we don't use SQL queries
+            throw new Exception("SQL queries not supported in JSON mode");
+        }
+        
+        try {
+            $stmt = $this->connection->prepare($sql);
+            $stmt->execute($params);
+            return $stmt;
+        } catch (PDOException $e) {
+            error_log("Query failed: " . $e->getMessage());
+            error_log("SQL: " . $sql);
+            error_log("Params: " . json_encode($params));
+            throw $e;
+        }
+    }
+    
+    /**
+     * Insert data and return the last insert ID
+     */
+    public function insert($table, $data) {
+        if ($this->useJson) {
+            return $this->jsonDb->insert($table, $data);
+        }
+        
+        $columns = implode(',', array_keys($data));
+        $placeholders = ':' . implode(', :', array_keys($data));
+        
+        $sql = "INSERT INTO {$table} ({$columns}) VALUES ({$placeholders})";
+        $this->query($sql, $data);
+        
+        return $this->connection->lastInsertId();
+    }
+    
+    /**
+     * Update data
+     */
+    public function update($table, $data, $where, $whereParams = []) {
+        if ($this->useJson) {
+            return $this->jsonDb->update($table, $data, $where, $whereParams);
+        }
+        
+        $setClause = [];
+        foreach ($data as $key => $value) {
+            $setClause[] = "{$key} = :{$key}";
+        }
+        $setClause = implode(', ', $setClause);
+        
+        $sql = "UPDATE {$table} SET {$setClause} WHERE {$where}";
+        $params = array_merge($data, $whereParams);
+        
+        $stmt = $this->query($sql, $params);
+        return $stmt->rowCount();
+    }
+    
+    /**
+     * Select data
+     */
+    public function select($table, $where = '', $params = [], $orderBy = '', $limit = '') {
+        if ($this->useJson) {
+            return $this->jsonDb->getData($table);
+        }
+        
+        $sql = "SELECT * FROM {$table}";
+        
+        if (!empty($where)) {
+            $sql .= " WHERE {$where}";
+        }
+        
+        if (!empty($orderBy)) {
+            $sql .= " ORDER BY {$orderBy}";
+        }
+        
+        if (!empty($limit)) {
+            $sql .= " LIMIT {$limit}";
+        }
+        
+        $stmt = $this->query($sql, $params);
+        return $stmt->fetchAll();
+    }
+    
+    /**
+     * Find record by ID
+     */
+    public function findById($table, $id) {
+        if ($this->useJson) {
+            $data = $this->jsonDb->getData($table);
+            foreach ($data as $record) {
+                if ($record['id'] == $id) {
+                    return $record;
+                }
+            }
+            return null;
+        }
+        
+        $sql = "SELECT * FROM {$table} WHERE id = :id";
+        $stmt = $this->query($sql, ['id' => $id]);
+        return $stmt->fetch();
+    }
+    
+    /**
+     * Find records with conditions
+     */
+    public function where($table, $conditions = []) {
+        if ($this->useJson) {
+            return $this->jsonDb->where($table, $conditions);
+        }
+        
+        if (empty($conditions)) {
+            return $this->select($table);
+        }
+        
+        $whereClause = [];
+        $params = [];
+        
+        foreach ($conditions as $key => $value) {
+            $whereClause[] = "{$key} = :{$key}";
+            $params[$key] = $value;
+        }
+        
+        $where = implode(' AND ', $whereClause);
+        return $this->select($table, $where, $params);
+    }
+    
+    /**
+     * Count records
+     */
+    public function count($table, $where = '', $params = []) {
+        if ($this->useJson) {
+            $data = $this->jsonDb->getData($table);
+            return count($data);
+        }
+        
+        $sql = "SELECT COUNT(*) as count FROM {$table}";
+        
+        if (!empty($where)) {
+            $sql .= " WHERE {$where}";
+        }
+        
+        $stmt = $this->query($sql, $params);
+        $result = $stmt->fetch();
+        return $result['count'];
+    }
+    
+    /**
+     * Delete records
+     */
+    public function delete($table, $where, $params = []) {
+        if ($this->useJson) {
+            return $this->jsonDb->delete($table, $where, $params);
+        }
+        
+        $sql = "DELETE FROM {$table} WHERE {$where}";
+        $stmt = $this->query($sql, $params);
+        return $stmt->rowCount();
     }
     
     /**
@@ -91,52 +256,51 @@ class Database {
     }
     
     /**
-     * Log form analytics
+     * Begin transaction
      */
-    public function logFormAnalytics($formType, $actionType, $formData = null, $errorMessage = null) {
-        try {
-            $stmt = $this->connection->prepare("
-                INSERT INTO form_analytics (form_type, action_type, user_ip, user_agent, referrer, form_data, error_message, session_id) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-            ");
-            
-            $stmt->execute([
-                $formType,
-                $actionType,
-                self::getClientIP(),
-                $_SERVER['HTTP_USER_AGENT'] ?? '',
-                $_SERVER['HTTP_REFERER'] ?? '',
-                $formData ? json_encode($formData) : null,
-                $errorMessage,
-                session_id()
-            ]);
-        } catch (PDOException $e) {
-            error_log("Failed to log form analytics: " . $e->getMessage());
+    public function beginTransaction() {
+        if ($this->useJson) {
+            // JSON database doesn't support transactions
+            return true;
         }
-    }
-}
-
-// Utility functions
-function sendEmail($to, $subject, $body, $isHTML = true) {
-    // This is a basic email function - you should implement proper SMTP
-    $headers = "From: " . FROM_NAME . " <" . FROM_EMAIL . ">\r\n";
-    $headers .= "Reply-To: " . FROM_EMAIL . "\r\n";
-    $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
-    
-    if ($isHTML) {
-        $headers .= "MIME-Version: 1.0\r\n";
-        $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+        return $this->connection->beginTransaction();
     }
     
-    return mail($to, $subject, $body, $headers);
-}
-
-function generateUnsubscribeToken() {
-    return bin2hex(random_bytes(32));
-}
-
-function formatDate($date, $format = 'Y-m-d H:i:s') {
-    return date($format, strtotime($date));
+    /**
+     * Commit transaction
+     */
+    public function commit() {
+        if ($this->useJson) {
+            // JSON database doesn't support transactions
+            return true;
+        }
+        return $this->connection->commit();
+    }
+    
+    /**
+     * Rollback transaction
+     */
+    public function rollback() {
+        if ($this->useJson) {
+            // JSON database doesn't support transactions
+            return true;
+        }
+        return $this->connection->rollback();
+    }
+    
+    /**
+     * Check if using JSON database
+     */
+    public function isUsingJson() {
+        return $this->useJson;
+    }
+    
+    /**
+     * Get database type
+     */
+    public function getDatabaseType() {
+        return $this->useJson ? 'JSON' : 'MySQL';
+    }
 }
 
 // Start session if not already started
@@ -144,4 +308,3 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 ?>
-

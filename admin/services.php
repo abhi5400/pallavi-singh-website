@@ -22,7 +22,7 @@ $error = '';
 // Handle form submissions
 if ($_POST) {
     try {
-        $db = Database::getInstance();
+        $db = JsonDatabase::getInstance();
         
         if (isset($_POST['create_service'])) {
             $serviceData = [
@@ -87,12 +87,14 @@ if ($_POST) {
 
 // Get services data
 try {
-    $db = Database::getInstance();
+    $db = JsonDatabase::getInstance();
     $allServices = $db->getData('services');
     
     // Sort by created_at descending
     usort($allServices, function($a, $b) {
-        return strtotime($b['created_at']) - strtotime($a['created_at']);
+        $dateA = $a['created_at'] ?? '1970-01-01';
+        $dateB = $b['created_at'] ?? '1970-01-01';
+        return strtotime($dateB) - strtotime($dateA);
     });
     
     // Get service categories

@@ -22,7 +22,7 @@ $error = '';
 // Handle form submissions
 if ($_POST) {
     try {
-        $db = Database::getInstance();
+        $db = JsonDatabase::getInstance();
         
         if (isset($_POST['update_profile'])) {
             // Update admin profile

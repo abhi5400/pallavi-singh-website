@@ -22,7 +22,7 @@ $error = '';
 // Handle form submissions
 if ($_POST) {
     try {
-        $db = Database::getInstance();
+        $db = JsonDatabase::getInstance();
         
         if (isset($_POST['create_event'])) {
             $eventData = [
@@ -85,7 +85,7 @@ if ($_POST) {
 
 // Get events data
 try {
-    $db = Database::getInstance();
+    $db = JsonDatabase::getInstance();
     $allEvents = $db->getData('events');
     
     // Sort by date ascending

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Contact Submissions - Pallavi Singh</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        
+        .submissions-list {
+            display: grid;
+            gap: 20px;
+        }
+        
+        .submission-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s;
+        }
+        
+        .submission-card:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+        
+        .submission-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .submission-id {
+            font-family: 'Courier New', monospace;
+            background: #667eea;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.85em;
+        }
+        
+        .submission-time {
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .submission-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .detail-label {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 0.85em;
+            text-transform: uppercase;
+        }
+        
+        .detail-value {
+            color: #333;
+            word-break: break-word;
+        }
+        
+        .message-box {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border: 1px solid #ddd;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+        
+        .empty-state i {
+            font-size: 4em;
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            margin: 10px 5px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+        }
+        
+        .btn-danger {
+            background: #dc3545;
+        }
+        
+        .btn-danger:hover {
+            background: #c82333;
+        }
+        
+        .actions {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid #e9ecef;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>
+            <i class="fas fa-inbox"></i>
+            Contact Form Submissions
+        </h1>
+        <p class="subtitle">All submissions are stored locally in your browser</p>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <span class="stat-number" id="totalSubmissions">0</span>
+                <span class="stat-label">Total Submissions</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number" id="todaySubmissions">0</span>
+                <span class="stat-label">Today</span>
+            </div>
+        </div>
+        
+        <div id="submissionsList" class="submissions-list">
+            <!-- Submissions will be loaded here -->
+        </div>
+        
+        <div class="actions">
+            <button onclick="exportToCSV()" class="btn">
+                <i class="fas fa-download"></i> Export to CSV
+            </button>
+            <button onclick="clearSubmissions()" class="btn btn-danger">
+                <i class="fas fa-trash"></i> Clear All Submissions
+            </button>
+            <a href="connect.html" class="btn">
+                <i class="fas fa-arrow-left"></i> Back to Contact Form
+            </a>
+        </div>
+    </div>
+    
+    <script>
+        function loadSubmissions() {
+            const submissions = JSON.parse(localStorage.getItem('contact_submissions') || '[]');
+            const listContainer = document.getElementById('submissionsList');
+            
+            // Update stats
+            document.getElementById('totalSubmissions').textContent = submissions.length;
+            
+            const today = new Date().toDateString();
+            const todayCount = submissions.filter(s => 
+                new Date(s.timestamp).toDateString() === today
+            ).length;
+            document.getElementById('todaySubmissions').textContent = todayCount;
+            
+            if (submissions.length === 0) {
+                listContainer.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-inbox"></i>
+                        <h2>No Submissions Yet</h2>
+                        <p>Contact form submissions will appear here when someone fills out the form.</p>
+                        <a href="connect.html" class="btn">Go to Contact Form</a>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Sort by newest first
+            submissions.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+            
+            listContainer.innerHTML = submissions.map(submission => {
+                const date = new Date(submission.timestamp);
+                const formattedDate = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+                const data = submission.data;
+                
+                return `
+                    <div class="submission-card">
+                        <div class="submission-header">
+                            <span class="submission-id">${submission.id}</span>
+                            <span class="submission-time">
+                                <i class="fas fa-clock"></i> ${formattedDate}
+                            </span>
+                        </div>
+                        
+                        <div class="submission-details">
+                            <div class="detail-item">
+                                <span class="detail-label"><i class="fas fa-user"></i> Name</span>
+                                <span class="detail-value">${data.name || 'N/A'}</span>
+                            </div>
+                            
+                            <div class="detail-item">
+                                <span class="detail-label"><i class="fas fa-envelope"></i> Email</span>
+                                <span class="detail-value">
+                                    <a href="mailto:${data.email}">${data.email || 'N/A'}</a>
+                                </span>
+                            </div>
+                            
+                            <div class="detail-item">
+                                <span class="detail-label"><i class="fas fa-phone"></i> Phone</span>
+                                <span class="detail-value">${data.phone || 'Not provided'}</span>
+                            </div>
+                            
+                            <div class="detail-item">
+                                <span class="detail-label"><i class="fas fa-tag"></i> Subject</span>
+                                <span class="detail-value">${data.subject ? data.subject.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) : 'N/A'}</span>
+                            </div>
+                        </div>
+                        
+                        ${data.message ? `
+                            <div class="message-box">
+                                <strong style="color: #667eea; display: block; margin-bottom: 10px;">
+                                    <i class="fas fa-comment"></i> Message:
+                                </strong>
+                                ${data.message.replace(/\n/g, '<br>')}
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function exportToCSV() {
+            const submissions = JSON.parse(localStorage.getItem('contact_submissions') || '[]');
+            
+            if (submissions.length === 0) {
+                alert('No submissions to export!');
+                return;
+            }
+            
+            // Create CSV content
+            const headers = ['ID', 'Timestamp', 'Name', 'Email', 'Phone', 'Subject', 'Message'];
+            const csvRows = [headers.join(',')];
+            
+            submissions.forEach(submission => {
+                const data = submission.data;
+                const row = [
+                    `"${submission.id}"`,
+                    `"${submission.timestamp}"`,
+                    `"${data.name || ''}"`,
+                    `"${data.email || ''}"`,
+                    `"${data.phone || ''}"`,
+                    `"${data.subject || ''}"`,
+                    `"${(data.message || '').replace(/"/g, '""')}"` // Escape quotes in message
+                ];
+                csvRows.push(row.join(','));
+            });
+            
+            // Download CSV
+            const csvContent = csvRows.join('\n');
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `contact-submissions-${new Date().toISOString().split('T')[0]}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }
+        
+        function clearSubmissions() {
+            if (confirm('Are you sure you want to delete all submissions? This cannot be undone!')) {
+                localStorage.removeItem('contact_submissions');
+                loadSubmissions();
+                alert('All submissions have been cleared!');
+            }
+        }
+        
+        // Load submissions on page load
+        loadSubmissions();
+        
+        // Refresh every 30 seconds
+        setInterval(loadSubmissions, 30000);
+    </script>
+</body>
+</html>
+
+

@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', async () => {
+// document.addEventListener('DOMContentLoaded', async () => {
 	const grid = document.getElementById('blogGrid');
 	if (!grid) return;
 
@@ -41,6 +41,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 		console.error('Error loading blogs:', err);
 		grid.innerHTML = '<p>Unable to load articles right now.</p>';
 	}
-});
+// });
 
 

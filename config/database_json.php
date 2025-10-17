@@ -15,7 +15,7 @@ if (!file_exists(DATA_DIR)) {
     mkdir(DATA_DIR, 0755, true);
 }
 
-class Database {
+class JsonDatabase {
     private static $instance = null;
     private $dataDir;
     
@@ -47,20 +47,35 @@ class Database {
      */
     public function saveData($table, $data) {
         $file = $this->dataDir . $table . '.json';
-        return file_put_contents($file, json_encode($data, JSON_PRETTY_PRINT));
+        $result = file_put_contents($file, json_encode($data, JSON_PRETTY_PRINT));
+        if ($result === false) {
+            error_log("Failed to save data to file: " . $file);
+            error_log("Data directory: " . $this->dataDir);
+            error_log("Directory exists: " . (is_dir($this->dataDir) ? 'yes' : 'no'));
+            error_log("Directory writable: " . (is_writable($this->dataDir) ? 'yes' : 'no'));
+        }
+        return $result;
     }
     
     /**
      * Add new record to table
      */
     public function insert($table, $data) {
-        $records = $this->getData($table);
-        $data['id'] = count($records) + 1;
-        $data['created_at'] = date('Y-m-d H:i:s');
-        $data['updated_at'] = date('Y-m-d H:i:s');
-        $records[] = $data;
-        $this->saveData($table, $records);
-        return $data['id'];
+        try {
+            $records = $this->getData($table);
+            $data['id'] = count($records) + 1;
+            $data['created_at'] = date('Y-m-d H:i:s');
+            $data['updated_at'] = date('Y-m-d H:i:s');
+            $records[] = $data;
+            $result = $this->saveData($table, $records);
+            if ($result === false) {
+                throw new Exception("Failed to save data to table: " . $table);
+            }
+            return $data['id'];
+        } catch (Exception $e) {
+            error_log("Database insert error: " . $e->getMessage());
+            throw $e;
+        }
     }
     
     /**
@@ -161,7 +176,7 @@ class Database {
 }
 
 // Utility functions
-function sendEmail($to, $subject, $body, $isHTML = true) {
+function sendEmailJson($to, $subject, $body, $isHTML = true) {
     // This is a basic email function - you should implement proper SMTP
     $headers = "From: Pallavi Singh Coaching <noreply@pallavi-coaching.com>\r\n";
     $headers .= "Reply-To: " . ADMIN_EMAIL . "\r\n";

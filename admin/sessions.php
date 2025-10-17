@@ -22,7 +22,7 @@ $error = '';
 // Handle form submissions
 if ($_POST) {
     try {
-        $db = Database::getInstance();
+        $db = JsonDatabase::getInstance();
         
         if (isset($_POST['add_session'])) {
             $sessionData = [
@@ -64,7 +64,7 @@ if ($_POST) {
 
 // Get sessions and clients data
 try {
-    $db = Database::getInstance();
+    $db = JsonDatabase::getInstance();
     $allSessions = $db->getData('sessions');
     $allClients = $db->getData('clients');
     

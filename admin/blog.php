@@ -77,12 +77,14 @@ if ($_POST) {
 
 // Get blog posts data
 try {
-    $db = Database::getInstance();
+    $db = JsonDatabase::getInstance();
     $allPosts = $db->getData('blog_posts');
     
     // Sort by created_at descending
     usort($allPosts, function($a, $b) {
-        return strtotime($b['created_at']) - strtotime($a['created_at']);
+        $dateA = $a['created_at'] ?? '1970-01-01';
+        $dateB = $b['created_at'] ?? '1970-01-01';
+        return strtotime($dateB) - strtotime($dateA);
     });
     
     // Get categories
@@ -196,8 +198,8 @@ ob_start();
                     </td>
                     <td>
                         <div class="date-info">
-                            <?php echo date('M j, Y', strtotime($post['created_at'])); ?>
-                            <small><?php echo date('H:i', strtotime($post['created_at'])); ?></small>
+                            <?php echo $post['created_at'] ? date('M j, Y', strtotime($post['created_at'])) : 'N/A'; ?>
+                            <small><?php echo $post['created_at'] ? date('H:i', strtotime($post['created_at'])) : ''; ?></small>
                         </div>
                     </td>
                     <td>

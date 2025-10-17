@@ -12,7 +12,9 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 // Set content type to JSON for AJAX responses
-header('Content-Type: application/json');
+if (!headers_sent()) {
+    header('Content-Type: application/json');
+}
 
 // Only allow POST requests
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -64,7 +66,7 @@ try {
         $errors[] = 'Contact number is required';
     }
     
-    if (empty($email) || !Database::validateEmail($email)) {
+    if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors[] = 'Valid email address is required';
     }
     
@@ -83,7 +85,7 @@ try {
     }
     
     // Get database instance
-    $db = Database::getInstance();
+    $db = JsonDatabase::getInstance();
     
     // Generate unique form ID
     $form_id = 'JOIN-' . date('Ymd') . '-' . strtoupper(substr(uniqid(), -6));
@@ -149,7 +151,16 @@ try {
     
 } catch (Exception $e) {
     error_log("Join form error: " . $e->getMessage());
+    error_log("Join form error file: " . $e->getFile());
+    error_log("Join form error line: " . $e->getLine());
+    error_log("Join form error trace: " . $e->getTraceAsString());
     $response['message'] = 'An error occurred while processing your request. Please try again.';
+    // Remove debug info for production
+    // $response['debug'] = [
+    //     'error' => $e->getMessage(),
+    //     'file' => $e->getFile(),
+    //     'line' => $e->getLine()
+    // ];
 }
 
 echo json_encode($response);

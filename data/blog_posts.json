@@ -7,7 +7,7 @@
         "excerpt": "Discover how life coaching can transform your life and help you achieve your goals.",
         "author": "Pallavi Singh",
         "status": "published",
-        "featured_image": "",
+        "featured_image": "assets/images/image 1.jpg",
         "categories": [
             "life-coaching",
             "transformation"
@@ -31,7 +31,7 @@
         "excerpt": "Learn practical strategies to overcome anxiety and build mental resilience.",
         "author": "Pallavi Singh",
         "status": "published",
-        "featured_image": "",
+        "featured_image": "assets/images/image 2.jpg",
         "categories": [
             "anxiety-management",
             "mental-health"
@@ -49,17 +49,20 @@
         "published_at": "2025-09-11 14:30:00"
     },
     {
-        "title": "Test",
-        "slug": "test",
-        "content": "Test",
-        "excerpt": "Test",
+        "title": "The Science of Habit Formation",
+        "slug": "science-of-habit-formation",
+        "content": "Understanding the psychology behind habit formation and how to create lasting positive changes in your life.",
+        "excerpt": "Learn the science behind building positive habits and breaking negative ones.",
         "categories": [
-            "Test"
+            "habits",
+            "personal-development"
         ],
         "tags": [
-            ""
+            "habits",
+            "psychology",
+            "behavior-change"
         ],
-        "featured_image": "",
+        "featured_image": "assets/images/image 3.jpg",
         "status": "published",
         "author": "Pallavi Singh",
         "published_at": "2025-09-19 09:08:49",

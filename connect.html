@@ -14,7 +14,6 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <img src="assets/images/pallavi-logo.png" alt="Pallavi Singh" class="logo-image">
                 <h2 class="logo-text">Pallavi Singh</h2>
             </div>
             <ul class="nav-menu">
@@ -80,6 +79,64 @@
                         <i class="fas fa-envelope"></i> Send Email
                     </a>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section id="contact-form" class="contact-form-section">
+        <div class="container">
+            <div class="contact-form-content">
+                <div class="form-header">
+                    <h2>Send Me a Message</h2>
+                    <p>Fill out the form below and I'll get back to you within 24 hours.</p>
+                </div>
+                
+                <form id="contactForm" class="contact-form" method="POST" action="process_contact.php">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject *</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Select a subject</option>
+                                <option value="general-inquiry">General Inquiry</option>
+                                <option value="coaching-session">Book Coaching Session</option>
+                                <option value="discovery-call">Schedule Discovery Call</option>
+                                <option value="workshop-inquiry">Workshop Inquiry</option>
+                                <option value="collaboration">Collaboration</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="message" rows="6" placeholder="Tell me about your goals, challenges, or how I can help you..." required></textarea>
+                    </div>
+                    
+                    <div class="form-submit">
+                        <button type="submit" class="btn btn-primary btn-large">
+                            <span class="btn-text">Send Message</span>
+                            <span class="btn-loading" style="display: none;">
+                                <i class="fas fa-spinner fa-spin"></i> Sending...
+                            </span>
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </section>
@@ -261,7 +318,6 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <div class="footer-logo">
-                        <img src="assets/images/pallavi-logo.png" alt="Pallavi Singh" class="logo-image">
                         <h3 class="logo-text">Pallavi Singh</h3>
                     </div>
                     <p>Transformation Coach & Storytelling Expert</p>
@@ -310,5 +366,6 @@
     </div>
 
     <script src="script.js"></script>
+    <script src="contact-form.js"></script>
 </body>
 </html>

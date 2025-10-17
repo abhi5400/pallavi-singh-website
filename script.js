@@ -243,8 +243,13 @@ class DynamicQuotes {
             });
         }
         
-        // Keyboard navigation
+        // Keyboard navigation - only when quotes section is focused
         document.addEventListener('keydown', (e) => {
+            // Only handle keyboard navigation if not typing in an input field
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable) {
+                return;
+            }
+            
             if (e.key === 'ArrowLeft') {
                 this.prevQuote();
             } else if (e.key === 'ArrowRight') {
@@ -1212,8 +1217,9 @@ document.addEventListener('keydown', function(e) {
         });
     }
     
-    // Arrow keys for scroll indicator navigation
-    if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+    // Arrow keys for scroll indicator navigation - only when not typing in forms
+    if ((e.key === 'ArrowUp' || e.key === 'ArrowDown') && 
+        e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA' && !e.target.isContentEditable) {
         e.preventDefault();
         const currentDot = document.querySelector('.scroll-dot.active');
         const dots = document.querySelectorAll('.scroll-dot');

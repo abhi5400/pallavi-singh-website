@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browser Form Test - Pallavi Singh</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin: 15px 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #1A535C;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #E0E0E0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #A8D5BA;
+        }
+        button {
+            background: linear-gradient(135deg, #A8D5BA, #1A535C);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(26, 83, 92, 0.3);
+        }
+        .result {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 2px solid #c3e6cb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 2px solid #f5c6cb;
+        }
+        .loading {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 2px solid #bee5eb;
+        }
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+        .form-row .form-group {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>🧪 Browser Form Test</h1>
+        <p>This page tests the form submission in a real browser environment.</p>
+        
+        <form id="testForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="full_name">Full Name *</label>
+                    <input type="text" id="full_name" name="full_name" required value="Test User">
+                </div>
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <input type="number" id="age" name="age" value="25">
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="city">City *</label>
+                    <input type="text" id="city" name="city" required value="Test City">
+                </div>
+                <div class="form-group">
+                    <label for="state">State *</label>
+                    <input type="text" id="state" name="state" required value="Test State">
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="contact_number">Contact Number *</label>
+                    <input type="tel" id="contact_number" name="contact_number" required value="1234567890">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required value="test@example.com">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="issue_challenge">Challenge/Issue *</label>
+                <textarea id="issue_challenge" name="issue_challenge" required>Testing form submission in browser</textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="goals">Goals (Optional)</label>
+                <textarea id="goals" name="goals">Test goals for form submission</textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" name="terms_accepted" required checked>
+                    I agree to terms and conditions
+                </label>
+            </div>
+            
+            <button type="submit">🚀 Test Form Submission</button>
+        </form>
+        
+        <div id="result"></div>
+    </div>
+
+    <script>
+        document.getElementById('testForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const resultDiv = document.getElementById('result');
+            const submitBtn = this.querySelector('button[type="submit"]');
+            
+            // Show loading state
+            resultDiv.innerHTML = '<div class="result loading">🔄 Submitting form...</div>';
+            submitBtn.disabled = true;
+            submitBtn.textContent = '🔄 Submitting...';
+            
+            const formData = new FormData(this);
+            
+            console.log('Form data being sent:');
+            for (let [key, value] of formData.entries()) {
+                console.log(key + ': ' + value);
+            }
+            
+            fetch('process_join.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                console.log('Response status:', response.status);
+                console.log('Response ok:', response.ok);
+                return response.text();
+            })
+            .then(text => {
+                console.log('Raw response:', text);
+                
+                try {
+                    const data = JSON.parse(text);
+                    console.log('Parsed response:', data);
+                    
+                    if (data.success) {
+                        resultDiv.innerHTML = '<div class="result success">✅ SUCCESS: ' + data.message + '</div>';
+                        resultDiv.innerHTML += '<p><strong>Form ID:</strong> ' + data.form_id + '</p>';
+                        resultDiv.innerHTML += '<p><strong>Redirect URL:</strong> ' + data.redirect_url + '</p>';
+                        
+                        // Reset form after success
+                        setTimeout(() => {
+                            this.reset();
+                            submitBtn.disabled = false;
+                            submitBtn.textContent = '🚀 Test Form Submission';
+                        }, 3000);
+                    } else {
+                        resultDiv.innerHTML = '<div class="result error">❌ ERROR: ' + data.message + '</div>';
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = '🚀 Test Form Submission';
+                    }
+                } catch (e) {
+                    console.error('JSON parse error:', e);
+                    resultDiv.innerHTML = '<div class="result error">❌ Invalid JSON response: ' + text + '</div>';
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = '🚀 Test Form Submission';
+                }
+            })
+            .catch(error => {
+                console.error('Fetch error:', error);
+                resultDiv.innerHTML = '<div class="result error">❌ Network error: ' + error.message + '</div>';
+                submitBtn.disabled = false;
+                submitBtn.textContent = '🚀 Test Form Submission';
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+

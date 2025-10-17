@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test All Forms - Pallavi Singh Coaching</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; max-width: 1200px; margin: 0 auto; }
+        .test-section { background: #f8f9fa; padding: 20px; margin: 20px 0; border-radius: 10px; }
+        .test-section h2 { color: #1A535C; margin-bottom: 15px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input, textarea, select { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+        button { background: #1A535C; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; margin: 5px; }
+        button:hover { background: #144046; }
+        .result { margin-top: 15px; padding: 10px; border-radius: 5px; }
+        .success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .loading { background: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+    </style>
+</head>
+<body>
+    <h1>Test All Forms - Pallavi Singh Coaching</h1>
+    <p>This page allows you to test all forms on the website to ensure they work correctly with the MySQL database.</p>
+
+    <!-- Join Form Test -->
+    <div class="test-section">
+        <h2>🌟 Join Form Test (Start Your Transformation Journey)</h2>
+        <form id="joinFormTest" method="POST" action="process_join.php">
+            <div class="form-group">
+                <label for="full_name">Full Name *</label>
+                <input type="text" id="full_name" name="full_name" value="Test User" required>
+            </div>
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" id="age" name="age" value="25" min="1" max="150">
+            </div>
+            <div class="form-group">
+                <label for="city">City *</label>
+                <input type="text" id="city" name="city" value="Test City" required>
+            </div>
+            <div class="form-group">
+                <label for="state">State/Province *</label>
+                <input type="text" id="state" name="state" value="Test State" required>
+            </div>
+            <div class="form-group">
+                <label for="contact_number">Contact Number *</label>
+                <input type="tel" id="contact_number" name="contact_number" value="1234567890" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" value="test@example.com" required>
+            </div>
+            <div class="form-group">
+                <label for="issue_challenge">What challenge or issue are you currently facing? *</label>
+                <textarea id="issue_challenge" name="issue_challenge" rows="4" required>This is a test challenge description for the join form submission.</textarea>
+            </div>
+            <div class="form-group">
+                <label for="goals">What are your main goals? (Optional)</label>
+                <textarea id="goals" name="goals" rows="3">Test goals for the join form submission.</textarea>
+            </div>
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" name="terms_accepted" required checked>
+                    I agree to the Terms and Conditions *
+                </label>
+            </div>
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" name="newsletter_subscription" checked>
+                    Subscribe to our newsletter
+                </label>
+            </div>
+            <button type="submit">Submit Join Form</button>
+        </form>
+        <div id="joinResult" class="result" style="display: none;"></div>
+    </div>
+
+    <!-- Contact Form Test -->
+    <div class="test-section">
+        <h2>📧 Contact Form Test</h2>
+        <form id="contactFormTest" method="POST" action="process_contact.php">
+            <div class="form-group">
+                <label for="name">Full Name *</label>
+                <input type="text" id="name" name="name" value="Test Contact User" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" value="contact@example.com" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" value="9876543210">
+            </div>
+            <div class="form-group">
+                <label for="subject">Subject *</label>
+                <select id="subject" name="subject" required>
+                    <option value="">Select a subject</option>
+                    <option value="general-inquiry" selected>General Inquiry</option>
+                    <option value="coaching-session">Book Coaching Session</option>
+                    <option value="discovery-call">Schedule Discovery Call</option>
+                    <option value="workshop-inquiry">Workshop Inquiry</option>
+                    <option value="collaboration">Collaboration</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="message">Message *</label>
+                <textarea id="message" name="message" rows="6" required>This is a test message for the contact form submission. I would like to know more about your coaching services.</textarea>
+            </div>
+            <button type="submit">Submit Contact Form</button>
+        </form>
+        <div id="contactResult" class="result" style="display: none;"></div>
+    </div>
+
+    <!-- Newsletter Subscription Test -->
+    <div class="test-section">
+        <h2>📬 Newsletter Subscription Test</h2>
+        <form id="newsletterFormTest" method="POST" action="process_newsletter.php">
+            <div class="form-group">
+                <label for="newsletter_email">Email Address *</label>
+                <input type="email" id="newsletter_email" name="email" value="newsletter@example.com" required>
+            </div>
+            <div class="form-group">
+                <label for="first_name">First Name</label>
+                <input type="text" id="first_name" name="first_name" value="Newsletter">
+            </div>
+            <div class="form-group">
+                <label for="last_name">Last Name</label>
+                <input type="text" id="last_name" name="last_name" value="Subscriber">
+            </div>
+            <button type="submit">Subscribe to Newsletter</button>
+        </form>
+        <div id="newsletterResult" class="result" style="display: none;"></div>
+    </div>
+
+    <!-- Admin Panel Test -->
+    <div class="test-section">
+        <h2>🔐 Admin Panel Test</h2>
+        <p>Test the admin panel login and dashboard:</p>
+        <a href="admin/login.php" target="_blank" style="background: #4ECDC4; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; display: inline-block;">Open Admin Panel</a>
+        <p><strong>Default Login:</strong> Username: <code>admin</code>, Password: <code>admin123</code></p>
+    </div>
+
+    <script>
+        // Join Form Handler
+        document.getElementById('joinFormTest').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const resultDiv = document.getElementById('joinResult');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result loading';
+            resultDiv.textContent = 'Submitting join form...';
+            
+            const formData = new FormData(this);
+            
+            fetch('process_join.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `✅ Success: ${data.message}<br>Form ID: ${data.form_id || 'N/A'}`;
+                } else {
+                    resultDiv.className = 'result error';
+                    resultDiv.textContent = `❌ Error: ${data.message}`;
+                }
+            })
+            .catch(error => {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `❌ Network Error: ${error.message}`;
+            });
+        });
+
+        // Contact Form Handler
+        document.getElementById('contactFormTest').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const resultDiv = document.getElementById('contactResult');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result loading';
+            resultDiv.textContent = 'Submitting contact form...';
+            
+            const formData = new FormData(this);
+            
+            fetch('process_contact.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `✅ Success: ${data.message}<br>Contact ID: ${data.contact_id || 'N/A'}`;
+                } else {
+                    resultDiv.className = 'result error';
+                    resultDiv.textContent = `❌ Error: ${data.message}`;
+                }
+            })
+            .catch(error => {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `❌ Network Error: ${error.message}`;
+            });
+        });
+
+        // Newsletter Form Handler
+        document.getElementById('newsletterFormTest').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const resultDiv = document.getElementById('newsletterResult');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result loading';
+            resultDiv.textContent = 'Subscribing to newsletter...';
+            
+            const formData = new FormData(this);
+            
+            fetch('process_newsletter.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `✅ Success: ${data.message}`;
+                } else {
+                    resultDiv.className = 'result error';
+                    resultDiv.textContent = `❌ Error: ${data.message}`;
+                }
+            })
+            .catch(error => {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `❌ Network Error: ${error.message}`;
+            });
+        });
+    </script>
+</body>
+</html>

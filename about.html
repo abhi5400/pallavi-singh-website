@@ -91,8 +91,8 @@
         }
         
         .hero-image-container {
-            width: 250px;
-            height: 250px;
+            width: 350px;
+            height: 350px;
             border-radius: 50%;
             overflow: hidden;
             border: 6px solid rgba(255, 255, 255, 0.3);
@@ -125,9 +125,9 @@
             margin-bottom: 80px;
             position: relative;
             display: flex;
-            align-items: center;
-            gap: 60px;
-            min-height: 300px;
+            align-items: flex-start;
+            gap: 70px;
+            min-height: 480px;
         }
         
         .story-block:nth-child(even) {
@@ -139,8 +139,8 @@
         }
         
         .story-image {
-            width: 200px;
-            height: 200px;
+            width: 320px;
+            height: 480px;
             border-radius: 15px;
             overflow: hidden;
             flex-shrink: 0;
@@ -148,6 +148,15 @@
             z-index: 2;
             box-shadow: 0 15px 40px rgba(26, 83, 92, 0.2);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .story-block:first-child .story-image {
+            margin-top: 120px;
+        }
+        
+        .story-block:not(:first-child) .story-image {
+            margin-top: 120px;
         }
 
         .story-image:hover {
@@ -163,13 +172,18 @@
         }
         
         .story-text {
-            flex: 1;
+            flex: 2;
             background: rgba(255, 255, 255, 0.9);
             padding: 40px;
             border-radius: 15px;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(168, 213, 186, 0.2);
             position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-self: stretch;
+            margin-top: 20px;
         }
         
         .story-text::before {
@@ -214,7 +228,7 @@
             color: #2E2E2E;
             line-height: 1.8;
             font-size: 1.1rem;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
         }
         
         .story-text p:last-child {
@@ -231,6 +245,64 @@
         
         .story-text li {
             margin-bottom: 8px;
+        }
+        
+        /* Responsive Design for Story Blocks - Parallel Alignment */
+        @media (max-width: 1200px) {
+            .story-block {
+                gap: 60px;
+            }
+            
+            .story-image {
+                width: 280px;
+                height: 420px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .story-block {
+                flex-direction: column !important;
+                align-items: center;
+                gap: 40px;
+                min-height: auto;
+            }
+            
+            .story-image {
+                width: 240px;
+                height: 360px;
+                margin-top: 0;
+            }
+            
+            .story-text {
+                width: 100%;
+                max-width: 500px;
+                margin: 0 auto;
+                padding: 40px;
+                margin-top: 0;
+            }
+            
+            .story-text::before {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .story-image {
+                width: 200px;
+                height: 300px;
+            }
+            
+            .story-text {
+                padding: 30px 20px;
+            }
+            
+            .story-text h2 {
+                font-size: 1.6rem;
+            }
+            
+            .story-text p {
+                font-size: 1rem;
+            }
         }
         
         .methods-grid {
@@ -529,8 +601,8 @@
             }
             
             .hero-image-container {
-                width: 200px;
-                height: 200px;
+                width: 280px;
+                height: 280px;
             }
             
             .about-hero h1 {
@@ -553,8 +625,8 @@
             }
             
             .story-image {
-                width: 150px;
-                height: 150px;
+                width: 200px;
+                height: 200px;
             }
             
             .story-text {
@@ -607,8 +679,8 @@
             }
             
             .hero-image-container {
-                width: 150px;
-                height: 150px;
+                width: 200px;
+                height: 200px;
             }
             
             .stats-grid {
@@ -639,7 +711,6 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <img src="assets/images/pallavi-logo.png" alt="Pallavi Singh" class="logo-image">
                 <h2 class="logo-text">Pallavi Singh</h2>
             </div>
             <ul class="nav-menu">
@@ -687,27 +758,21 @@
             <!-- About Me -->
             <div class="story-block">
                 <div class="story-image">
-                    <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Professional woman portrait" class="story-img">
+                    <img src="assets/images/image 5.jpg" alt="Pallavi Singh - Life Coach" class="story-img">
                 </div>
                 <div class="story-text">
                     <h2>✨ About Me ✨</h2>
-                    <p>Khamagani! From the vibrant Pink City of Jaipur, where heritage and colours breathe life into everyday stories, I'm Pallavi — a banker turned hotelier, and today, a coach by calling.</p>
-                    <p>My journey with coaching didn't begin in a seminar hall. It began with my natural curiosity about people and their stories — the why behind habits, relationships, and human behaviour. Through my years as a banker and later as a hotelier, one thread remained constant: training and coaching, where I discovered the joy of helping people grow.</p>
+                    <p>Khamagani! From the vibrant Pink City of Jaipur — where heritage and colours breathe life into everyday stories — I'm Pallavi Singh: a banker turned hotelier, and today, a coach by calling.</p>
+                    <p>My journey with coaching didn't begin in a seminar hall — it began with my curiosity about people and their stories. The why behind habits, relationships, and human behaviour fascinated me. Across two decades in diverse careers, one thread stayed constant — helping people grow.</p>
+                    <p>But my real transformation began when life tested me deeply.</p>
+                    <p>In my late twenties and thirties, I faced a storm of relationship complexities, family pressures, deceit, and emotional exhaustion. Anxiety gnawed at me; sleepless nights became routine. There were moments I believed it would never end.</p>
+                    <p>Yet life had a different plan. It was pushing me not to break — but to awaken.</p>
+                    <p>Step by patient step, I rebuilt myself: through meditation, fitness, self-reflection, and the art of keeping small daily promises. I discovered a system that helped me reclaim balance — a method to beat the madness — and it has worked for years.</p>
+                    <p>Now, I share this holistic approach with those ready to live better, healthier, and happier.</p>
+                    <p>If that sounds like you, I invite you to a complimentary first session — a space to explore your path and see if my coaching aligns with your journey.</p>
                 </div>
             </div>
 
-            <!-- My Personal Journey -->
-            <div class="story-block">
-                <div class="story-image">
-                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Mountain sunrise representing personal growth" class="story-img">
-                </div>
-                <div class="story-text">
-                    <h2>My Personal Journey</h2>
-                    <p>Life in my twenties and thirties brought its own storm: family complexities, career demands, and personal struggles all colliding. Anxiety, sleepless nights, and helplessness became constant companions. I thought it would never end.</p>
-                    <p><strong>But life taught me this truth: our thoughts may trap us, but our actions can free us.</strong></p>
-                    <p>Step by step, I rebuilt myself — meditation, fitness, small daily promises, and most importantly, a reconnection with myself.</p>
-                </div>
-            </div>
 
             <!-- Professional Achievements -->
             <div class="story-block">
@@ -716,8 +781,13 @@
                 </div>
                 <div class="story-text">
                     <h2>Professional Achievements</h2>
-                    <p>Along the way, I trained professionally in communication, became a certified NLP Practitioner and Habit Mastery expert, anchored two book launches of Shri Shashi Tharoor- a personal milestone, served as a Regional Trainer for BNI, Freelance trainer for Genpact and done free lance work with several institutes /businesses in Jaipur.</p>
-                    <p>At my core, I'm a constant and curious learner. Today, I bring together lived experience and professional training to coach individuals. Not as someone who has "arrived," but as someone walking this path alongside you.</p>
+                    <p>Professionally, I hold an MBA in Marketing and Finance from Symbiosis Institute of Management Studies and have worked with Citibank in a previous chapter of life. My path later led me into education and hospitality — as Ex Executive Board Member of a school, Managing Director of a heritage hotel, and Director in a private hospitality company.</p>
+                    <p>Over the past 2 decades, I've trained and coached employees across organizations, including GENPACT, and have been part of several train-the-trainer initiatives. I'm also a certified storyteller, coach, and Neuro-Linguistic Practitioner (NLP).</p>
+                    <p>Currently, I'm researching Habit Mastery and integrating it into my coaching framework — blending neuroscience, storytelling, and simple daily rituals that create lasting change.</p>
+                    <p>Along the way, I've had the joy of anchoring and emceeing major events, including two with Dr. Shashi Tharoor, and serving as a Regional Trainer for the networking group BNI. I have trained over 3,000 students and teachers across Jaipur's top schools.</p>
+                    <p>At my core, I'm a constant and curious learner. Today, I bring together real life experience and practical coaching tools, professional training and human connections to help others redesign their inner world and rise stronger.</p>
+                    <p><strong>Because I believe one thing deeply:</strong></p>
+                    <p><em>You are not broken — you're becoming.</em></p>
                 </div>
             </div>
 
@@ -791,7 +861,7 @@
             <!-- Let's Begin the Journey -->
             <div class="story-block">
                 <div class="story-image">
-                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Journey and new beginnings" class="story-img">
+                    <img src="assets/images/image 3.jpg" alt="Let's Begin the Journey" class="story-img">
                 </div>
                 <div class="story-text">
                     <h2>Let's Begin the Journey</h2>
@@ -891,7 +961,6 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <div class="footer-logo">
-                        <img src="assets/images/pallavi-logo.png" alt="Pallavi Singh" class="logo-image">
                         <h3 class="logo-text">Pallavi Singh</h3>
                     </div>
                     <p>Transforming lives through the power of storytelling and coaching.</p>
