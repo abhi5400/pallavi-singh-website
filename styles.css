@@ -4525,6 +4525,11 @@ body:has(.coming-soon-section) .footer {
     z-index: 1;
 }
 
+.package-card.featured.featured-package {
+    border: none;
+    transform: scale(1.05);
+}
+
 
 .package-card h3 {
     font-size: 1.5rem;
