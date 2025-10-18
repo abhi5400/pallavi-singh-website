@@ -2091,16 +2091,17 @@ body:has(.coming-soon-section) .footer {
 
 .featured-badge {
     position: absolute;
-    top: -15px;
+    top: -20px;
     left: 50%;
     transform: translateX(-50%);
     background: linear-gradient(135deg, #A8D5BA, #1A535C);
     color: white;
-    padding: 8px 20px;
-    border-radius: 20px;
+    padding: 10px 24px;
+    border-radius: 25px;
     font-size: 0.9rem;
     font-weight: 600;
     box-shadow: 0 5px 15px rgba(168, 213, 186, 0.3);
+    z-index: 10;
 }
 
 /* Client info styles */
@@ -4497,7 +4498,7 @@ body:has(.coming-soon-section) .footer {
     gap: 30px;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px 20px 0 20px;
+    padding: 40px 20px 0 20px;
 }
 
 .package-card {
