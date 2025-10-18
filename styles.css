@@ -4497,7 +4497,7 @@ body:has(.coming-soon-section) .footer {
     gap: 30px;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 20px 20px 0 20px;
 }
 
 .package-card {
@@ -4512,6 +4512,7 @@ body:has(.coming-soon-section) .footer {
     display: flex;
     flex-direction: column;
     height: 100%;
+    overflow: visible;
 }
 
 .package-card:hover {
