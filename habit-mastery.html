@@ -248,15 +248,17 @@
         
         .featured-badge {
             position: absolute;
-            top: -15px;
+            top: -12px;
             left: 50%;
             transform: translateX(-50%);
             background: linear-gradient(135deg, #A8D5BA, #1A535C);
             color: white;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 0.9rem;
+            padding: 6px 16px;
+            border-radius: 15px;
+            font-size: 0.8rem;
             font-weight: 600;
+            box-shadow: 0 2px 8px rgba(168, 213, 186, 0.3);
+            z-index: 10;
         }
         
         .package-card h3 {
@@ -426,7 +428,9 @@
         
         /* Enhanced Button Styles */
         .btn {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             padding: 15px 35px;
             border-radius: 35px;
             text-decoration: none;
@@ -496,6 +500,14 @@
             transform: translateY(-3px) scale(1.05);
             box-shadow: 0 8px 25px rgba(26, 83, 92, 0.4);
             border-color: #A8D5BA;
+        }
+        
+        /* Package Card Button Styling */
+        .package-card .btn {
+            margin-top: auto;
+            width: 100%;
+            max-width: 200px;
+            align-self: center;
         }
         
         .contact-item p {
@@ -740,12 +752,37 @@
             <h2>Ready to Master Your Habits?</h2>
             <p>Start your habit transformation journey today with a free assessment session.</p>
             <div class="contact-content">
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">What habits would you like to master?</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Book Free Assessment</button>
+                    </form>
+                </div>
                 <div class="contact-info">
                     <div class="contact-item">
                         <i class="fas fa-envelope"></i>
                         <div>
                             <h3>Email</h3>
                             <p>pallavi@thestorytree.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-instagram"></i>
+                        <div>
+                            <h3>Instagram</h3>
+                            <p>@lifecoachandstorytellerpallavi</p>
+                            <a href="https://www.instagram.com/lifecoachandstorytellerpallavi/" target="_blank" class="btn btn-outline btn-small">Follow Me</a>
                         </div>
                     </div>
                 </div>

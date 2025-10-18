@@ -557,36 +557,72 @@
         }
 
         .cta-section {
-            background: rgba(248, 249, 250, 0.7);
-            padding: 80px 0;
+            background: linear-gradient(135deg, #1A535C 0%, #2C7A7B 25%, #A8D5BA 75%, #1A535C 100%);
+            padding: 100px 0;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 60%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+            z-index: 1;
         }
         
         .cta-content {
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
             padding: 0 20px;
+            position: relative;
+            z-index: 2;
         }
         
         .cta-content h2 {
-            color: #1A535C;
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            font-weight: 600;
+            color: #FFFFFF;
+            font-size: 3.2rem;
+            margin-bottom: 25px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            line-height: 1.2;
         }
         
         .cta-content p {
-            color: #666;
-            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1.4rem;
             line-height: 1.6;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            font-weight: 500;
         }
         
         .cta-buttons {
             display: flex;
-            gap: 20px;
+            gap: 25px;
             justify-content: center;
             flex-wrap: wrap;
+        }
+        
+        .cta-buttons .btn {
+            padding: 16px 32px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .cta-buttons .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
         }
         
         @media (max-width: 768px) {
@@ -667,9 +703,23 @@
                 font-size: 1.2rem;
             }
             
+            .cta-content h2 {
+                font-size: 2.5rem;
+            }
+            
+            .cta-content p {
+                font-size: 1.2rem;
+            }
+            
             .cta-buttons {
                 flex-direction: column;
                 align-items: center;
+                gap: 20px;
+            }
+            
+            .cta-buttons .btn {
+                padding: 14px 28px;
+                font-size: 1rem;
             }
         }
         
@@ -703,6 +753,43 @@
             .credential-column li {
                 font-size: 0.9rem;
             }
+            
+            .cta-content h2 {
+                font-size: 2rem;
+            }
+            
+            .cta-content p {
+                font-size: 1.1rem;
+            }
+            
+            .cta-buttons .btn {
+                padding: 12px 24px;
+                font-size: 0.95rem;
+            }
+        }
+        
+        /* Hidden content styles */
+        .hidden-content {
+            display: none;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+        
+        .hidden-content.show {
+            display: block;
+            opacity: 1;
+            max-height: 2000px;
+        }
+        
+        .read-more-btn.read-less {
+            background: #1A535C;
+            color: white;
+        }
+        
+        .read-more-btn.read-less:hover {
+            background: #2A636C;
         }
     </style>
 </head>
@@ -765,11 +852,16 @@
                     <p>Khamagani! From the vibrant Pink City of Jaipur — where heritage and colours breathe life into everyday stories — I'm Pallavi Singh: a banker turned hotelier, and today, a coach by calling.</p>
                     <p>My journey with coaching didn't begin in a seminar hall — it began with my curiosity about people and their stories. The why behind habits, relationships, and human behaviour fascinated me. Across two decades in diverse careers, one thread stayed constant — helping people grow.</p>
                     <p>But my real transformation began when life tested me deeply.</p>
-                    <p>In my late twenties and thirties, I faced a storm of relationship complexities, family pressures, deceit, and emotional exhaustion. Anxiety gnawed at me; sleepless nights became routine. There were moments I believed it would never end.</p>
-                    <p>Yet life had a different plan. It was pushing me not to break — but to awaken.</p>
-                    <p>Step by patient step, I rebuilt myself: through meditation, fitness, self-reflection, and the art of keeping small daily promises. I discovered a system that helped me reclaim balance — a method to beat the madness — and it has worked for years.</p>
-                    <p>Now, I share this holistic approach with those ready to live better, healthier, and happier.</p>
-                    <p>If that sounds like you, I invite you to a complimentary first session — a space to explore your path and see if my coaching aligns with your journey.</p>
+                    <div class="read-more-container">
+                        <a href="#" class="read-more-btn" onclick="toggleContent('transformation-content', this); return false;">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div id="transformation-content" class="hidden-content">
+                        <p>In my late twenties and thirties, I faced a storm of relationship complexities, family pressures, deceit, and emotional exhaustion. Anxiety gnawed at me; sleepless nights became routine. There were moments I believed it would never end.</p>
+                        <p>Yet life had a different plan. It was pushing me not to break — but to awaken.</p>
+                        <p>Step by patient step, I rebuilt myself: through meditation, fitness, self-reflection, and the art of keeping small daily promises. I discovered a system that helped me reclaim balance — a method to beat the madness — and it has worked for years.</p>
+                        <p>Now, I share this holistic approach with those ready to live better, healthier, and happier.</p>
+                        <p>If that sounds like you, I invite you to a complimentary first session — a space to explore your path and see if my coaching aligns with your journey.</p>
+                    </div>
                 </div>
             </div>
 
@@ -784,10 +876,15 @@
                     <p>Professionally, I hold an MBA in Marketing and Finance from Symbiosis Institute of Management Studies and have worked with Citibank in a previous chapter of life. My path later led me into education and hospitality — as Ex Executive Board Member of a school, Managing Director of a heritage hotel, and Director in a private hospitality company.</p>
                     <p>Over the past 2 decades, I've trained and coached employees across organizations, including GENPACT, and have been part of several train-the-trainer initiatives. I'm also a certified storyteller, coach, and Neuro-Linguistic Practitioner (NLP).</p>
                     <p>Currently, I'm researching Habit Mastery and integrating it into my coaching framework — blending neuroscience, storytelling, and simple daily rituals that create lasting change.</p>
-                    <p>Along the way, I've had the joy of anchoring and emceeing major events, including two with Dr. Shashi Tharoor, and serving as a Regional Trainer for the networking group BNI. I have trained over 3,000 students and teachers across Jaipur's top schools.</p>
-                    <p>At my core, I'm a constant and curious learner. Today, I bring together real life experience and practical coaching tools, professional training and human connections to help others redesign their inner world and rise stronger.</p>
-                    <p><strong>Because I believe one thing deeply:</strong></p>
-                    <p><em>You are not broken — you're becoming.</em></p>
+                    <div class="read-more-container">
+                        <a href="#" class="read-more-btn" onclick="toggleContent('achievements-content', this); return false;">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div id="achievements-content" class="hidden-content">
+                        <p>Along the way, I've had the joy of anchoring and emceeing major events, including two with Dr. Shashi Tharoor, and serving as a Regional Trainer for the networking group BNI. I have trained over 3,000 students and teachers across Jaipur's top schools.</p>
+                        <p>At my core, I'm a constant and curious learner. Today, I bring together real life experience and practical coaching tools, professional training and human connections to help others redesign their inner world and rise stronger.</p>
+                        <p><strong>Because I believe one thing deeply:</strong></p>
+                        <p><em>You are not broken — you're becoming.</em></p>
+                    </div>
                 </div>
             </div>
 
@@ -1002,5 +1099,24 @@
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="script.js"></script>
+    
+    <script>
+        function toggleContent(contentId, button) {
+            const content = document.getElementById(contentId);
+            const isHidden = content.classList.contains('hidden-content') && !content.classList.contains('show');
+            
+            if (isHidden) {
+                // Show content
+                content.classList.add('show');
+                button.innerHTML = 'Read Less <i class="fas fa-arrow-up"></i>';
+                button.classList.add('read-less');
+            } else {
+                // Hide content
+                content.classList.remove('show');
+                button.innerHTML = 'Read More <i class="fas fa-arrow-right"></i>';
+                button.classList.remove('read-less');
+            }
+        }
+    </script>
 </body>
 </html>

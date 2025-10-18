@@ -35,7 +35,7 @@
                 <h2 class="logo-text">Pallavi Singh</h2>
             </div>
             <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Discover</a></li>
+                <li><a href="index.html" class="nav-link">Home</a></li>
                 <li><a href="index.html#about" class="nav-link">About Pallavi</a></li>
                 <li class="nav-dropdown">
                     <a href="#services" class="nav-link dropdown-toggle">Services <i class="fas fa-chevron-down"></i></a>
@@ -123,64 +123,73 @@
             </div>
             <div class="services-grid">
                 <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-lightbulb"></i>
+                    <div class="service-card-front">
+                        <div class="service-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3>Clarity & Direction</h3>
+                        <p>Gain clear understanding of your goals and the path to achieve them.</p>
                     </div>
-                    <h3>Clarity & Direction</h3>
-                    <p>Gain clear understanding of your goals and the path to achieve them.</p>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-rocket"></i>
+                    <div class="service-card-front">
+                        <div class="service-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3>Confidence & Courage</h3>
+                        <p>Build the confidence to take bold actions and make important decisions.</p>
                     </div>
-                    <h3>Confidence & Courage</h3>
-                    <p>Build the confidence to take bold actions and make important decisions.</p>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-balance-scale"></i>
+                    <div class="service-card-front">
+                        <div class="service-icon">
+                            <i class="fas fa-balance-scale"></i>
+                        </div>
+                        <h3>Work-Life Balance</h3>
+                        <p>Create harmony between your personal and professional life.</p>
                     </div>
-                    <h3>Work-Life Balance</h3>
-                    <p>Create harmony between your personal and professional life.</p>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-users"></i>
+                    <div class="service-card-front">
+                        <div class="service-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Better Relationships</h3>
+                        <p>Improve communication and build stronger connections with others.</p>
                     </div>
-                    <h3>Better Relationships</h3>
-                    <p>Improve communication and build stronger connections with others.</p>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-target"></i>
+                    <div class="service-card-front">
+                        <div class="service-icon">
+                            <i class="fas fa-target"></i>
+                        </div>
+                        <h3>Goal Achievement</h3>
+                        <p>Break through barriers and achieve the goals that matter most to you.</p>
                     </div>
-                    <h3>Goal Achievement</h3>
-                    <p>Break through barriers and achieve the goals that matter most to you.</p>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-heart"></i>
+                    <div class="service-card-front">
+                        <div class="service-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3>Inner Peace</h3>
+                        <p>Find inner peace and emotional well-being through self-discovery.</p>
                     </div>
-                    <h3>Inner Peace</h3>
-                    <p>Find inner peace and emotional well-being through self-discovery.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Packages Section -->
-    <section class="community page-section">
+    <section class="packages-section">
         <div class="container">
             <div class="section-header">
                 <h2>Coaching Packages</h2>
                 <p>Choose the perfect package for your transformation journey</p>
             </div>
-            <div class="services-grid">
-                <div class="service-card">
+            <div class="packages-grid">
+                <div class="package-card">
                     <h3>Discovery Session</h3>
-                    <div class="service-icon">
-                        <i class="fas fa-coffee"></i>
-                    </div>
                     <ul>
                         <li>30-minute consultation</li>
                         <li>Goal assessment</li>
@@ -201,11 +210,8 @@
                     </ul>
                     <a href="#contact" class="btn btn-primary">Get Started</a>
                 </div>
-                <div class="service-card">
+                <div class="package-card">
                     <h3>6-Month Deep Dive</h3>
-                    <div class="service-icon">
-                        <i class="fas fa-diamond"></i>
-                    </div>
                     <ul>
                         <li>24 weekly sessions</li>
                         <li>Comprehensive transformation</li>
@@ -270,6 +276,23 @@
                 <p>Book your free discovery session and take the first step towards your transformation.</p>
             </div>
             <div class="contact-content">
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">What challenges are you currently facing?</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Book Free Discovery Session</button>
+                    </form>
+                </div>
                 <div class="contact-info">
                     <div class="contact-item">
                         <i class="fas fa-envelope"></i>
@@ -283,6 +306,14 @@
                         <div>
                             <h3>Location</h3>
                             <p>Available Worldwide (Online)</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-instagram"></i>
+                        <div>
+                            <h3>Instagram</h3>
+                            <p>@lifecoachandstorytellerpallavi</p>
+                            <a href="https://www.instagram.com/lifecoachandstorytellerpallavi/" target="_blank" class="btn btn-outline btn-small">Follow Me</a>
                         </div>
                     </div>
                     <div class="social-links">
