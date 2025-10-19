@@ -38,6 +38,67 @@
             overflow: hidden;
         }
         
+        /* About Page Hero Banner */
+        .dedicated-hero {
+            background: #f8f9fa url('assets/images/about banner pallavi singh.jpg') no-repeat center center;
+            background-size: contain;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            height: 0;
+            padding-bottom: 40%; /* 436/1090 = 0.4 = 40% */
+            display: block;
+        }
+        
+        .dedicated-hero::before {
+            display: none;
+        }
+        
+        /* Ensure banner image loads properly */
+        .dedicated-hero {
+            background-attachment: scroll;
+            background-position: center center;
+            background-repeat: no-repeat;
+        }
+        
+        /* Fallback for browsers that don't support aspect-ratio */
+        @supports not (aspect-ratio: 1090/436) {
+            .dedicated-hero {
+                height: 400px;
+            }
+        }
+        
+        .dedicated-hero-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+        }
+        
+        /* Responsive styles for about banner */
+        @media (max-width: 768px) {
+            .dedicated-hero {
+                padding-bottom: 45%; /* Slightly taller on tablets */
+                background-size: contain;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .dedicated-hero {
+                padding-bottom: 50%; /* Taller on mobile for better visibility */
+                background-size: contain;
+            }
+        }
+        
+        @media (max-width: 320px) {
+            .dedicated-hero {
+                padding-bottom: 55%; /* Even taller on very small screens */
+                background-size: contain;
+            }
+        }
+        
         .about-hero::before {
             display: none;
         }
@@ -830,12 +891,7 @@
     <!-- About Hero Section -->
     <section class="dedicated-hero">
         <div class="dedicated-hero-content">
-            <h1>About Pallavi Singh</h1>
-            <p class="hero-subtitle">Life Coach & Mentor from Jaipur, India<br>Transforming lives through the power of storytelling and personalized guidance</p>
-            <div class="hero-buttons">
-                <a href="#story" class="btn btn-primary">Read My Story</a>
-                <a href="#contact" class="btn btn-secondary">Connect With Me</a>
-            </div>
+            <!-- Banner image only - no text overlay -->
         </div>
     </section>
 
