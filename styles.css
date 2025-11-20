@@ -4235,13 +4235,10 @@ body:has(.coming-soon-section) .footer {
 
 /* Universal Hero Section Styles */
 .dedicated-hero {
-    background: linear-gradient(135deg, #A8D5BA 0%, #1A535C 100%);
-    background-image: 
-        url('./assets/images/img.png'),
-        radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.1) 1px, transparent 0);
-    background-size: cover, 20px 20px;
-    background-position: center, 0 0;
-    background-repeat: no-repeat, repeat;
+    background: none;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     position: relative;
     overflow: hidden;
     padding: 100px 0 40px 0;
@@ -4322,13 +4319,51 @@ body:has(.coming-soon-section) .footer {
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
 }
 
+/* Fallback styling for pages without a specific banner class */
+.dedicated-hero:not([class*="dedicated-hero--"]) {
+    background-image:
+        linear-gradient(135deg, rgba(168, 213, 186, 0.6) 0%, rgba(26, 83, 92, 0.6) 100%),
+        url('./assets/images/img.png');
+    background-size: cover, 20px 20px;
+    background-position: center, 0 0;
+    background-repeat: no-repeat, repeat;
+}
+
+/* Service-specific dedicated hero banners */
+.dedicated-hero--habit-mastery {
+    background-image:
+        linear-gradient(135deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.15)),
+        url('assets/images/Banners/habit-mastery.jpg');
+}
+
+.dedicated-hero--overcome-anxiety {
+    background-image:
+        linear-gradient(135deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.15)),
+        url('assets/images/Banners/overcome-anxiety.jpg');
+}
+
+.dedicated-hero--public-speaking {
+    background-image:
+        linear-gradient(135deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.15)),
+        url('assets/images/Banners/public-speaking.png');
+}
+
+.dedicated-hero--relationship-mentoring {
+    background-image:
+        linear-gradient(135deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.15)),
+        url('assets/images/Banners/relationship-mentoring.jpg');
+}
+
+.dedicated-hero--storytelling {
+    background-image:
+        linear-gradient(135deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.15)),
+        url('assets/images/Banners/storytelling.jpg');
+}
+
 /* Service Pages Styles */
 .service-hero {
+    /* Fallback gradient if a specific banner class is not applied */
     background: linear-gradient(135deg, #FAF9F6 0%, #F8F9FA 100%);
-    background-image: url('./assets/images/img.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
     position: relative;
     overflow: hidden;
     padding: 100px 0 40px 0;
@@ -4372,6 +4407,16 @@ body:has(.coming-soon-section) .footer {
     margin-bottom: 40px;
     line-height: 1.6;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Coaching & Mentoring banner */
+.service-hero--coaching {
+    background-image:
+        linear-gradient(135deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.15)),
+        url('assets/images/Banners/coaching-mentoring-banner.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .service-overview {
