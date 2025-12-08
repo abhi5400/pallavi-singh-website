@@ -519,7 +519,18 @@ body:has(.coming-soon-section) .footer {
     flex-shrink: 0;
 }
 
-/* Logo image styles removed */
+.site-logo {
+    height: 85px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .site-logo {
+        height: 60px;
+    }
+}
 
 .logo-text {
     font-family: 'Dancing Script', cursive;
