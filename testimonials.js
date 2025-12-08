@@ -6,6 +6,12 @@ class TestimonialsCarousel {
         this.nextBtn = document.getElementById('nextTestimonial');
         this.dotsContainer = document.getElementById('testimonialDots');
         this.cards = document.querySelectorAll('.testimonial-card');
+        
+        if (!this.container || !this.prevBtn || !this.nextBtn || !this.dotsContainer || this.cards.length === 0) {
+            this.isDisabled = true;
+            return;
+        }
+        
         this.currentIndex = 0;
         this.cardsPerView = 3;
         this.totalCards = this.cards.length;
@@ -150,8 +156,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize testimonials carousel
     const testimonialsCarousel = new TestimonialsCarousel();
     
-    // Handle window resize
-    window.addEventListener('resize', () => {
-        testimonialsCarousel.handleResize();
-    });
+    if (!testimonialsCarousel.isDisabled) {
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            testimonialsCarousel.handleResize();
+        });
+    }
 });

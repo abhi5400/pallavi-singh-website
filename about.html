@@ -38,64 +38,22 @@
             overflow: hidden;
         }
         
-        /* About Page Hero Banner */
-        .dedicated-hero {
-            background: #f8f9fa url('assets/images/about banner pallavi singh.jpg') no-repeat center center;
-            background-size: contain;
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-            height: 0;
-            padding-bottom: 40%; /* 436/1090 = 0.4 = 40% */
-            display: block;
+        /* About Page Hero Banner - Additional responsive styles if needed */
+        .dedicated-hero--about {
+            /* Styles are handled in main styles.css */
         }
         
-        .dedicated-hero::before {
-            display: none;
-        }
-        
-        /* Ensure banner image loads properly */
-        .dedicated-hero {
-            background-attachment: scroll;
-            background-position: center center;
-            background-repeat: no-repeat;
-        }
-        
-        /* Fallback for browsers that don't support aspect-ratio */
-        @supports not (aspect-ratio: 1090/436) {
-            .dedicated-hero {
-                height: 400px;
-            }
-        }
-        
-        .dedicated-hero-content {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 2;
-        }
-        
-        /* Responsive styles for about banner */
         @media (max-width: 768px) {
-            .dedicated-hero {
-                padding-bottom: 45%; /* Slightly taller on tablets */
-                background-size: contain;
+            .dedicated-hero--about {
+                min-height: 40vh;
+                padding: 80px 0 30px 0;
             }
         }
         
         @media (max-width: 480px) {
-            .dedicated-hero {
-                padding-bottom: 50%; /* Taller on mobile for better visibility */
-                background-size: contain;
-            }
-        }
-        
-        @media (max-width: 320px) {
-            .dedicated-hero {
-                padding-bottom: 55%; /* Even taller on very small screens */
-                background-size: contain;
+            .dedicated-hero--about {
+                min-height: 35vh;
+                padding: 60px 0 20px 0;
             }
         }
         
@@ -867,7 +825,7 @@
                 <li class="nav-dropdown">
                     <a href="#services" class="nav-link dropdown-toggle">Services <i class="fas fa-chevron-down"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a href="coaching-mentoring.html" class="dropdown-item">Coaching & Mentoring</a></li>
+                        <li><a href="coaching-mentoring.html" class="dropdown-item">Coaching</a></li>
                         <li><a href="habit-mastery.html" class="dropdown-item">Habit Mastery</a></li>
                         <li><a href="overcome-anxiety.html" class="dropdown-item">Overcome Anxiety</a></li>
                         <li><a href="relationship-mentoring.html" class="dropdown-item">Relationship Mentoring</a></li>
@@ -889,10 +847,8 @@
     </nav>
 
     <!-- About Hero Section -->
-    <section class="dedicated-hero">
-        <div class="dedicated-hero-content">
-            <!-- Banner image only - no text overlay -->
-        </div>
+    <section class="dedicated-hero dedicated-hero--about">
+        <!-- Banner image displays as background -->
     </section>
 
     <!-- Story Sections -->
@@ -905,18 +861,22 @@
                 </div>
                 <div class="story-text">
                     <h2>✨ About Me ✨</h2>
-                    <p>Khamagani! From the vibrant Pink City of Jaipur — where heritage and colours breathe life into everyday stories — I'm Pallavi Singh: a banker turned hotelier, and today, a coach by calling.</p>
-                    <p>My journey with coaching didn't begin in a seminar hall — it began with my curiosity about people and their stories. The why behind habits, relationships, and human behaviour fascinated me. Across two decades in diverse careers, one thread stayed constant — helping people grow.</p>
-                    <p>But my real transformation began when life tested me deeply.</p>
-                    <div class="read-more-container">
-                        <a href="#" class="read-more-btn" onclick="toggleContent('transformation-content', this); return false;">Read More <i class="fas fa-arrow-right"></i></a>
+                    <p>Khamagani! From the vibrant Pink City of Jaipur, where heritage and colours breathe life into everyday stories, I'm Pallavi Singh — a banker turned heritage hotelier, corporate trainer, and today, a life coach by calling.</p>
+                    <p>My journey into coaching didn't begin in a seminar hall. It began with a deep curiosity about people and their stories. I was always drawn to the "why" behind habits, relationships, and human behaviour. And through two decades across diverse careers, one thread remained constant: my love for helping people grow.</p>
+                    <p>Life, of course, shaped this journey even further. My own experiences strengthened my interest in coaching, soft skills, and story-based healing. In my late twenties and thirties, I walked through a long phase of relationship complexities, family pressures, deceit, and emotional exhaustion. Anxiety often sat on my shoulders, sleepless nights felt almost routine, and there were moments when it seemed like the storm would never end.</p>
+                    <p>But life had its own design. Slowly, I realised those painful moments were not endings, they were invitations. Coaching and training didn't just guide me professionally; it helped me look inward, heal, and rebuild.</p>
+                    
+                    <div style="text-align: center; margin: 30px 0;">
+                        <button onclick="toggleContent('about-more-content', this)" class="read-more-btn btn btn-outline" style="padding: 12px 30px; font-size: 1rem; border-radius: 25px; cursor: pointer; transition: all 0.3s ease;">
+                            Read More <i class="fas fa-arrow-down"></i>
+                        </button>
                     </div>
-                    <div id="transformation-content" class="hidden-content">
-                        <p>In my late twenties and thirties, I faced a storm of relationship complexities, family pressures, deceit, and emotional exhaustion. Anxiety gnawed at me; sleepless nights became routine. There were moments I believed it would never end.</p>
-                        <p>Yet life had a different plan. It was pushing me not to break — but to awaken.</p>
-                        <p>Step by patient step, I rebuilt myself: through meditation, fitness, self-reflection, and the art of keeping small daily promises. I discovered a system that helped me reclaim balance — a method to beat the madness — and it has worked for years.</p>
+                    
+                    <div id="about-more-content" class="hidden-content">
+                        <p>Overtime, I worked on my issues always with an optimistic perspective. Whether it was my health, where alternative remedies helped when doctors had given up, or my personal life, where I took tough decisions which needed to be taken, I kept moving forward. Step by step, through routine, structure, meditation, fitness, self-reflection, and keeping small daily promises, I rebuilt myself.</p>
+                        <p>Through this journey, I discovered a system that helped me reclaim balance, a method that helped me quiet the chaos and find clarity. It has stayed with me for years. I call this method my "Kriya", a simple inner practice that supports transformation.</p>
                         <p>Now, I share this holistic approach with those ready to live better, healthier, and happier.</p>
-                        <p>If that sounds like you, I invite you to a complimentary first session — a space to explore your path and see if my coaching aligns with your journey.</p>
+                        <p>If that sounds like you, I invite you to connect with me —to explore your path and see if my coaching aligns with your journey.</p>
                     </div>
                 </div>
             </div>
@@ -929,18 +889,13 @@
                 </div>
                 <div class="story-text">
                     <h2>Professional Achievements</h2>
-                    <p>Professionally, I hold an MBA in Marketing and Finance from Symbiosis Institute of Management Studies and have worked with Citibank in a previous chapter of life. My path later led me into education and hospitality — as Ex Executive Board Member of a school, Managing Director of a heritage hotel, and Director in a private hospitality company.</p>
-                    <p>Over the past 2 decades, I've trained and coached employees across organizations, including GENPACT, and have been part of several train-the-trainer initiatives. I'm also a certified storyteller, coach, and Neuro-Linguistic Practitioner (NLP).</p>
+                    <p>Professionally, I hold an MBA in Marketing and Finance from Symbiosis Institute of Management Studies and have worked with Citibank in a previous chapter of life. My path later led me into education and hospitality — From a previous role as an Executive Board Member of a school's management committee, to Managing Director of a heritage hotel, and Director in a private hospitality company.</p>
+                    <p>Over the past 2 decades, I've trained and coached employees across organizations, including GENPACT and most of the premier schools of Jaipur. I have been part of several train-the-trainer initiatives as well. I'm also a certified storyteller, coach, and Neuro-Linguistic Practitioner (NLP).</p>
                     <p>Currently, I'm researching Habit Mastery and integrating it into my coaching framework — blending neuroscience, storytelling, and simple daily rituals that create lasting change.</p>
-                    <div class="read-more-container">
-                        <a href="#" class="read-more-btn" onclick="toggleContent('achievements-content', this); return false;">Read More <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                    <div id="achievements-content" class="hidden-content">
-                        <p>Along the way, I've had the joy of anchoring and emceeing major events, including two with Dr. Shashi Tharoor, and serving as a Regional Trainer for the networking group BNI. I have trained over 3,000 students and teachers across Jaipur's top schools.</p>
-                        <p>At my core, I'm a constant and curious learner. Today, I bring together real life experience and practical coaching tools, professional training and human connections to help others redesign their inner world and rise stronger.</p>
+                    <p>Along the way, I've had the joy of anchoring and emceeing major events, including two with Honourable Dr. Shashi Tharoor(MP& formerly an Under-Secretary-General of the United Nations) I also served as a Regional Trainer for the networking group BNI, I have trained over 3,000 students and teachers across Jaipur's top schools.</p>
+                    <p>At my core, I'm a constant and curious learner. Today, I bring together real-life experience and practical coaching tools, professional training and human connections to help others redesign their inner world and rise stronger.</p>
                         <p><strong>Because I believe one thing deeply:</strong></p>
-                        <p><em>You are not broken — you're becoming.</em></p>
-                    </div>
+                    <p><em>You're not broken — you're getting ready for your next version.</em></p>
                 </div>
             </div>
 
@@ -1033,15 +988,13 @@
                 <div class="credential-column certifications">
                     <h3>CERTIFICATIONS & TRAINING</h3>
                     <ul>
-                        <li>Jack Canfield's Train the Trainer</li>
-                        <li>EMyth Certified Business Coach</li>
-                        <li>Family Business Governance at Insead</li>
-                        <li>Pre-School/Kindergarten Montessori Teaching Diploma by NAMC (North American Montessori Centre)</li>
-                        <li>Making the Stage - Success Resources</li>
-                        <li>World's greatest speaker training - Brendan Burchard</li>
-                        <li>School of Womanly Arts - Regina Thomashauer</li>
-                        <li>Quantum Leap by Success Gyan</li>
-                        <li>Training under eminent International gurus like Jack Canfield, Brian Tracy, Anthony Robbins, Brendon Burchard & more</li>
+                        <li>MBA (Symbiosis Institute of Management Studies)</li>
+                        <li>B.A Hons in Public Administration</li>
+                        <li>Neuro Linguistic Practitioner Certificate (2 times)</li>
+                        <li>The Art of Storytelling</li>
+                        <li>Bachelor of Education</li>
+                        <li>Diploma Course on Practising Gratitude</li>
+                        <li>Train the Trainer by GENPACT and BNI</li>
                     </ul>
                 </div>
 
@@ -1049,25 +1002,25 @@
                 <div class="credential-column awards">
                     <h3>AWARDS & ACHIEVEMENTS</h3>
                     <ul>
-                        <li>Style Icon 2018 by Style Bazaar</li>
-                        <li>Naturals Woman of the year, 2014</li>
-                        <li>Extensive media coverage in publications such as Femina, The Hindu, The Indian Express, Vogue, Hello, Deccan Chronicle, Times of India & many more</li>
-                        <li>Running Ran Alps pre-school in Chennai for 10 years</li>
-                        <li>Columnist for The Hindu, answering questions from young adults</li>
-                        <li>Taught a full semester for 2nd year students at Sathyabama University</li>
+                        <li>Best Regional Trainer for BNI Rajasthan</li>
+                        <li>Certificate of Excellence by Genpact for Soft Skill Trainings</li>
+                        <li>Columnist for First India English Newspaper</li>
+                        <li>Challenging self and completing 2 half marathons post birth of both children</li>
+                        <li>Best Women Entrepreneurship Award by a Woman's Association in Jaipur</li>
+                        <li>Overcame my health issues to live a healthier and happier life with my children</li>
+                        <li>Regular media coverage for my storytelling venture in local newspapers</li>
                     </ul>
                 </div>
 
                 <!-- Seminars & Events -->
                 <div class="credential-column seminars">
-                    <h3>SEMINARS & EVENTS</h3>
+                    <h3>EVENTS & WORKSHOPS</h3>
                     <ul>
-                        <li>Speaker at Global Leadership Summit - 2015</li>
-                        <li>Speaker at TEDx Chennai, Sept 2012</li>
-                        <li>Speaker at various organizations including YPO, FICCI, Rotary, YIE, RCC, RYA, Chennai Sindhi Ladies Chapter, JITO</li>
-                        <li>Keynote addresses by Jack Canfield, Brian Tracy, John Foppe, John Gray, Sean Smith, Nik Halik</li>
-                        <li>Conducted Life By Design workshops for women in Malaysia and Singapore</li>
-                        <li>Keynote Speaker at over 10 universities</li>
+                        <li>MCing Shashi Tharoor's 2 events in Jaipur</li>
+                        <li>MCing various important events in the education and cultural space for relevant organizations in Jaipur</li>
+                        <li>Conducting workshops for teachers and students across premier schools of Jaipur</li>
+                        <li>Conducted several successful virtual sessions for students globally in the space of storytelling, one on one coaching and teacher trainings</li>
+                        <li>Hosted 2 book launches for new writers</li>
                     </ul>
                 </div>
             </div>
@@ -1078,11 +1031,11 @@
     <section class="stats-section">
         <div class="stats-grid">
             <div class="stat-item">
-                <span class="stat-number">500+</span>
-                <span class="stat-label">Lives Transformed</span>
+                <span class="stat-number">3000+</span>
+                <span class="stat-label">People Trained</span>
             </div>
             <div class="stat-item">
-                <span class="stat-number">10+</span>
+                <span class="stat-number">20</span>
                 <span class="stat-label">Years Experience</span>
             </div>
             <div class="stat-item">
@@ -1123,14 +1076,14 @@
                     <ul>
                         <li><a href="index.html">Home</a></li>
                         <li><a href="about.html">About Pallavi</a></li>
-                        <li><a href="coaching-mentoring.html">Coaching & Mentoring</a></li>
+                        <li><a href="coaching-mentoring.html">Coaching</a></li>
                         <li><a href="connect.html">Connect</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h4>Services</h4>
                     <ul>
-                        <li><a href="coaching-mentoring.html">Coaching & Mentoring</a></li>
+                        <li><a href="coaching-mentoring.html">Coaching</a></li>
                         <li><a href="habit-mastery.html">Habit Mastery</a></li>
                         <li><a href="overcome-anxiety.html">Overcome Anxiety</a></li>
                         <li><a href="relationship-mentoring.html">Relationship Mentoring</a></li>

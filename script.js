@@ -1,7 +1,9 @@
 // Initialize Scrollify for smooth section transitions (guarded)
-$(document).ready(function() {
+function initScrollEnhancements($) {
+    let hasScrollify = false;
     try {
-        if ($ && $.scrollify && typeof $.scrollify === 'function') {
+        hasScrollify = typeof $.scrollify === 'function';
+        if (hasScrollify) {
             $.scrollify({
                 section: ".page-section",
                 easing: "jswing",
@@ -26,24 +28,40 @@ $(document).ready(function() {
             console.warn('Scrollify not available; using native scrolling.');
         }
     } catch (err) {
+        hasScrollify = false;
         console.warn('Failed to initialize Scrollify:', err);
     }
     
     // Override navigation link clicks to use Scrollify when available
     $('.nav-link').on('click', function(e) {
+        if (!hasScrollify) return;
         const target = $(this).attr('href');
-        if ($ && $.scrollify && typeof $.scrollify === 'function') {
+        if (target) {
             e.preventDefault();
             $.scrollify.move(target);
         }
     });
     
-    // Scroll indicator click events
+    // Scroll indicator click events (only if Scrollify is active)
+    if (hasScrollify) {
     $('.scroll-dot').on('click', function() {
         const targetSection = $(this).data('section');
+            if (targetSection) {
         $.scrollify.move(`#${targetSection}`);
+            }
+        });
+    }
+}
+
+if (typeof window.jQuery !== 'undefined') {
+    window.jQuery(function($) {
+        initScrollEnhancements($);
     });
+} else {
+    document.addEventListener('DOMContentLoaded', function() {
+        console.warn('jQuery not available; skipping Scrollify enhancements.');
 });
+}
 
 // Mobile Navigation Toggle
 const hamburger = document.querySelector('.hamburger');
@@ -66,34 +84,34 @@ class DynamicQuotes {
         this.quotes = [
             {
                 text: "You are not defined by your struggles; you are shaped by how you rise from them.",
-                author: "Pallavi Singh"
+                author: ""
             },
             {
                 text: "Every story has the power to transform, every conversation can heal, and every moment is an opportunity to grow.",
-                author: "Pallavi Singh"
+                author: ""
             },
             {
                 text: "The journey of self-discovery begins with a single step of courage and a willingness to embrace your authentic self.",
-                author: "Pallavi Singh"
+                author: ""
             },
             {
                 text: "Habits are the bridge between your dreams and your reality. Build them with intention, and they will carry you forward.",
+                author: ""
+            },
+            {
+                text: "Our limits are not set by people around us but by our own limiting beliefs. Break away and keep discovering yourself.",
                 author: "Pallavi Singh"
             },
             {
-                text: "In the silence between words, in the pause between breaths, that's where transformation lives.",
+                text: "We live in our minds! Keep it clean and clutter free",
                 author: "Pallavi Singh"
             },
             {
-                text: "Your voice is your superpower. When you speak your truth, you give others permission to do the same.",
+                text: "Live, love, laugh! Help, support, give!\n\nAll the spices that make an awesome dish called Life.",
                 author: "Pallavi Singh"
             },
             {
-                text: "The most beautiful stories are not about perfection, but about the courage to be imperfectly human.",
-                author: "Pallavi Singh"
-            },
-            {
-                text: "Every challenge is a teacher, every setback is a setup for a comeback, and every ending is a new beginning.",
+                text: "Where is the butterfly garden?\n\nWhispered the girl to the tree…\n\nJust around the corner, answered hope",
                 author: "Pallavi Singh"
             }
         ];
@@ -148,8 +166,8 @@ class DynamicQuotes {
             this.quoteAuthor.classList.remove('active');
             
             // Update content
-            this.quoteText.textContent = quote.text;
-            this.quoteAuthor.textContent = quote.author;
+            this.quoteText.innerHTML = quote.text.replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>');
+            this.quoteAuthor.textContent = quote.author ? `- ${quote.author}` : '';
             
             // Update dots
             document.querySelectorAll('.quote-dot').forEach((dot, i) => {
@@ -705,6 +723,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Close popup with Escape key
     document.addEventListener('keydown', function(e) {
+        if (!bookNowPopup) return;
         if (e.key === 'Escape' && bookNowPopup.classList.contains('active')) {
             hideBookNowPopup();
         }
@@ -961,6 +980,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Close popup with Escape key
     document.addEventListener('keydown', function(e) {
+        if (!popup) return;
         if (e.key === 'Escape' && popup.classList.contains('active')) {
             hidePopup();
         }

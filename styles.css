@@ -32,13 +32,11 @@ html {
 
 /* Page sections for Scrollify */
 .page-section {
-    min-height: 100vh;
+    min-height: auto;
     position: relative;
     overflow: visible;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px 0 10px 0;
+    display: block;
+    padding: 50px 0 40px 0;
 }
 
 /* Apply semi-transparent overlay to all sections except hero */
@@ -51,6 +49,42 @@ html {
     bottom: 0;
     background: rgba(255, 255, 255, 0.85);
     z-index: 1;
+}
+
+/* Keep testimonials visible by reducing the overlay strength */
+.testimonials.page-section::before,
+.video-testimonials.page-section::before {
+    background: rgba(255, 255, 255, 0.35);
+}
+
+/* Reduce excessive vertical spacing for testimonial sections */
+.testimonials.page-section,
+.video-testimonials.page-section {
+    min-height: auto;
+    padding: 40px 0;
+    display: flex;
+    align-items: flex-start;
+}
+
+/* Tighter gap between text and video testimonials */
+.testimonials.page-section {
+    padding-bottom: 20px;
+}
+
+.video-testimonials.page-section {
+    padding-top: 20px;
+}
+
+.video-testimonials .video-testimonials-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.video-testimonials .video-testimonial-card {
+    display: flex;
+    justify-content: center;
 }
 
 /* Read More Button Styles */
@@ -417,7 +451,7 @@ body:has(.coming-soon-section) .footer {
 .section-header {
     text-align: center;
     margin-top: 0px;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
     width: 100%;
 }
 
@@ -425,7 +459,7 @@ body:has(.coming-soon-section) .footer {
     font-size: 2.5rem;
     font-weight: 700;
     color: #1A535C;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     position: relative;
     text-align: center;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2), 0 0 8px rgba(255, 255, 255, 0.6);
@@ -447,7 +481,7 @@ body:has(.coming-soon-section) .footer {
     font-size: 1.1rem;
     color: #666;
     max-width: 600px;
-    margin: 0 auto 10px auto;
+    margin: 20px auto 0 auto;
     text-align: center;
     line-height: 1.6;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1), 0 0 5px rgba(255, 255, 255, 0.4);
@@ -4333,31 +4367,101 @@ body:has(.coming-soon-section) .footer {
 .dedicated-hero--habit-mastery {
     background-image:
         linear-gradient(135deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.15)),
-        url('assets/images/Banners/habit-mastery.jpg');
+        url('assets/images/Banners/habit-mastery.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .dedicated-hero--overcome-anxiety {
     background-image:
         linear-gradient(135deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.15)),
         url('assets/images/Banners/overcome-anxiety.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .dedicated-hero--public-speaking {
     background-image:
         linear-gradient(135deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.15)),
-        url('assets/images/Banners/public-speaking.png');
+        url('assets/images/Banners/public-speaking.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .dedicated-hero--relationship-mentoring {
     background-image:
         linear-gradient(135deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.15)),
         url('assets/images/Banners/relationship-mentoring.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .dedicated-hero--storytelling {
     background-image:
         linear-gradient(135deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.15)),
         url('assets/images/Banners/storytelling.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.dedicated-hero--about {
+    background-image:
+        linear-gradient(135deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.05)),
+        url('assets/images/about%20banner%20pallavi%20singh.jpg');
+    background-size: contain;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    min-height: 500px;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    display: block;
+    position: relative;
+    overflow: hidden;
+    background-color: #f8f9fa;
+}
+
+.dedicated-hero--about::before {
+    display: none !important;
+}
+
+.dedicated-hero--about::after {
+    display: none !important;
+}
+
+.dedicated-hero--about .dedicated-hero-content {
+    display: none;
+}
+
+/* Ensure banner displays properly on all screen sizes */
+@media (min-width: 1200px) {
+    .dedicated-hero--about {
+        min-height: 600px;
+        background-size: contain;
+        background-position: center top;
+    }
+}
+
+@media (max-width: 768px) {
+    .dedicated-hero--about {
+        min-height: 400px;
+        background-size: contain;
+        background-position: center top;
+    }
+}
+
+@media (max-width: 480px) {
+    .dedicated-hero--about {
+        min-height: 300px;
+        background-size: contain;
+        background-position: center top;
+    }
 }
 
 /* Service Pages Styles */
@@ -4409,7 +4513,7 @@ body:has(.coming-soon-section) .footer {
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-/* Coaching & Mentoring banner */
+/* Coaching banner */
 .service-hero--coaching {
     background-image:
         linear-gradient(135deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.15)),
