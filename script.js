@@ -36,9 +36,17 @@ function initScrollEnhancements($) {
     $('.nav-link').on('click', function(e) {
         if (!hasScrollify) return;
         const target = $(this).attr('href');
-        if (target) {
+        // Let external links behave normally
+        if (!target || /^https?:/i.test(target)) return;
+
+        // Use Scrollify only for same-page anchors (including index.html# anchors)
+        const isHashLink = target.startsWith('#');
+        const isIndexHashLink = target.startsWith('index.html#');
+
+        if (isHashLink || isIndexHashLink) {
             e.preventDefault();
-            $.scrollify.move(target);
+            const destination = isIndexHashLink ? target.replace(/^index\.html/, '') : target;
+            $.scrollify.move(destination);
         }
     });
     
