@@ -7,6 +7,15 @@
     <meta name="description" content="Meet Pallavi Singh, a life coach and mentor from Jaipur with over a decade of experience helping 500+ individuals transform their lives through coaching, storytelling, and mentorship.">
     <meta name="author" content="Pallavi Singh">
     
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HZM0K6N3WG"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-HZM0K6N3WG');
+    </script>
+    
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="About Pallavi Singh - Life Coach & Storyteller" />
     <meta property="og:description" content="Meet Pallavi Singh, a life coach and mentor from Jaipur with over a decade of experience helping 500+ individuals transform their lives." />
@@ -810,6 +819,43 @@
         .read-more-btn.read-less:hover {
             background: #2A636C;
         }
+        
+        /* Fix alignment for Coaching Services section */
+        .coaching-services-block {
+            align-items: center;
+        }
+        
+        .coaching-services-image {
+            margin-top: 0 !important;
+            align-self: center;
+        }
+        
+        .coaching-services-text {
+            margin-top: 0 !important;
+            align-self: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        /* Story Tree image - reduced size */
+        .story-tree-image {
+            width: auto !important;
+            height: auto !important;
+            max-width: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .story-tree-img {
+            width: auto !important;
+            height: auto !important;
+            max-width: 250px;
+            max-height: 250px;
+            object-fit: contain !important;
+            opacity: 0.7;
+        }
     </style>
 </head>
 <body>
@@ -885,7 +931,7 @@
             <!-- Professional Achievements -->
             <div class="story-block">
                 <div class="story-image">
-                    <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Professional training and certification" class="story-img">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1000&q=80" alt="Professional training and certification" class="story-img">
                 </div>
                 <div class="story-text">
                     <h2>Professional Achievements</h2>
@@ -902,7 +948,7 @@
             <!-- My Coaching Philosophy -->
             <div class="story-block">
                 <div class="story-image">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Coaching and mentoring session" class="story-img">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1000&q=80" alt="Coaching and mentoring session" class="story-img">
                 </div>
                 <div class="story-text">
                     <h2>My Coaching Philosophy</h2>
@@ -917,11 +963,11 @@
             </div>
 
             <!-- Coaching Services -->
-            <div class="story-block">
-                <div class="story-image">
-                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Support and helping hands" class="story-img">
+            <div class="story-block coaching-services-block">
+                <div class="story-image coaching-services-image">
+                    <img src="assets/images/Coaching Services image_abtpg.jpeg" alt="Coaching Services" class="story-img">
                 </div>
-                <div class="story-text">
+                <div class="story-text coaching-services-text">
                     <h2>Coaching Services</h2>
                     <p><strong>Coaching provided:</strong></p>
                     <ul>
@@ -936,7 +982,7 @@
             <!-- Public Speaking and Communication -->
             <div class="story-block">
                 <div class="story-image">
-                    <img src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Public speaking and presentation" class="story-img">
+                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1000&q=80" alt="Public speaking and presentation" class="story-img">
                 </div>
                 <div class="story-text">
                     <h2>Public Speaking and Communication</h2>
@@ -945,20 +991,25 @@
             </div>
 
             <!-- The Story Tree -->
-            <div class="story-block">
-                <div class="story-image">
-                    <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Storytelling and children learning" class="story-img">
+            <div class="story-block story-tree-block">
+                <div class="story-image story-tree-image">
+                    <img src="assets/images/storytree_logo.png" alt="The Story Tree" class="story-img story-tree-img">
                 </div>
                 <div class="story-text">
                     <h2>The Story Tree</h2>
                     <p>This storytelling journey is thoughtfully curated and structured in a sequential manner—designed to nurture both learning and life skills. Each story is carefully chosen to spark curiosity, encourage questioning, and foster a love for reading. For children, it also becomes a joyful way to enhance public speaking skills, build confidence, and gently let go of inhibitions, in a sense it is a special space where all my programs get bundled up to create a lasting experience for young children.</p>
+                    <div style="margin-top: 25px;">
+                        <a href="story-tree.html" class="btn btn-primary" style="display: inline-block; padding: 12px 30px; text-decoration: none; border-radius: 25px; transition: all 0.3s ease;">
+                            Explore The Story Tree <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
 
             <!-- A Gentle Reminder -->
             <div class="story-block">
                 <div class="story-image">
-                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Inspirational sunrise and hope" class="story-img">
+                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1000&q=80" alt="Inspirational sunrise and hope" class="story-img">
                 </div>
                 <div class="story-text">
                     <h2>A Gentle Reminder</h2>
