@@ -35,6 +35,149 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* Coaching Page Image Styling - Matching About Page Alignment */
+        .about-content {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 70px;
+            min-height: 480px;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .about-text {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(168, 213, 186, 0.2);
+            align-self: stretch;
+            margin-top: 20px;
+        }
+        
+        .about-text h3 {
+            color: #1A535C;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+            position: relative;
+        }
+        
+        .about-text h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, #A8D5BA, #1A535C);
+            border-radius: 2px;
+        }
+        
+        .about-text p {
+            color: #2E2E2E;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            margin-bottom: 18px;
+        }
+        
+        .about-image-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 20px;
+            flex-shrink: 0;
+        }
+        
+        .about-image {
+            width: 400px;
+            height: auto;
+            aspect-ratio: 3/4;
+            max-width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 15px 40px rgba(26, 83, 92, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-top: 120px;
+        }
+        
+        .about-image:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(26, 83, 92, 0.3);
+        }
+        
+        .about-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            border: 4px solid #A8D5BA;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .about-content {
+                gap: 60px;
+            }
+            
+            .about-image {
+                width: 280px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .about-content {
+                flex-direction: column;
+                align-items: center;
+                gap: 40px;
+                min-height: auto;
+            }
+            
+            .about-image-wrapper {
+                align-items: center;
+                width: 100%;
+            }
+            
+            .about-image {
+                width: 240px;
+                margin-top: 0;
+            }
+            
+            .about-text {
+                width: 100%;
+                max-width: 500px;
+                margin: 0 auto;
+                padding: 40px;
+                margin-top: 0;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .about-image {
+                width: 200px;
+            }
+            
+            .about-text {
+                padding: 30px 20px;
+            }
+            
+            .about-text h3 {
+                font-size: 1.6rem;
+            }
+            
+            .about-text p {
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -120,8 +263,10 @@
                     
                     <p>We begin with a free 30-minute discovery session to understand your goals and challenges. Then we dive deep into your current situation, create a customized coaching plan, and embark on a transformation journey with ongoing support and accountability.</p>
                 </div>
-                <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80" alt="Coaching Process" class="about-img">
+                <div class="about-image-wrapper">
+                    <div class="about-image">
+                        <img src="assets/images/Personalized transformation and coaching.jpg" alt="Personalized Transformation and Coaching" class="about-img">
+                    </div>
                 </div>
             </div>
         </div>

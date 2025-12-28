@@ -6,38 +6,72 @@
 
 require_once '../config/database.php';
 
-// Simple authentication
+// Start session with proper settings
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
+}
+
+// Check if already logged in
+if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true) {
+    header('Location: dashboard.php');
+    exit;
 }
 
 $error = '';
 
 if (isset($_POST['username']) && isset($_POST['password'])) {
-    $username = $_POST['username'];
+    $username = trim($_POST['username']);
     $password = $_POST['password'];
     
     try {
         $db = Database::getInstance();
         
-        $users = $db->where('admin_users', ['username' => $username, 'is_active' => true]);
+        // Get all users for debugging
+        $allUsers = $db->where('admin_users', []);
+        
+        // Find user by username
+        $users = $db->where('admin_users', ['username' => $username]);
         $user = !empty($users) ? $users[0] : null;
         
-        if ($user && password_verify($password, $user['password_hash'])) {
-            $_SESSION['admin_logged_in'] = true;
-            $_SESSION['admin_user'] = $user;
-            
-            // Update last login
-            $db->update('admin_users', $user['id'], ['last_login' => date('Y-m-d H:i:s')]);
-            
-            // Redirect to dashboard
-            header('Location: index.php');
-            exit;
+        // Debug: Check if user exists
+        if (!$user) {
+            $error = "User not found. Username: " . htmlspecialchars($username);
+        } elseif (isset($user['is_active']) && !$user['is_active']) {
+            $error = "User account is inactive";
+        } elseif (!isset($user['password_hash']) || empty($user['password_hash'])) {
+            $error = "User account error: password hash missing";
         } else {
-            $error = "Invalid username or password";
+            // Verify password
+            $passwordValid = password_verify($password, $user['password_hash']);
+            
+            if (!$passwordValid) {
+                $error = "Invalid password. Please check your password.";
+            } else {
+                // Login successful - set session variables
+                $_SESSION['admin_logged_in'] = true;
+                $_SESSION['admin_user'] = $user;
+                
+                // Save session immediately
+                session_write_close();
+                session_start(); // Reopen for potential updates
+                
+                // Update last login (don't let this block login)
+                try {
+                    $db->update('admin_users', ['last_login' => date('Y-m-d H:i:s')], 'id = ?', [$user['id']]);
+                } catch (Exception $e) {
+                    error_log("Failed to update last login: " . $e->getMessage());
+                }
+                
+                // Final session save and redirect
+                session_write_close();
+                header('Location: dashboard.php');
+                exit;
+            }
         }
     } catch (Exception $e) {
         $error = "Login failed: " . $e->getMessage();
+        error_log("Login error: " . $e->getMessage());
+        error_log("Stack trace: " . $e->getTraceAsString());
     }
 }
 ?>

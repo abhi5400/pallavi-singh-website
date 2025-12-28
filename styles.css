@@ -90,10 +90,11 @@ html {
 /* Read More Button Styles */
 .read-more-container {
     text-align: left;
-    margin: 25px 0;
+    margin: 0;
     position: relative;
     z-index: 2;
     display: flex;
+    align-self: flex-start;
     gap: 15px;
     flex-wrap: wrap;
 }
@@ -102,15 +103,16 @@ html {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 12px 24px;
+    padding: 12px 30px;
     background: transparent;
     border: 2px solid #1A535C;
     color: #1A535C;
     text-decoration: none;
     border-radius: 25px;
-    font-weight: 500;
+    font-weight: 600;
     transition: all 0.3s ease;
-    font-size: 0.95rem;
+    font-size: 1rem;
+    cursor: pointer;
 }
 
 .read-more-btn:hover {
@@ -1536,7 +1538,7 @@ body:has(.coming-soon-section) .footer {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 60px;
-    align-items: center;
+    align-items: flex-start;
     min-height: 50vh;
     width: 100%;
     margin-top: 20px;
@@ -1558,10 +1560,11 @@ body:has(.coming-soon-section) .footer {
 }
 
 .about-text p {
-    color: #666;
+    color: #2E2E2E;
     margin-bottom: 20px;
     line-height: 1.8;
     text-align: left;
+    font-size: 1.1rem;
 }
 
 .about-stats {
@@ -1597,22 +1600,32 @@ body:has(.coming-soon-section) .footer {
     color: #666;
 }
 
+.about-image-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    position: relative;
+    align-self: flex-start;
+}
+
 .about-image {
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100%;
+    width: 100%;
 }
 
 .about-profile-img {
-    width: 500px;
-    height: 500px;
-    border-radius: 50%;
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    aspect-ratio: 3/4;
+    border-radius: 8px;
     object-fit: cover;
     border: 4px solid #A8D5BA;
-    box-shadow: 0 20px 40px rgba(26, 83, 92, 0.1);
-    max-width: 100%;
+    box-shadow: 0 20px 40px rgba(26, 83, 92, 0.15);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
 }
@@ -1653,6 +1666,102 @@ body:has(.coming-soon-section) .footer {
     }
 }
 
+/* Hidden Content Styles */
+.hidden-content {
+    display: none;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.5s ease;
+}
+
+.hidden-content.show {
+    display: block;
+    opacity: 1;
+    max-height: 2000px;
+}
+
+.read-more-btn.read-less {
+    background: #1A535C;
+    color: white;
+}
+
+/* Professional Achievements Section */
+.professional-achievements {
+    position: relative;
+    z-index: 1;
+}
+
+.achievements-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: flex-start;
+    min-height: 50vh;
+    width: 100%;
+    margin-top: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.achievements-text {
+    position: relative;
+    z-index: 2;
+}
+
+.achievements-text p {
+    color: #2E2E2E;
+    margin-bottom: 20px;
+    line-height: 1.8;
+    text-align: left;
+    font-size: 1.1rem;
+}
+
+.achievements-text p strong {
+    color: #1A535C;
+    font-weight: 600;
+}
+
+.achievements-text p em {
+    font-style: italic;
+    color: #1A535C;
+    font-size: 1.15rem;
+}
+
+.achievements-image-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    position: relative;
+    align-self: flex-start;
+}
+
+.achievements-image {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.achievements-profile-img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    aspect-ratio: 3/4;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 4px solid #A8D5BA;
+    box-shadow: 0 20px 40px rgba(26, 83, 92, 0.15);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.achievements-profile-img:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 25px 50px rgba(26, 83, 92, 0.2);
+}
 
 /* Services Section */
 .services {
@@ -3911,11 +4020,24 @@ body:has(.coming-soon-section) .footer {
     }
 
     .about-content,
+    .achievements-content,
     .community-content,
     .contact-content {
         grid-template-columns: 1fr;
         gap: 30px;
         min-height: auto;
+    }
+    
+    .about-image-wrapper,
+    .achievements-image-wrapper {
+        align-items: center;
+        order: -1;
+        margin-bottom: 20px;
+    }
+    
+    .about-profile-img,
+    .achievements-profile-img {
+        max-width: 100%;
     }
     
     .about {

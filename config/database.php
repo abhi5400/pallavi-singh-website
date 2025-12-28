@@ -99,10 +99,29 @@ class Database {
     
     /**
      * Update data
+     * For JSON: update($table, $id, $data)
+     * For MySQL: update($table, $data, $where, $whereParams)
      */
-    public function update($table, $data, $where, $whereParams = []) {
+    public function update($table, $data, $where = null, $whereParams = []) {
         if ($this->useJson) {
-            return $this->jsonDb->update($table, $data, $where, $whereParams);
+            // JSON database expects: update($table, $id, $data)
+            // Extract ID from where clause
+            $id = null;
+            if (!empty($where)) {
+                if (preg_match('/id\s*=\s*\?/', $where) && !empty($whereParams)) {
+                    $id = $whereParams[0];
+                } elseif (preg_match('/id\s*=\s*:id/', $where) && isset($whereParams['id'])) {
+                    $id = $whereParams['id'];
+                } elseif (preg_match('/id\s*=\s*(\d+)/', $where, $matches)) {
+                    $id = $matches[1];
+                }
+            }
+            
+            if ($id === null) {
+                throw new Exception("Could not extract ID from where clause for JSON database update");
+            }
+            
+            return $this->jsonDb->update($table, $id, $data);
         }
         
         $setClause = [];

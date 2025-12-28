@@ -80,7 +80,7 @@ ob_start();
 <div class="quick-actions fade-in">
     <h3>🚀 Quick Actions</h3>
     <div class="action-buttons">
-        <a href="contacts.php" class="action-btn">
+        <a href="contact-forms.php" class="action-btn">
             <div class="action-icon">📧</div>
             <div class="action-text">View Contacts</div>
         </a>
@@ -104,7 +104,7 @@ ob_start();
     <div class="dashboard-widget fade-in">
         <div class="widget-header">
             <h3>📧 Recent Contact Submissions</h3>
-            <a href="contacts.php" class="widget-link">View All</a>
+            <a href="contact-forms.php" class="widget-link">View All</a>
         </div>
         <div class="widget-content">
             <?php if (!empty($recentContacts)): ?>

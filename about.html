@@ -153,13 +153,22 @@
             margin-bottom: 80px;
             position: relative;
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             gap: 70px;
             min-height: 480px;
+            flex-direction: row !important;
         }
         
-        .story-block:nth-child(even) {
-            flex-direction: row-reverse;
+        .about-me-block {
+            flex-direction: row !important;
+        }
+        
+        .story-image-wrapper-about {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 20px;
+            margin-top: 0;
         }
         
         .story-block::before {
@@ -167,24 +176,18 @@
         }
         
         .story-image {
-            width: 320px;
-            height: 480px;
-            border-radius: 15px;
+            width: 400px;
+            height: auto;
+            aspect-ratio: 3/4;
+            max-width: 100%;
+            border-radius: 8px;
             overflow: hidden;
             flex-shrink: 0;
             position: relative;
             z-index: 2;
             box-shadow: 0 15px 40px rgba(26, 83, 92, 0.2);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            margin-top: 20px;
-        }
-        
-        .story-block:first-child .story-image {
-            margin-top: 120px;
-        }
-        
-        .story-block:not(:first-child) .story-image {
-            margin-top: 120px;
+            margin-top: 0;
         }
 
         .story-image:hover {
@@ -197,6 +200,7 @@
             height: 100%;
             object-fit: cover;
             object-position: center;
+            border: 4px solid #A8D5BA;
         }
         
         .story-text {
@@ -210,27 +214,12 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
-            align-self: stretch;
-            margin-top: 20px;
+            align-self: center;
+            margin-top: 0;
         }
         
         .story-text::before {
-            content: '';
-            position: absolute;
-            top: 20px;
-            left: -10px;
-            width: 0;
-            height: 0;
-            border-top: 15px solid transparent;
-            border-bottom: 15px solid transparent;
-            border-right: 15px solid rgba(255, 255, 255, 0.9);
-        }
-        
-        .story-block:nth-child(even) .story-text::before {
-            left: auto;
-            right: -10px;
-            border-right: none;
-            border-left: 15px solid rgba(255, 255, 255, 0.9);
+            display: none;
         }
         
         .story-text h2 {
@@ -295,10 +284,26 @@
                 min-height: auto;
             }
             
+            .about-me-block {
+                flex-direction: column !important;
+            }
+            
+            .story-image-wrapper-about {
+                align-items: center;
+                width: 100%;
+                margin-top: 0;
+            }
+            
             .story-image {
                 width: 240px;
                 height: 360px;
                 margin-top: 0;
+            }
+            
+            .about-me-block .story-image {
+                width: 100%;
+                max-width: 300px;
+                height: auto;
             }
             
             .story-text {
@@ -840,21 +845,18 @@
         
         /* Story Tree image - reduced size */
         .story-tree-image {
-            width: auto !important;
-            height: auto !important;
-            max-width: 250px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 400px;
+            height: auto;
+            aspect-ratio: 1/1;
+            max-width: 100%;
+            margin-top: 0;
         }
         
         .story-tree-img {
-            width: auto !important;
-            height: auto !important;
-            max-width: 250px;
-            max-height: 250px;
-            object-fit: contain !important;
-            opacity: 0.7;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            opacity: 0.9;
         }
     </style>
 </head>
@@ -901,28 +903,30 @@
     <section class="story-section">
         <div class="story-content">
             <!-- About Me -->
-            <div class="story-block">
-                <div class="story-image">
-                    <img src="assets/images/image 5.jpg" alt="Pallavi Singh - Life Coach" class="story-img">
-                </div>
+            <div class="story-block about-me-block">
                 <div class="story-text">
                     <h2>✨ About Me ✨</h2>
                     <p>Khamagani! From the vibrant Pink City of Jaipur, where heritage and colours breathe life into everyday stories, I'm Pallavi Singh — a banker turned heritage hotelier, corporate trainer, and today, a life coach by calling.</p>
                     <p>My journey into coaching didn't begin in a seminar hall. It began with a deep curiosity about people and their stories. I was always drawn to the "why" behind habits, relationships, and human behaviour. And through two decades across diverse careers, one thread remained constant: my love for helping people grow.</p>
-                    <p>Life, of course, shaped this journey even further. My own experiences strengthened my interest in coaching, soft skills, and story-based healing. In my late twenties and thirties, I walked through a long phase of relationship complexities, family pressures, deceit, and emotional exhaustion. Anxiety often sat on my shoulders, sleepless nights felt almost routine, and there were moments when it seemed like the storm would never end.</p>
-                    <p>But life had its own design. Slowly, I realised those painful moments were not endings, they were invitations. Coaching and training didn't just guide me professionally; it helped me look inward, heal, and rebuild.</p>
                     
-                    <div style="text-align: center; margin: 30px 0;">
+                    <div style="text-align: left; margin-top: 20px; margin-bottom: 20px;">
                         <button onclick="toggleContent('about-more-content', this)" class="read-more-btn btn btn-outline" style="padding: 12px 30px; font-size: 1rem; border-radius: 25px; cursor: pointer; transition: all 0.3s ease;">
                             Read More <i class="fas fa-arrow-down"></i>
                         </button>
                     </div>
                     
                     <div id="about-more-content" class="hidden-content">
+                        <p>Life, of course, shaped this journey even further. My own experiences strengthened my interest in coaching, soft skills, and story-based healing. In my late twenties and thirties, I walked through a long phase of relationship complexities, family pressures, deceit, and emotional exhaustion. Anxiety often sat on my shoulders, sleepless nights felt almost routine, and there were moments when it seemed like the storm would never end.</p>
+                        <p>But life had its own design. Slowly, I realised those painful moments were not endings, they were invitations. Coaching and training didn't just guide me professionally; it helped me look inward, heal, and rebuild.</p>
                         <p>Overtime, I worked on my issues always with an optimistic perspective. Whether it was my health, where alternative remedies helped when doctors had given up, or my personal life, where I took tough decisions which needed to be taken, I kept moving forward. Step by step, through routine, structure, meditation, fitness, self-reflection, and keeping small daily promises, I rebuilt myself.</p>
                         <p>Through this journey, I discovered a system that helped me reclaim balance, a method that helped me quiet the chaos and find clarity. It has stayed with me for years. I call this method my "Kriya", a simple inner practice that supports transformation.</p>
                         <p>Now, I share this holistic approach with those ready to live better, healthier, and happier.</p>
                         <p>If that sounds like you, I invite you to connect with me —to explore your path and see if my coaching aligns with your journey.</p>
+                    </div>
+                </div>
+                <div class="story-image-wrapper-about">
+                    <div class="story-image">
+                        <img src="assets/images/image 5.jpg" alt="Pallavi Singh - Life Coach" class="story-img">
                     </div>
                 </div>
             </div>
@@ -930,26 +934,34 @@
 
             <!-- Professional Achievements -->
             <div class="story-block">
-                <div class="story-image">
-                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1000&q=80" alt="Professional training and certification" class="story-img">
-                </div>
                 <div class="story-text">
                     <h2>Professional Achievements</h2>
                     <p>Professionally, I hold an MBA in Marketing and Finance from Symbiosis Institute of Management Studies and have worked with Citibank in a previous chapter of life. My path later led me into education and hospitality — From a previous role as an Executive Board Member of a school's management committee, to Managing Director of a heritage hotel, and Director in a private hospitality company.</p>
                     <p>Over the past 2 decades, I've trained and coached employees across organizations, including GENPACT and most of the premier schools of Jaipur. I have been part of several train-the-trainer initiatives as well. I'm also a certified storyteller, coach, and Neuro-Linguistic Practitioner (NLP).</p>
-                    <p>Currently, I'm researching Habit Mastery and integrating it into my coaching framework — blending neuroscience, storytelling, and simple daily rituals that create lasting change.</p>
-                    <p>Along the way, I've had the joy of anchoring and emceeing major events, including two with Honourable Dr. Shashi Tharoor(MP& formerly an Under-Secretary-General of the United Nations) I also served as a Regional Trainer for the networking group BNI, I have trained over 3,000 students and teachers across Jaipur's top schools.</p>
-                    <p>At my core, I'm a constant and curious learner. Today, I bring together real-life experience and practical coaching tools, professional training and human connections to help others redesign their inner world and rise stronger.</p>
+                    
+                    <div style="text-align: left; margin-top: 20px; margin-bottom: 20px;">
+                        <button onclick="toggleContent('achievements-more-content-about', this)" class="read-more-btn btn btn-outline" style="padding: 12px 30px; font-size: 1rem; border-radius: 25px; cursor: pointer; transition: all 0.3s ease;">
+                            Read More <i class="fas fa-arrow-down"></i>
+                        </button>
+                    </div>
+                    
+                    <div id="achievements-more-content-about" class="hidden-content">
+                        <p>Currently, I'm researching Habit Mastery and integrating it into my coaching framework — blending neuroscience, storytelling, and simple daily rituals that create lasting change.</p>
+                        <p>Along the way, I've had the joy of anchoring and emceeing major events, including two with Honourable Dr. Shashi Tharoor (MP & formerly an Under-Secretary-General of the United Nations). I also served as a Regional Trainer for the networking group BNI, and have trained over 3,000 students and teachers across Jaipur's top schools.</p>
+                        <p>At my core, I'm a constant and curious learner. Today, I bring together real-life experience and practical coaching tools, professional training and human connections to help others redesign their inner world and rise stronger.</p>
                         <p><strong>Because I believe one thing deeply:</strong></p>
-                    <p><em>You're not broken — you're getting ready for your next version.</em></p>
+                        <p><em>You're not broken — you're getting ready for your next version.</em></p>
+                    </div>
+                </div>
+                <div class="story-image-wrapper-about">
+                    <div class="story-image">
+                        <img src="assets/images/My professional achievements.JPG" alt="Professional Achievements" class="story-img">
+                    </div>
                 </div>
             </div>
 
             <!-- My Coaching Philosophy -->
             <div class="story-block">
-                <div class="story-image">
-                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1000&q=80" alt="Coaching and mentoring session" class="story-img">
-                </div>
                 <div class="story-text">
                     <h2>My Coaching Philosophy</h2>
                     <p>My take on coaching is that it is a journey for both the coach and the coachee—much like a beautiful drive filled with aha-moments of self-realization. The coachee is gently guided through their own thoughts until they discover an inner, enchanted garden. There, they plant their favorite self-help tools like flowers. And each day, as they return to this sacred space, those flowers bloom into reminders—guiding them toward deeper self-discovery and inner integration.</p>
@@ -960,13 +972,15 @@
                         <li>Reconnect with creativity and purpose</li>
                     </ul>
                 </div>
+                <div class="story-image-wrapper-about">
+                    <div class="story-image">
+                        <img src="assets/images/My coaching philosophy.jpg" alt="My Coaching Philosophy" class="story-img">
+                    </div>
+                </div>
             </div>
 
             <!-- Coaching Services -->
             <div class="story-block coaching-services-block">
-                <div class="story-image coaching-services-image">
-                    <img src="assets/images/Coaching Services image_abtpg.jpeg" alt="Coaching Services" class="story-img">
-                </div>
                 <div class="story-text coaching-services-text">
                     <h2>Coaching Services</h2>
                     <p><strong>Coaching provided:</strong></p>
@@ -976,25 +990,29 @@
                         <li>Relationship coaching for couples</li>
                     </ul>
                 </div>
+                <div class="story-image-wrapper-about">
+                    <div class="story-image coaching-services-image">
+                        <img src="assets/images/Personalized transformation and coaching.jpg" alt="Personalized Transformation and Coaching" class="story-img">
+                    </div>
+                </div>
             </div>
 
 
             <!-- Public Speaking and Communication -->
             <div class="story-block">
-                <div class="story-image">
-                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1000&q=80" alt="Public speaking and presentation" class="story-img">
-                </div>
                 <div class="story-text">
                     <h2>Public Speaking and Communication</h2>
                     <p>Public speaking and communication are powerful skills that open doors in every sphere of life. This coaching is designed to help teachers, students, women, and young adults find their authentic voice, express with clarity, and connect with confidence. The journey is not just about speaking well to others alone but to the self as well—it's about learning to dance to the rhythm of inner confidence.</p>
+                </div>
+                <div class="story-image-wrapper-about">
+                    <div class="story-image">
+                        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1000&q=80" alt="Public speaking and presentation" class="story-img">
+                    </div>
                 </div>
             </div>
 
             <!-- The Story Tree -->
             <div class="story-block story-tree-block">
-                <div class="story-image story-tree-image">
-                    <img src="assets/images/storytree_logo.png" alt="The Story Tree" class="story-img story-tree-img">
-                </div>
                 <div class="story-text">
                     <h2>The Story Tree</h2>
                     <p>This storytelling journey is thoughtfully curated and structured in a sequential manner—designed to nurture both learning and life skills. Each story is carefully chosen to spark curiosity, encourage questioning, and foster a love for reading. For children, it also becomes a joyful way to enhance public speaking skills, build confidence, and gently let go of inhibitions, in a sense it is a special space where all my programs get bundled up to create a lasting experience for young children.</p>
@@ -1004,28 +1022,24 @@
                         </a>
                     </div>
                 </div>
-            </div>
-
-            <!-- A Gentle Reminder -->
-            <div class="story-block">
-                <div class="story-image">
-                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1000&q=80" alt="Inspirational sunrise and hope" class="story-img">
-                </div>
-                <div class="story-text">
-                    <h2>A Gentle Reminder</h2>
-                    <p style="font-size: 1.3rem; font-weight: 500; color: #1A535C; text-align: center; font-style: italic;">"You are not defined by your struggles; you are shaped by how you rise from them."</p>
+                <div class="story-image-wrapper-about">
+                    <div class="story-image story-tree-image">
+                        <img src="assets/images/storytree_logo.jpg" alt="The Story Tree" class="story-img story-tree-img">
+                    </div>
                 </div>
             </div>
 
             <!-- Let's Begin the Journey -->
             <div class="story-block">
-                <div class="story-image">
-                    <img src="assets/images/image 3.jpg" alt="Let's Begin the Journey" class="story-img">
-                </div>
                 <div class="story-text">
                     <h2>Let's Begin the Journey</h2>
                     <p>If you're ready to break free from what holds you back and step into your truest, strongest, and most authentic self, I invite you to begin this journey with me. Together, we won't just shape your path—we'll shape your story.</p>
                     <p style="text-align: center; font-size: 1.2rem; font-weight: 600; color: #1A535C; margin-top: 30px;">Let's begin.</p>
+                </div>
+                <div class="story-image-wrapper-about">
+                    <div class="story-image">
+                        <img src="assets/images/image 3.jpg" alt="Let's Begin the Journey" class="story-img">
+                    </div>
                 </div>
             </div>
         </div>

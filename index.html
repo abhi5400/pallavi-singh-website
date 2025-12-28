@@ -262,34 +262,42 @@
                     
                     <p>My journey into coaching didn't begin in a seminar hall. It began with a deep curiosity about people and their stories. I was always drawn to the "why" behind habits, relationships, and human behaviour. And through two decades across diverse careers, one thread remained constant: my love for helping people grow.</p>
                     
-                    <p>Life, of course, shaped this journey even further. My own experiences strengthened my interest in coaching, soft skills, and story-based healing. In my late twenties and thirties, I walked through a long phase of relationship complexities, family pressures, deceit, and emotional exhaustion. Anxiety often sat on my shoulders, sleepless nights felt almost routine, and there were moments when it seemed like the storm would never end.</p>
-                    
-                    <p>But life had its own design. Slowly, I realised those painful moments were not endings, they were invitations. Coaching and training didn't just guide me professionally; it helped me look inward, heal, and rebuild.</p>
+                    <div class="read-more-container">
+                        <a href="about.html" class="btn btn-outline read-more-btn">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="about-image-wrapper">
+                    <div class="about-image">
+                        <img src="assets/images/image 5.jpg" alt="Pallavi Singh - Life Coach" class="about-profile-img">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Achievements Section -->
+    <section class="professional-achievements page-section">
+        <div class="container">
+            <div class="section-decor">
+                <img src="assets/images/decor.png" alt="Decorative Botanical Garland" class="section-decor-image">
+            </div>
+            <div class="section-header">
+                <h2>Professional Achievements</h2>
+                <p>Two decades of experience across diverse fields</p>
+            </div>
+            <div class="achievements-content">
+                <div class="achievements-text">
+                    <p>Professionally, I hold an MBA in Marketing and Finance from Symbiosis Institute of Management Studies and have worked with Citibank in a previous chapter of life. My path later led me into education and hospitality — From a previous role as an Executive Board Member of a school's management committee, to Managing Director of a heritage hotel, and Director in a private hospitality company.</p>
+                    <p>Over the past 2 decades, I've trained and coached employees across organizations, including GENPACT and most of the premier schools of Jaipur. I have been part of several train-the-trainer initiatives as well. I'm also a certified storyteller, coach, and Neuro-Linguistic Practitioner (NLP).</p>
                     
                     <div class="read-more-container">
                         <a href="about.html" class="btn btn-outline read-more-btn">Read More <i class="fas fa-arrow-right"></i></a>
-                        <a href="https://www.instagram.com/lifecoachandstorytellerpallavi/" class="btn btn-instagram" target="_blank">
-                            <i class="fab fa-instagram"></i> Follow on Instagram
-                        </a>
-                    </div>
-                    
-                    <div class="about-stats">
-                        <div class="stat">
-                            <span class="stat-number">3000+</span>
-                            <span class="stat-label">Lives Transformed</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">10+</span>
-                            <span class="stat-label">Years Experience</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">95%</span>
-                            <span class="stat-label">Success Rate</span>
-                        </div>
                     </div>
                 </div>
-                <div class="about-image">
-                    <img src="assets/images/image 5.jpg" alt="Pallavi Singh - Life Coach" class="about-profile-img">
+                <div class="achievements-image-wrapper">
+                    <div class="achievements-image">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1000&q=80" alt="Professional training and certification" class="achievements-profile-img">
+                    </div>
                 </div>
             </div>
         </div>
@@ -1127,5 +1135,23 @@
     <script src="testimonials.js"></script>
     <script src="blogs.js"></script>
     <script src="join-form.js"></script>
+    <script>
+        function toggleContent(contentId, button) {
+            const content = document.getElementById(contentId);
+            const isHidden = content.classList.contains('hidden-content') && !content.classList.contains('show');
+            
+            if (isHidden) {
+                // Show content
+                content.classList.add('show');
+                button.innerHTML = 'Read Less <i class="fas fa-arrow-up"></i>';
+                button.classList.add('read-less');
+            } else {
+                // Hide content
+                content.classList.remove('show');
+                button.innerHTML = 'Read More <i class="fas fa-arrow-down"></i>';
+                button.classList.remove('read-less');
+            }
+        }
+    </script>
 </body>
 </html>
