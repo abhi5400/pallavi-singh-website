@@ -4,7 +4,7 @@
  * Run this once to set up admin credentials
  */
 
-require_once '../config/database_json.php';
+require_once '../config/database.php';
 
 // Default admin credentials
 $username = 'admin';
@@ -28,7 +28,7 @@ $adminUser = [
 ];
 
 // Get existing users
-$jsonDb = JsonDatabase::getInstance();
+$jsonDb = Database::getInstance();
 $users = $jsonDb->getData('admin_users');
 
 // Check if admin user exists

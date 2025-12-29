@@ -4,7 +4,7 @@
  * Central hub for all form submissions
  */
 
-require_once '../config/database_json.php';
+require_once '../config/database.php';
 
 // Check authentication
 if (session_status() === PHP_SESSION_NONE) {
@@ -33,7 +33,7 @@ $recentJoins = [];
 
 // Get form submissions data
 try {
-    $db = JsonDatabase::getInstance();
+    $db = Database::getInstance();
     
     // Get all form data with null safety
     $contactSubmissions = $db->getData('contact_submissions') ?: [];

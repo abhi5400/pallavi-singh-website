@@ -4,7 +4,7 @@
  * Manage client information and sessions
  */
 
-require_once '../config/database_json.php';
+require_once '../config/database.php';
 
 // Check authentication
 if (session_status() === PHP_SESSION_NONE) {
@@ -22,7 +22,7 @@ $error = '';
 // Handle form submissions
 if ($_POST) {
     try {
-        $db = JsonDatabase::getInstance();
+        $db = Database::getInstance();
         
         if (isset($_POST['add_client'])) {
             $clientData = [
@@ -60,7 +60,7 @@ if ($_POST) {
 
 // Get clients data
 try {
-    $db = JsonDatabase::getInstance();
+    $db = Database::getInstance();
     $allClients = $db->getData('clients');
     
     // Sort by created_at descending

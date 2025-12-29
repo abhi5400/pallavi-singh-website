@@ -4,7 +4,7 @@
  * Manage blog posts, categories, and content
  */
 
-require_once '../config/database_json.php';
+require_once '../config/database.php';
 
 // Check authentication
 if (session_status() === PHP_SESSION_NONE) {
@@ -25,48 +25,83 @@ if ($_POST) {
         $db = Database::getInstance();
         
         if (isset($_POST['create_post'])) {
+            // Prepare categories and tags arrays
+            $categories = array_map('trim', explode(',', $_POST['category']));
+            $tags = array_map('trim', explode(',', $_POST['tags'] ?? ''));
+            
+            // For MySQL, encode arrays as JSON; for JSON database, keep as arrays
+            $db = Database::getInstance();
+            $categoriesValue = $db->isUsingJson() ? $categories : json_encode($categories);
+            $tagsValue = $db->isUsingJson() ? $tags : json_encode($tags);
+            
             $postData = [
-                'title' => $_POST['title'],
+                'title' => trim($_POST['title']),
                 'slug' => strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $_POST['title']))),
                 'content' => $_POST['content'],
-                'excerpt' => $_POST['excerpt'],
-                'categories' => explode(',', $_POST['category']),
-                'tags' => explode(',', $_POST['tags']),
-                'featured_image' => $_POST['featured_image'],
+                'excerpt' => trim($_POST['excerpt'] ?? ''),
+                'categories' => $categoriesValue,
+                'tags' => $tagsValue,
+                'featured_image' => trim($_POST['featured_image'] ?? ''),
                 'status' => $_POST['status'],
-                'author' => $_SESSION['admin_user']['full_name'],
+                'author' => $_SESSION['admin_user']['full_name'] ?? 'Pallavi Singh',
                 'published_at' => $_POST['status'] === 'published' ? date('Y-m-d H:i:s') : null,
-                'meta_title' => $_POST['meta_title'],
-                'meta_description' => $_POST['meta_description']
+                'meta_title' => trim($_POST['meta_title'] ?? ''),
+                'meta_description' => trim($_POST['meta_description'] ?? ''),
+                'views' => 0
             ];
             
             $db->insert('blog_posts', $postData);
+            
+            // Sync to JSON file for frontend
+            require_once 'sync_blog_json.php';
+            syncBlogPostsToJson();
+            
             $success = "Blog post created successfully!";
         }
         
         if (isset($_POST['update_post'])) {
             $postId = $_POST['post_id'];
+            
+            // Prepare categories and tags arrays
+            $categories = array_map('trim', explode(',', $_POST['category']));
+            $tags = array_map('trim', explode(',', $_POST['tags'] ?? ''));
+            
+            // For MySQL, encode arrays as JSON; for JSON database, keep as arrays
+            $db = Database::getInstance();
+            $categoriesValue = $db->isUsingJson() ? $categories : json_encode($categories);
+            $tagsValue = $db->isUsingJson() ? $tags : json_encode($tags);
+            
             $updateData = [
-                'title' => $_POST['title'],
+                'title' => trim($_POST['title']),
                 'slug' => strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $_POST['title']))),
                 'content' => $_POST['content'],
-                'excerpt' => $_POST['excerpt'],
-                'categories' => explode(',', $_POST['category']),
-                'tags' => explode(',', $_POST['tags']),
-                'featured_image' => $_POST['featured_image'],
+                'excerpt' => trim($_POST['excerpt'] ?? ''),
+                'categories' => $categoriesValue,
+                'tags' => $tagsValue,
+                'featured_image' => trim($_POST['featured_image'] ?? ''),
                 'status' => $_POST['status'],
                 'published_at' => $_POST['status'] === 'published' ? date('Y-m-d H:i:s') : null,
-                'meta_title' => $_POST['meta_title'],
-                'meta_description' => $_POST['meta_description']
+                'meta_title' => trim($_POST['meta_title'] ?? ''),
+                'meta_description' => trim($_POST['meta_description'] ?? '')
             ];
             
-            $db->update('blog_posts', $postId, $updateData);
+            $db->update('blog_posts', $updateData, 'id = ?', [$postId]);
+            
+            // Sync to JSON file for frontend
+            require_once 'sync_blog_json.php';
+            syncBlogPostsToJson();
+            
             $success = "Blog post updated successfully!";
         }
         
         if (isset($_POST['delete_post'])) {
             $postId = $_POST['post_id'];
-            $db->delete('blog_posts', $postId);
+            $db->delete('blog_posts', 'id = ?', [$postId]);
+            
+            // Sync to JSON file for frontend
+            require_once 'sync_blog_json.php';
+            syncBlogPostsToJson();
+            
             $success = "Blog post deleted successfully!";
         }
         
@@ -77,8 +112,21 @@ if ($_POST) {
 
 // Get blog posts data
 try {
-    $db = JsonDatabase::getInstance();
+    $db = Database::getInstance();
     $allPosts = $db->getData('blog_posts');
+    
+    // Decode JSON fields if using MySQL
+    if (!$db->isUsingJson()) {
+        foreach ($allPosts as &$post) {
+            if (isset($post['categories']) && is_string($post['categories'])) {
+                $post['categories'] = json_decode($post['categories'], true) ?: [];
+            }
+            if (isset($post['tags']) && is_string($post['tags'])) {
+                $post['tags'] = json_decode($post['tags'], true) ?: [];
+            }
+        }
+        unset($post); // Break reference
+    }
     
     // Sort by created_at descending
     usort($allPosts, function($a, $b) {

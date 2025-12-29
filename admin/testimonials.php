@@ -4,7 +4,7 @@
  * Manage client testimonials and reviews
  */
 
-require_once '../config/database_json.php';
+require_once '../config/database.php';
 
 // Check authentication
 if (session_status() === PHP_SESSION_NONE) {
@@ -22,7 +22,7 @@ $error = '';
 // Handle form submissions
 if ($_POST) {
     try {
-        $db = JsonDatabase::getInstance();
+        $db = Database::getInstance();
         
         if (isset($_POST['create_testimonial'])) {
             $testimonialData = [
@@ -73,7 +73,7 @@ if ($_POST) {
 
 // Get testimonials data
 try {
-    $db = JsonDatabase::getInstance();
+    $db = Database::getInstance();
     $allTestimonials = $db->getData('testimonials');
     
     // Sort by created_at descending

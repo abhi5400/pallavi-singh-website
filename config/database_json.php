@@ -139,6 +139,35 @@ class JsonDatabase {
     }
     
     /**
+     * Delete records
+     */
+    public function delete($table, $where, $params = []) {
+        $records = $this->getData($table);
+        
+        // Extract ID from where clause (e.g., "id = ?" with params)
+        $id = null;
+        if (preg_match('/id\s*=\s*\?/', $where) && !empty($params)) {
+            $id = $params[0];
+        } elseif (preg_match('/id\s*=\s*(\d+)/', $where, $matches)) {
+            $id = $matches[1];
+        }
+        
+        if ($id === null) {
+            throw new Exception("Could not extract ID from where clause for JSON database delete");
+        }
+        
+        // Filter out the record with matching ID
+        $filteredRecords = array_filter($records, function($record) use ($id) {
+            return $record['id'] != $id;
+        });
+        
+        // Re-index array
+        $filteredRecords = array_values($filteredRecords);
+        
+        return $this->saveData($table, $filteredRecords);
+    }
+    
+    /**
      * Get client IP address
      */
     public static function getClientIP() {

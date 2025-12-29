@@ -4,7 +4,7 @@
  * Manage "Join Now" form submissions
  */
 
-require_once '../config/database_json.php';
+require_once '../config/database.php';
 
 // Check authentication
 if (session_status() === PHP_SESSION_NONE) {
@@ -22,7 +22,7 @@ $error = '';
 // Handle form submissions
 if ($_POST) {
     try {
-        $db = JsonDatabase::getInstance();
+        $db = Database::getInstance();
         
         if (isset($_POST['update_join'])) {
             $joinId = $_POST['join_id'];
@@ -42,7 +42,7 @@ if ($_POST) {
 
 // Get join submissions data
 try {
-    $db = JsonDatabase::getInstance();
+    $db = Database::getInstance();
     $allJoins = $db->getData('join_submissions');
     
     // Sort by submission_date descending

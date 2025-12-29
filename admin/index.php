@@ -4,7 +4,7 @@
  * Routes to appropriate admin pages
  */
 
-require_once '../config/database_json.php';
+require_once '../config/database.php';
 
 // Start session
 if (session_status() === PHP_SESSION_NONE) {

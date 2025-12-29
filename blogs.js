@@ -1,4 +1,4 @@
-// document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', async () => {
 	const grid = document.getElementById('blogGrid');
 	if (!grid) return;
 
@@ -17,7 +17,7 @@
 		}
 
 		grid.innerHTML = '';
-		published.slice(0, 6).forEach(post => {
+		published.forEach(post => {
 			const card = document.createElement('article');
 			card.className = 'blog-card';
 			const imgSrc = (post.featured_image && post.featured_image.trim()) ? post.featured_image : 'assets/images/pallavi-logo.png';
@@ -41,6 +41,5 @@
 		console.error('Error loading blogs:', err);
 		grid.innerHTML = '<p>Unable to load articles right now.</p>';
 	}
-// });
-
+});
 

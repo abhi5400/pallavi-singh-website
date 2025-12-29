@@ -87,24 +87,24 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 <body>
     <div class="login-container fade-in">
         <div class="login-header">
-            <h2>🔐 Admin Login</h2>
+            <h2>Admin Login</h2>
             <p>Access your coaching dashboard</p>
         </div>
         
         <?php if ($error): ?>
-            <div class="error">⚠️ <?php echo htmlspecialchars($error); ?></div>
+            <div class="error"><?php echo htmlspecialchars($error); ?></div>
         <?php endif; ?>
         
         <form method="POST">
             <div class="form-group">
-                <label for="username">👤 Username:</label>
+                <label for="username">Username</label>
                 <input type="text" id="username" name="username" required placeholder="Enter your username" value="<?php echo htmlspecialchars($_POST['username'] ?? ''); ?>">
             </div>
             <div class="form-group">
-                <label for="password">🔒 Password:</label>
+                <label for="password">Password</label>
                 <input type="password" id="password" name="password" required placeholder="Enter your password">
             </div>
-            <button type="submit">🚀 Login to Dashboard</button>
+            <button type="submit">Sign In</button>
         </form>
         
         <div class="login-footer">

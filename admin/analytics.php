@@ -4,7 +4,7 @@
  * View detailed analytics and reports
  */
 
-require_once '../config/database_json.php';
+require_once '../config/database.php';
 
 // Check authentication
 if (session_status() === PHP_SESSION_NONE) {
@@ -18,7 +18,7 @@ if (!isset($_SESSION['admin_logged_in'])) {
 
 // Get analytics data
 try {
-    $db = JsonDatabase::getInstance();
+    $db = Database::getInstance();
     
     // Get counts
     $contactCount = $db->count('contact_submissions');

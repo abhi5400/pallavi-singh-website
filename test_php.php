@@ -6,7 +6,7 @@ echo "Current directory: " . getcwd() . "<br>";
 
 // Test database class
 try {
-    require_once 'config/database_json.php';
+    require_once 'config/database.php';
     echo "Database class loaded successfully<br>";
     
     $db = Database::getInstance();

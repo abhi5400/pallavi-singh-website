@@ -50,26 +50,26 @@ ob_start();
 
 <?php if (isset($error)): ?>
     <div class="error-message fade-in">
-        ⚠️ <?php echo htmlspecialchars($error); ?>
+        <?php echo htmlspecialchars($error); ?>
     </div>
 <?php endif; ?>
 
 <!-- Stats Overview -->
 <div class="dashboard-stats fade-in">
     <div class="stat-card">
-        <div class="stat-icon">📧</div>
+        <div class="stat-icon"><i class="fas fa-envelope"></i></div>
         <div class="stat-number"><?php echo $contactCount; ?></div>
         <div class="stat-label">Contact Submissions</div>
         <div class="stat-change positive">+<?php echo $todayContacts; ?> today</div>
     </div>
     <div class="stat-card">
-        <div class="stat-icon">🌟</div>
+        <div class="stat-icon"><i class="fas fa-handshake"></i></div>
         <div class="stat-number"><?php echo $joinCount; ?></div>
         <div class="stat-label">Join Submissions</div>
         <div class="stat-change positive">+<?php echo $todayJoins; ?> today</div>
     </div>
     <div class="stat-card">
-        <div class="stat-icon">📬</div>
+        <div class="stat-icon"><i class="fas fa-newspaper"></i></div>
         <div class="stat-number"><?php echo $newsletterCount; ?></div>
         <div class="stat-label">Newsletter Subscribers</div>
         <div class="stat-change">Growing community</div>
@@ -78,22 +78,22 @@ ob_start();
 
 <!-- Quick Actions -->
 <div class="quick-actions fade-in">
-    <h3>🚀 Quick Actions</h3>
+    <h3>Quick Actions</h3>
     <div class="action-buttons">
         <a href="contact-forms.php" class="action-btn">
-            <div class="action-icon">📧</div>
+            <div class="action-icon"><i class="fas fa-envelope"></i></div>
             <div class="action-text">View Contacts</div>
         </a>
         <a href="users.php" class="action-btn">
-            <div class="action-icon">👥</div>
+            <div class="action-icon"><i class="fas fa-users"></i></div>
             <div class="action-text">View Submissions</div>
         </a>
         <a href="analytics.php" class="action-btn">
-            <div class="action-icon">📈</div>
+            <div class="action-icon"><i class="fas fa-chart-line"></i></div>
             <div class="action-text">View Analytics</div>
         </a>
         <a href="settings.php" class="action-btn">
-            <div class="action-icon">⚙️</div>
+            <div class="action-icon"><i class="fas fa-cog"></i></div>
             <div class="action-text">Settings</div>
         </a>
     </div>
@@ -103,7 +103,7 @@ ob_start();
 <div class="dashboard-grid">
     <div class="dashboard-widget fade-in">
         <div class="widget-header">
-            <h3>📧 Recent Contact Submissions</h3>
+            <h3>Recent Contact Submissions</h3>
             <a href="contact-forms.php" class="widget-link">View All</a>
         </div>
         <div class="widget-content">
@@ -111,7 +111,7 @@ ob_start();
                 <div class="activity-list">
                     <?php foreach ($recentContacts as $contact): ?>
                     <div class="activity-item">
-                        <div class="activity-icon">📧</div>
+                        <div class="activity-icon"><i class="fas fa-envelope"></i></div>
                         <div class="activity-content">
                             <div class="activity-title"><?php echo htmlspecialchars($contact['name']); ?></div>
                             <div class="activity-subtitle"><?php echo htmlspecialchars($contact['email']); ?></div>
@@ -128,7 +128,7 @@ ob_start();
                 </div>
             <?php else: ?>
                 <div class="empty-widget">
-                    <div class="empty-icon">📭</div>
+                    <div class="empty-icon"><i class="fas fa-inbox"></i></div>
                     <div class="empty-text">No contact submissions yet</div>
                 </div>
             <?php endif; ?>
@@ -137,7 +137,7 @@ ob_start();
     
     <div class="dashboard-widget fade-in">
         <div class="widget-header">
-            <h3>🌟 Recent Join Submissions</h3>
+            <h3>Recent Join Submissions</h3>
             <a href="users.php" class="widget-link">View All</a>
         </div>
         <div class="widget-content">
@@ -145,7 +145,7 @@ ob_start();
                 <div class="activity-list">
                     <?php foreach ($recentJoins as $join): ?>
                     <div class="activity-item">
-                        <div class="activity-icon">🌟</div>
+                        <div class="activity-icon"><i class="fas fa-handshake"></i></div>
                         <div class="activity-content">
                             <div class="activity-title"><?php echo htmlspecialchars($join['full_name']); ?></div>
                             <div class="activity-subtitle"><?php echo htmlspecialchars($join['email']); ?></div>
@@ -162,7 +162,7 @@ ob_start();
                 </div>
             <?php else: ?>
                 <div class="empty-widget">
-                    <div class="empty-icon">🌟</div>
+                    <div class="empty-icon"><i class="fas fa-clipboard-list"></i></div>
                     <div class="empty-text">No join submissions yet</div>
                 </div>
             <?php endif; ?>
@@ -171,7 +171,7 @@ ob_start();
     
     <div class="dashboard-widget fade-in">
         <div class="widget-header">
-            <h3>📊 Analytics Overview</h3>
+            <h3>Analytics Overview</h3>
             <a href="analytics.php" class="widget-link">View Details</a>
         </div>
         <div class="widget-content">
@@ -204,59 +204,67 @@ ob_start();
 
 .stat-card {
     background: white;
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-    text-align: center;
-    transition: all 0.3s ease;
-    border-left: 4px solid #1A535C;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    text-align: left;
+    transition: box-shadow 0.2s ease;
+    border: 1px solid #e2e8f0;
+    border-left: 3px solid #4299e1;
 }
 
 .stat-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
 .stat-icon {
-    font-size: 2.5em;
-    margin-bottom: 15px;
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+    color: #4299e1;
+}
+
+.stat-icon i {
+    font-size: 1.5rem;
 }
 
 .stat-number {
-    font-size: 2.5em;
-    font-weight: 800;
-    color: #1A535C;
-    margin-bottom: 5px;
+    font-size: 2rem;
+    font-weight: 600;
+    color: #1a202c;
+    margin-bottom: 4px;
 }
 
 .stat-label {
-    color: #666;
+    color: #718096;
+    font-size: 0.875rem;
     font-weight: 500;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .stat-change {
-    font-size: 0.9em;
-    color: #4ECDC4;
-    font-weight: 600;
+    font-size: 0.875rem;
+    color: #48bb78;
+    font-weight: 500;
 }
 
 .stat-change.positive {
-    color: #28a745;
+    color: #48bb78;
 }
 
 .quick-actions {
     background: white;
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-    margin-bottom: 30px;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border: 1px solid #e2e8f0;
+    margin-bottom: 24px;
 }
 
 .quick-actions h3 {
-    color: #1A535C;
-    margin-bottom: 20px;
-    font-size: 1.3em;
+    color: #1a202c;
+    margin-bottom: 16px;
+    font-size: 1.25rem;
+    font-weight: 600;
 }
 
 .action-buttons {
@@ -270,27 +278,32 @@ ob_start();
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    background: #f8f9fa;
-    border-radius: 10px;
+    background: #f7fafc;
+    border-radius: 6px;
     text-decoration: none;
-    color: #333;
-    transition: all 0.3s ease;
+    color: #2d3748;
+    transition: all 0.2s ease;
+    border: 1px solid #e2e8f0;
 }
 
 .action-btn:hover {
-    background: #1A535C;
+    background: #4299e1;
     color: white;
-    transform: translateY(-3px);
+    border-color: #4299e1;
 }
 
 .action-icon {
-    font-size: 2em;
-    margin-bottom: 10px;
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+}
+
+.action-icon i {
+    font-size: 1.5rem;
 }
 
 .action-text {
-    font-weight: 600;
-    font-size: 0.9em;
+    font-weight: 500;
+    font-size: 0.875rem;
 }
 
 .dashboard-grid {
@@ -301,30 +314,33 @@ ob_start();
 
 .dashboard-widget {
     background: white;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border: 1px solid #e2e8f0;
     overflow: hidden;
 }
 
 .widget-header {
-    padding: 20px 25px;
-    border-bottom: 1px solid #f0f0f0;
+    padding: 16px 20px;
+    border-bottom: 1px solid #e2e8f0;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background: #f7fafc;
 }
 
 .widget-header h3 {
-    color: #1A535C;
-    font-size: 1.2em;
+    color: #1a202c;
+    font-size: 1rem;
+    font-weight: 600;
     margin: 0;
 }
 
 .widget-link {
-    color: #4ECDC4;
+    color: #4299e1;
     text-decoration: none;
-    font-size: 0.9em;
-    font-weight: 600;
+    font-size: 0.875rem;
+    font-weight: 500;
 }
 
 .widget-link:hover {
@@ -344,28 +360,33 @@ ob_start();
 .activity-item {
     display: flex;
     align-items: center;
-    gap: 15px;
-    padding: 15px;
-    background: #f8f9fa;
-    border-radius: 10px;
-    transition: all 0.3s ease;
+    gap: 12px;
+    padding: 12px;
+    background: #f7fafc;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+    border: 1px solid #e2e8f0;
 }
 
 .activity-item:hover {
-    background: #e9ecef;
-    transform: translateX(5px);
+    background: #edf2f7;
 }
 
 .activity-icon {
-    font-size: 1.5em;
-    width: 40px;
-    height: 40px;
+    font-size: 1rem;
+    width: 36px;
+    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
     background: white;
     border-radius: 50%;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border: 1px solid #e2e8f0;
+    color: #4299e1;
+}
+
+.activity-icon i {
+    font-size: 1rem;
 }
 
 .activity-content {
@@ -395,25 +416,25 @@ ob_start();
 
 .status-badge {
     padding: 4px 12px;
-    border-radius: 15px;
-    font-size: 0.8em;
+    border-radius: 4px;
+    font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
 }
 
 .status-badge.new {
-    background: #e3f2fd;
-    color: #1976d2;
+    background: #ebf8ff;
+    color: #2c5282;
 }
 
 .status-badge.pending {
-    background: #fff3e0;
-    color: #f57c00;
+    background: #fffaf0;
+    color: #c05621;
 }
 
 .status-badge.completed {
-    background: #e8f5e8;
-    color: #388e3c;
+    background: #f0fff4;
+    color: #22543d;
 }
 
 .empty-widget {
@@ -423,9 +444,14 @@ ob_start();
 }
 
 .empty-icon {
-    font-size: 3em;
-    margin-bottom: 15px;
-    opacity: 0.5;
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+    opacity: 0.4;
+    color: #a0aec0;
+}
+
+.empty-icon i {
+    font-size: 2.5rem;
 }
 
 .empty-text {
@@ -442,9 +468,10 @@ ob_start();
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px;
-    background: #f8f9fa;
-    border-radius: 10px;
+    padding: 12px;
+    background: #f7fafc;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
 }
 
 .analytics-label {
@@ -453,19 +480,20 @@ ob_start();
 }
 
 .analytics-value {
-    color: #1A535C;
-    font-weight: 700;
-    font-size: 1.2em;
+    color: #1a202c;
+    font-weight: 600;
+    font-size: 1.125rem;
 }
 
 .error-message {
-    background: linear-gradient(135deg, #ffebee, #ffcdd2);
-    color: #c62828;
-    padding: 15px 20px;
-    border-radius: 10px;
+    background: #fed7d7;
+    color: #c53030;
+    padding: 12px 16px;
+    border-radius: 6px;
     margin-bottom: 20px;
-    border-left: 4px solid #f44336;
+    border-left: 4px solid #e53e3e;
     font-weight: 500;
+    font-size: 0.875rem;
 }
 
 @media (max-width: 768px) {

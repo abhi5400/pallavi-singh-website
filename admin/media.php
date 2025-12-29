@@ -4,7 +4,7 @@
  * Manage images, documents, and media files
  */
 
-require_once '../config/database_json.php';
+require_once '../config/database.php';
 
 // Check authentication
 if (session_status() === PHP_SESSION_NONE) {
@@ -76,7 +76,7 @@ if ($_POST) {
 
 // Get media data
 try {
-    $db = JsonDatabase::getInstance();
+    $db = Database::getInstance();
     $allMedia = $db->getData('media_library');
     
     // Generate URLs for media files

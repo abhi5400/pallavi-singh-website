@@ -138,6 +138,19 @@ class Database {
     }
     
     /**
+     * Get data from table (compatibility method for JsonDatabase)
+     */
+    public function getData($table) {
+        if ($this->useJson) {
+            return $this->jsonDb->getData($table);
+        }
+        
+        $sql = "SELECT * FROM {$table}";
+        $stmt = $this->query($sql, []);
+        return $stmt->fetchAll();
+    }
+    
+    /**
      * Select data
      */
     public function select($table, $where = '', $params = [], $orderBy = '', $limit = '') {

@@ -4,7 +4,7 @@
  * Manage contact form submissions
  */
 
-require_once '../config/database_json.php';
+require_once '../config/database.php';
 
 // Check authentication
 if (session_status() === PHP_SESSION_NONE) {
@@ -22,7 +22,7 @@ $error = '';
 // Handle form submissions
 if ($_POST) {
     try {
-        $db = JsonDatabase::getInstance();
+        $db = Database::getInstance();
         
         if (isset($_POST['update_contact'])) {
             $contactId = $_POST['contact_id'];
@@ -48,7 +48,7 @@ if ($_POST) {
 
 // Get contact submissions data
 try {
-    $db = JsonDatabase::getInstance();
+    $db = Database::getInstance();
     $allContacts = $db->getData('contact_submissions');
     
     // Sort by submission_date descending

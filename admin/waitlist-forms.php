@@ -4,7 +4,7 @@
  * Manage waitlist subscriptions and notifications
  */
 
-require_once '../config/database_json.php';
+require_once '../config/database.php';
 
 // Check authentication
 if (session_status() === PHP_SESSION_NONE) {
@@ -22,7 +22,7 @@ $error = '';
 // Handle form submissions
 if ($_POST) {
     try {
-        $db = JsonDatabase::getInstance();
+        $db = Database::getInstance();
         
         if (isset($_POST['update_waitlist'])) {
             $waitlistId = $_POST['waitlist_id'];
@@ -48,7 +48,7 @@ if ($_POST) {
 
 // Get waitlist submissions data
 try {
-    $db = JsonDatabase::getInstance();
+    $db = Database::getInstance();
     $allWaitlist = $db->getData('waitlist_subscriptions') ?: [];
     
     // Sort by submission_date descending

@@ -4,7 +4,7 @@
  * Manage workshops, events, and sessions
  */
 
-require_once '../config/database_json.php';
+require_once '../config/database.php';
 
 // Check authentication
 if (session_status() === PHP_SESSION_NONE) {
@@ -22,7 +22,7 @@ $error = '';
 // Handle form submissions
 if ($_POST) {
     try {
-        $db = JsonDatabase::getInstance();
+        $db = Database::getInstance();
         
         if (isset($_POST['create_event'])) {
             $eventData = [
@@ -85,7 +85,7 @@ if ($_POST) {
 
 // Get events data
 try {
-    $db = JsonDatabase::getInstance();
+    $db = Database::getInstance();
     $allEvents = $db->getData('events');
     
     // Sort by date ascending
