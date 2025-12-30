@@ -159,6 +159,47 @@
             flex-direction: row !important;
         }
         
+        .story-block-centered {
+            justify-content: center;
+            min-height: auto;
+        }
+        
+        .story-text-centered {
+            flex: 1;
+            max-width: 800px;
+            text-align: center;
+        }
+        
+        .story-text-centered h2 {
+            text-align: center;
+        }
+        
+        .story-text-centered h2::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .btn-begin-journey {
+            display: inline-block;
+            padding: 14px 40px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #1A535C, #2d7a8a);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(26, 83, 92, 0.3);
+        }
+        
+        .btn-begin-journey:hover {
+            background: linear-gradient(135deg, #2d7a8a, #1A535C);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(26, 83, 92, 0.4);
+            color: white;
+        }
+        
         .about-me-block {
             flex-direction: row !important;
         }
@@ -282,6 +323,19 @@
                 align-items: center;
                 gap: 40px;
                 min-height: auto;
+            }
+            
+            .story-block-centered {
+                justify-content: center;
+            }
+            
+            .story-text-centered {
+                max-width: 100%;
+            }
+            
+            .btn-begin-journey {
+                padding: 12px 30px;
+                font-size: 1.1rem;
             }
             
             .about-me-block {
@@ -883,7 +937,7 @@
                 </li>
                 <li><a href="https://abhi5400.github.io/thestorytree/" class="nav-link">The Story Tree</a></li>
                 <li><a href="wisdom-vault.html" class="nav-link">Wisdom Vault</a></li>
-                <li><a href="collaborate.html" class="nav-link">Collaborate</a></li>
+                <li><a href="collaborate.html" class="nav-link">Media Coverage</a></li>
                 <li><a href="connect.html" class="nav-link">Connect</a></li>
             </ul>
             <div class="hamburger">
@@ -1006,7 +1060,7 @@
                 </div>
                 <div class="story-image-wrapper-about">
                     <div class="story-image">
-                        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1000&q=80" alt="Public speaking and presentation" class="story-img">
+                        <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1000&q=80" alt="Public speaking and communication" class="story-img">
                     </div>
                 </div>
             </div>
@@ -1030,15 +1084,12 @@
             </div>
 
             <!-- Let's Begin the Journey -->
-            <div class="story-block">
-                <div class="story-text">
+            <div class="story-block story-block-centered">
+                <div class="story-text story-text-centered">
                     <h2>Let's Begin the Journey</h2>
                     <p>If you're ready to break free from what holds you back and step into your truest, strongest, and most authentic self, I invite you to begin this journey with me. Together, we won't just shape your path—we'll shape your story.</p>
-                    <p style="text-align: center; font-size: 1.2rem; font-weight: 600; color: #1A535C; margin-top: 30px;">Let's begin.</p>
-                </div>
-                <div class="story-image-wrapper-about">
-                    <div class="story-image">
-                        <img src="assets/images/image 3.jpg" alt="Let's Begin the Journey" class="story-img">
+                    <div style="text-align: center; margin-top: 30px;">
+                        <a href="connect.html#contact-form" class="btn btn-primary btn-begin-journey">Let's begin</a>
                     </div>
                 </div>
             </div>

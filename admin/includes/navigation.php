@@ -19,6 +19,9 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         </div>
         
         <div class="nav-menu">
+            <a href="../index.html" class="nav-link" target="_blank" title="View Main Website">
+                🏠 Home
+            </a>
             <a href="dashboard.php" class="nav-link <?php echo $currentPage === 'dashboard.php' ? 'active' : ''; ?>">
                 📊 Dashboard
             </a>

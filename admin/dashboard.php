@@ -80,6 +80,10 @@ ob_start();
 <div class="quick-actions fade-in">
     <h3>Quick Actions</h3>
     <div class="action-buttons">
+        <a href="../index.html" class="action-btn" target="_blank">
+            <div class="action-icon"><i class="fas fa-home"></i></div>
+            <div class="action-text">View Website</div>
+        </a>
         <a href="contact-forms.php" class="action-btn">
             <div class="action-icon"><i class="fas fa-envelope"></i></div>
             <div class="action-text">View Contacts</div>
