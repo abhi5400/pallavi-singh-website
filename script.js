@@ -408,36 +408,40 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Dropdown menu functionality
+// Dropdown menu functionality - works on both desktop and mobile
 document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
     toggle.addEventListener('click', (e) => {
         e.preventDefault();
+        e.stopPropagation();
         const dropdown = toggle.closest('.nav-dropdown');
         const dropdownMenu = dropdown.querySelector('.dropdown-menu');
         
         // Close other dropdowns
-        document.querySelectorAll('.dropdown-menu').forEach(menu => {
-            if (menu !== dropdownMenu) {
-                menu.style.display = 'none';
+        document.querySelectorAll('.nav-dropdown').forEach(dd => {
+            if (dd !== dropdown) {
+                dd.classList.remove('active');
             }
         });
         
         // Toggle current dropdown
-        if (dropdownMenu.style.display === 'block') {
-            dropdownMenu.style.display = 'none';
-        } else {
-            dropdownMenu.style.display = 'block';
-        }
+        dropdown.classList.toggle('active');
     });
 });
 
 // Close dropdown when clicking outside
 document.addEventListener('click', (e) => {
     if (!e.target.closest('.nav-dropdown')) {
-        document.querySelectorAll('.dropdown-menu').forEach(menu => {
-            menu.style.display = 'none';
+        document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+            dropdown.classList.remove('active');
         });
     }
+});
+
+// Prevent dropdown from closing when clicking inside it
+document.querySelectorAll('.dropdown-menu').forEach(menu => {
+    menu.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
 });
 
 // Enhanced smooth scrolling for internal elements

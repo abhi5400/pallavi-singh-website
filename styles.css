@@ -608,9 +608,21 @@ body:has(.coming-soon-section) .footer {
     display: none;
     list-style: none;
     margin: 0;
+    z-index: 1001;
 }
 
-.nav-dropdown:hover .dropdown-menu {
+/* Desktop hover effect */
+@media (hover: hover) and (pointer: fine) {
+    .nav-dropdown:hover .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        display: block;
+    }
+}
+
+/* Mobile/Tablet active state */
+.nav-dropdown.active .dropdown-menu {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
@@ -3986,6 +3998,39 @@ body:has(.coming-soon-section) .footer {
     .nav-menu li {
         margin: 10px 0;
     }
+    
+    /* Mobile dropdown styles */
+    .nav-dropdown {
+        position: relative;
+        width: 100%;
+    }
+    
+    .dropdown-menu {
+        position: static !important;
+        display: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        box-shadow: none;
+        background: #f8f9fa;
+        margin-top: 10px;
+        border-radius: 0;
+        padding: 0;
+        width: 100%;
+    }
+    
+    .nav-dropdown.active .dropdown-menu {
+        display: block !important;
+    }
+    
+    .dropdown-item {
+        padding: 12px 20px;
+        border-bottom: 1px solid #e2e8f0;
+    }
+    
+    .dropdown-item:last-child {
+        border-bottom: none;
+    }
 
     .hero-title {
         font-size: 3.5rem;
@@ -4512,6 +4557,37 @@ body:has(.coming-soon-section) .footer {
     flex-wrap: wrap;
     margin-top: 32px;
     padding: 0 20px;
+}
+
+/* Position hero content at bottom for all banners */
+.service-hero-content-bottom,
+.dedicated-hero-content-bottom {
+    position: absolute !important;
+    bottom: 20px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 100% !important;
+    max-width: 800px !important;
+    padding: 0 20px !important;
+}
+
+.service-hero--coaching,
+.dedicated-hero--habit-mastery,
+.dedicated-hero--storytelling,
+.dedicated-hero--overcome-anxiety,
+.dedicated-hero--relationship-mentoring,
+.dedicated-hero--public-speaking,
+.dedicated-hero--wisdom-vault,
+.dedicated-hero--media-coverage,
+.dedicated-hero:not(.dedicated-hero--contact) {
+    position: relative !important;
+    align-items: flex-end !important;
+    justify-content: center !important;
+}
+
+/* Special handling for contact page - keep its existing styling but add bottom positioning */
+.dedicated-hero--contact .dedicated-hero-content-bottom {
+    bottom: 80px !important;
 }
 
 .dedicated-hero .btn {

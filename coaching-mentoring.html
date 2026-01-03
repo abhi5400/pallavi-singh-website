@@ -177,6 +177,23 @@
                 font-size: 1rem;
             }
         }
+        
+        /* Position hero content at bottom */
+        .service-hero-content-bottom {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .service-hero--coaching {
+            position: relative;
+            align-items: flex-end;
+            justify-content: center;
+        }
     </style>
 </head>
 <body>
@@ -215,9 +232,8 @@
 
     <!-- Hero Section -->
     <section class="service-hero service-hero--coaching">
-        <div class="service-hero-content">
+        <div class="service-hero-content service-hero-content-bottom">
             <h1>Personalized Coaching That Transforms You</h1>
-            <p class="hero-subtitle">One-on-one sessions designed to help you overcome challenges, gain clarity, and achieve your goals with confidence.</p>
             <div class="hero-buttons">
                 <a href="#contact" class="btn btn-primary">Book a Session</a>
                 <a href="#learn-more" class="btn btn-secondary">Learn More</a>
