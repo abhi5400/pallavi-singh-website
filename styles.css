@@ -3997,12 +3997,45 @@ body:has(.coming-soon-section) .footer {
 
     .nav-menu li {
         margin: 10px 0;
+        width: 100%;
+        text-align: center;
+    }
+    
+    /* Mobile nav links - ensure center alignment and clickability */
+    .nav-menu .nav-link {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 12px 20px;
+        pointer-events: auto;
+        cursor: pointer;
+    }
+    
+    .nav-menu .nav-link::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .nav-menu .nav-link:hover::after {
+        width: 80%;
+        left: 50%;
+        transform: translateX(-50%);
     }
     
     /* Mobile dropdown styles */
     .nav-dropdown {
         position: relative;
         width: 100%;
+        text-align: center;
+    }
+    
+    .nav-dropdown .dropdown-toggle {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 12px 20px;
+        pointer-events: auto;
+        cursor: pointer;
     }
     
     .dropdown-menu {
@@ -4026,6 +4059,9 @@ body:has(.coming-soon-section) .footer {
     .dropdown-item {
         padding: 12px 20px;
         border-bottom: 1px solid #e2e8f0;
+        text-align: center;
+        display: block;
+        width: 100%;
     }
     
     .dropdown-item:last-child {
