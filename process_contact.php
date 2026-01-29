@@ -27,6 +27,19 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $response = ['success' => false, 'message' => ''];
 
 try {
+    // Honeypot: reject if bot filled the hidden field
+    if (!empty(trim($_POST['website_url'] ?? ''))) {
+        echo json_encode(['success' => true, 'message' => 'Thank you for your message. We will get back to you soon.']);
+        exit;
+    }
+    // Header injection prevention: reject if any field contains newlines
+    $rawFields = ['name' => $_POST['name'] ?? '', 'email' => $_POST['email'] ?? '', 'subject' => $_POST['subject'] ?? '', 'message' => $_POST['message'] ?? ''];
+    foreach ($rawFields as $val) {
+        if (preg_match('/[\r\n]/', (string) $val)) {
+            echo json_encode(['success' => false, 'message' => 'Invalid input. Please try again.']);
+            exit;
+        }
+    }
     // Get and sanitize form data
     $name = Database::sanitizeInput($_POST['name'] ?? '');
     $email = Database::sanitizeInput($_POST['email'] ?? '');
@@ -101,8 +114,7 @@ try {
     error_log("Contact form error: " . $e->getMessage());
     error_log("Contact form error trace: " . $e->getTraceAsString());
     $response['message'] = 'An error occurred while sending your message. Please try again.';
-    $response['debug'] = $e->getMessage(); // Enable for debugging
-    $response['trace'] = $e->getTraceAsString(); // Enable for debugging
+    // Production: never expose debug or stack trace in response
 }
 
 echo json_encode($response);

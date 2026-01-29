@@ -7,27 +7,31 @@
     <meta name="description" content="Transform your life through personalized coaching, storytelling, and mentorship with Pallavi Singh. Discover your authentic voice and create lasting change.">
     <meta name="author" content="Pallavi Singh">
     
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HZM0K6N3WG"></script>
+    <!-- Google Analytics - gated by cookie consent -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-HZM0K6N3WG');
+      if (localStorage.getItem('ps_cookie_consent') === '1') {
+        var s = document.createElement('script'); s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=G-HZM0K6N3WG';
+        document.head.appendChild(s);
+        s.onload = function() { gtag('js', new Date()); gtag('config', 'G-HZM0K6N3WG'); };
+      }
+      function acceptCookies() { localStorage.setItem('ps_cookie_consent', '1'); var s = document.createElement('script'); s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=G-HZM0K6N3WG'; document.head.appendChild(s); s.onload = function() { gtag('js', new Date()); gtag('config', 'G-HZM0K6N3WG'); }; document.getElementById('cookie-notice') && (document.getElementById('cookie-notice').style.display = 'none'); }
     </script>
     
     <!-- Open Graph Meta Tags -->   
     <meta property="og:title" content="Pallavi Singh - Life Coach & Storyteller" />
     <meta property="og:description" content="Transform your life through personalized coaching, storytelling, and mentorship with Pallavi Singh." />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="assets/images/pallavi-logo.png" />
+    <meta property="og:image" content="https://pallavisingofficial.com/assets/images/Pallavi%20Singh%20official.png" />
     
     
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Pallavi Singh  - Life Coach & Storyteller" />
     <meta name="twitter:description" content="Transform your life through personalized coaching, storytelling, and mentorship with Pallavi Singh." />
-    <meta name="twitter:image" content="assets/images/pallavi-logo.png" />
+    <meta name="twitter:image" content="https://pallavisingofficial.com/assets/images/Pallavi%20Singh%20official.png" />
+    <link rel="canonical" href="https://pallavisingofficial.com/index.html" />
     
     <!-- Favicon -->
 
@@ -38,8 +42,12 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800;900&family=Merriweather:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Person","name":"Pallavi Singh","url":"https://pallavisingofficial.com","image":"https://pallavisingofficial.com/assets/images/Pallavi%20Singh%20official.png","jobTitle":"Life Coach & Storyteller","description":"Transform your life through personalized coaching, storytelling, and mentorship with Pallavi Singh.","sameAs":["https://www.instagram.com/lifecoachandstorytellerpallavi/","https://thestorytree.in"]}
+    </script>
 </head>
 <body class="home-page">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <script>
         (function(){
             try {
@@ -55,7 +63,7 @@
     <!-- Live Server notice: forms need PHP -->
     <div id="php-server-notice" style="display:none; position:fixed; top:0; left:0; right:0; z-index:9999; background:#1A535C; color:#fff; padding:10px 16px; text-align:center; font-size:14px; box-shadow:0 2px 8px rgba(0,0,0,0.2);">
         <span>Forms (Join, Contact, etc.) need a PHP server. </span>
-        <strong>Double-click <code style="background:rgba(255,255,255,0.2); padding:2px 6px;">start_server.bat</code></strong> in your project folder, then use <a href="http://localhost:8000" style="color:#4ECDC4;">http://localhost:8000</a>
+        run a PHP server (e.g. <code style="background:rgba(255,255,255,0.2); padding:2px 6px;">php -S localhost:8000</code>) and open <a href="http://localhost:8000" style="color:#4ECDC4;">http://localhost:8000</a>
         <button type="button" onclick="this.parentElement.style.display='none'; try{ localStorage.setItem('ps_php_notice_dismiss','1'); }catch(e){}" style="margin-left:12px; background:rgba(255,255,255,0.2); border:none; color:#fff; padding:4px 10px; cursor:pointer; border-radius:4px;">Dismiss</button>
     </div>
     <script>
@@ -95,7 +103,7 @@
     </nav>
 
     <!-- Hero Section with Video Background -->
-    <section id="hero" class="hero page-section">
+    <section id="hero" class="hero page-section" aria-label="Hero">
         <!-- Video Background -->
         <div class="hero-video-container">
             <video class="hero-video" autoplay muted loop playsinline>
@@ -138,19 +146,23 @@
     </section>
 
     <!-- Join Now Registration Form Modal -->
-    <div id="join-form-modal" class="join-form-modal" style="display: none;">
-        <div class="modal-overlay"></div>
+    <div id="join-form-modal" class="join-form-modal" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="join-modal-title" aria-describedby="join-modal-desc">
+        <div class="modal-overlay" aria-hidden="true"></div>
         <div class="modal-container">
             <div class="modal-header">
-                <h2>Start Your Transformation Journey</h2>
-                <p>Join our community and begin your path to personal growth and authentic living.</p>
-                <button class="modal-close" type="button">
-                    <i class="fas fa-times"></i>
+                <h2 id="join-modal-title">Start Your Transformation Journey</h2>
+                <p id="join-modal-desc">Join our community and begin your path to personal growth and authentic living.</p>
+                <button class="modal-close" type="button" aria-label="Close registration form">
+                    <i class="fas fa-times" aria-hidden="true"></i>
                 </button>
             </div>
             
             <div class="form-container">
                 <form id="joinForm" class="join-form" method="POST" action="process_join.php">
+                    <div class="form-group" style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden;" aria-hidden="true">
+                        <label for="website_url">Leave blank</label>
+                        <input type="text" id="website_url" name="website_url" tabindex="-1" autocomplete="off">
+                    </div>
                     <div class="form-row">
                         <div class="form-group">
                             <label for="full_name">Full Name *</label>
@@ -198,7 +210,7 @@
                         <label class="checkbox-label">
                             <input type="checkbox" name="terms_accepted" required>
                             <span class="checkmark"></span>
-                            I agree to the <a href="#" target="_blank">Terms and Conditions</a> and <a href="#" target="_blank">Privacy Policy</a> *
+                            I agree to the <a href="terms-and-conditions.html" target="_blank" rel="noopener">Terms and Conditions</a> and <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a> *
                         </label>
                     </div>
                     
@@ -223,6 +235,7 @@
         </div>
     </div>
 
+    <main id="main-content">
     <!-- Dynamic Quotes Section -->
     <section class="quotes-section">
         <div class="container">
@@ -258,7 +271,7 @@
     <section id="about" class="about page-section">
         <div class="container">
             <div class="section-decor">
-                <img src="assets/images/decor.png" alt="Decorative Botanical Garland" class="section-decor-image">
+                <img src="assets/images/decor.png" alt="Decorative Botanical Garland" class="section-decor-image" loading="lazy">
             </div>
             <div class="section-header">
                 <h2>About Pallavi</h2>
@@ -289,7 +302,7 @@
                 </div>
                 <div class="about-image-wrapper">
                     <div class="about-image">
-                        <img src="assets/images/image 5.jpg" alt="Pallavi Singh - Life Coach" class="about-profile-img">
+                        <img src="assets/images/image 5.jpg" alt="Pallavi Singh - Life Coach" class="about-profile-img" loading="lazy">
                     </div>
                 </div>
             </div>
@@ -300,7 +313,7 @@
     <section class="professional-achievements page-section">
         <div class="container">
             <div class="section-decor">
-                <img src="assets/images/decor.png" alt="Decorative Botanical Garland" class="section-decor-image">
+                <img src="assets/images/decor.png" alt="Decorative Botanical Garland" class="section-decor-image" loading="lazy">
             </div>
             <div class="section-header">
                 <h2>Professional Achievements</h2>
@@ -317,7 +330,7 @@
                 </div>
                 <div class="achievements-image-wrapper">
                     <div class="achievements-image">
-                        <img src="assets/images/My professional achievements.JPG" alt="Pallavi Singh - Professional Achievements" class="achievements-profile-img">
+                        <img src="assets/images/My professional achievements.JPG" alt="Pallavi Singh - Professional Achievements" class="achievements-profile-img" loading="lazy">
                     </div>
                 </div>
             </div>
@@ -328,7 +341,7 @@
     <section id="services" class="services page-section">
         <div class="container">
             <div class="section-decor">
-                <img src="assets/images/decor.png" alt="Decorative Botanical Garland" class="section-decor-image">
+                <img src="assets/images/decor.png" alt="Decorative Botanical Garland" class="section-decor-image" loading="lazy">
             </div>
             <div class="section-header">
                 <h2>Services</h2>
@@ -528,7 +541,7 @@
     <section id="testimonials" class="testimonials page-section">
         <div class="container">
             <div class="section-decor">
-                <img src="assets/images/decor.png" alt="Decorative Botanical Garland" class="section-decor-image">
+                <img src="assets/images/decor.png" alt="Decorative Botanical Garland" class="section-decor-image" loading="lazy">
             </div>
             <div class="section-header">
                 <h2>Client Success Stories</h2>
@@ -616,7 +629,7 @@
     <section class="video-testimonials page-section">
         <div class="container">
             <div class="section-decor">
-                <img src="assets/images/decor.png" alt="Decorative Botanical Garland" class="section-decor-image">
+                <img src="assets/images/decor.png" alt="Decorative Botanical Garland" class="section-decor-image" loading="lazy">
             </div>
             <div class="section-header">
                 <h2>Video Testimonials</h2>
@@ -736,7 +749,7 @@
     <section class="video-feedbacks page-section">
         <div class="container">
             <div class="section-decor">
-                <img src="assets/images/decor.png" alt="Decorative Botanical Garland" class="section-decor-image">
+                <img src="assets/images/decor.png" alt="Decorative Botanical Garland" class="section-decor-image" loading="lazy">
             </div>
             <div class="section-header">
                 <h2>Client Success Stories</h2>
@@ -970,7 +983,7 @@
     <!-- Banner Section -->
     <section class="banner">
         <div class="banner-content">
-            <h1>Begin Your Healing & Transformation Today</h1>
+            <h2 class="banner-heading">Begin Your Healing & Transformation Today</h2>
             <p>Pallavi Singh is here to guide you toward peace, clarity, and confidence.<br>
                Start your journey today.</p>
             <div class="banner-buttons">
@@ -991,7 +1004,7 @@
                 <!-- Featured Article 1 -->
                 <article class="blog-card">
                     <div class="blog-image">
-                        <img src="assets/images/image 1.jpg" alt="The Power of Storytelling" class="blog-img">
+                        <img src="assets/images/image 1.jpg" alt="The Power of Storytelling" class="blog-img" loading="lazy">
                     </div>
                     <div class="blog-content">
                         <div class="blog-meta">
@@ -1007,7 +1020,7 @@
                 <!-- Featured Article 2 -->
                 <article class="blog-card">
                     <div class="blog-image">
-                        <img src="assets/images/image 2.jpg" alt="Overcoming Anxiety" class="blog-img">
+                        <img src="assets/images/image 2.jpg" alt="Overcoming Anxiety" class="blog-img" loading="lazy">
                     </div>
                     <div class="blog-content">
                         <div class="blog-meta">
@@ -1023,7 +1036,7 @@
                 <!-- Featured Article 3 -->
                 <article class="blog-card">
                     <div class="blog-image">
-                        <img src="assets/images/image 3.jpg" alt="Building Better Habits" class="blog-img">
+                        <img src="assets/images/image 3.jpg" alt="Building Better Habits" class="blog-img" loading="lazy">
                     </div>
                     <div class="blog-content">
                         <div class="blog-meta">
@@ -1037,11 +1050,12 @@
                 </article>
             </div>
             <div class="blog-cta">
-                <a href="#" class="btn btn-secondary">View All Articles</a>
+                <a href="wisdom-vault.html" class="btn btn-secondary">View All Articles</a>
             </div>
         </div>
     </section>
 
+    </main>
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -1073,15 +1087,16 @@
                 <div class="footer-section">
                     <h4>Connect</h4>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="https://www.instagram.com/lifecoachandstorytellerpallavi/" target="_blank"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.instagram.com/lifecoachandstorytellerpallavi/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="javascript:void(0)" aria-label="Facebook coming soon" title="Coming soon"><i class="fab fa-facebook"></i></a>
+                        <a href="javascript:void(0)" aria-label="LinkedIn coming soon" title="Coming soon"><i class="fab fa-linkedin"></i></a>
+                        <a href="javascript:void(0)" aria-label="YouTube coming soon" title="Coming soon"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2025 Pallavi Singh. All rights reserved.</p>
+                <p id="cookie-notice" style="margin-top:8px;font-size:0.85rem;opacity:0.9;display:block;">We use cookies for analytics. <a href="privacy-policy.html">Privacy</a>. <button type="button" onclick="acceptCookies(); return false;" style="background:transparent;border:none;color:#A8D5BA;cursor:pointer;text-decoration:underline;padding:0;">OK</button></p>
             </div>
         </div>
     </footer>
@@ -1098,6 +1113,7 @@
     <script src="blogs.js"></script>
     <script src="join-form.js"></script>
     <script>
+        (function(){ if (localStorage.getItem('ps_cookie_consent') === '1') { var n = document.getElementById('cookie-notice'); if (n) n.style.display = 'none'; } })();
         function toggleContent(contentId, button) {
             const content = document.getElementById(contentId);
             const isHidden = content.classList.contains('hidden-content') && !content.classList.contains('show');

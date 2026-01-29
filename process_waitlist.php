@@ -27,6 +27,11 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $response = ['success' => false, 'message' => ''];
 
 try {
+    // Honeypot: reject if bot filled the hidden field
+    if (!empty(trim($_POST['website_url'] ?? ''))) {
+        echo json_encode(['success' => true, 'message' => 'Thank you for joining our waitlist!']);
+        exit;
+    }
     // Get and sanitize form data
     $name = Database::sanitizeInput($_POST['name'] ?? '');
     $email = Database::sanitizeInput($_POST['email'] ?? '');

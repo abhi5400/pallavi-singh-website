@@ -22,6 +22,26 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Skip to main content - visible on focus only */
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 20px;
+    z-index: 10000;
+    padding: 12px 20px;
+    background: #1A535C;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 4px;
+    transition: top 0.2s;
+}
+.skip-link:focus {
+    top: 20px;
+    outline: 2px solid #A8D5BA;
+    outline-offset: 2px;
+}
+
 /* Container */
 .container {
     max-width: 1200px;
@@ -702,7 +722,8 @@ body:has(.coming-soon-section) .footer {
     z-index: 2;
 }
 
-.banner h1 {
+.banner h1,
+.banner h2.banner-heading {
     font-size: 48px;
     margin: 0 0 20px 0;
     font-weight: 700;
@@ -4241,7 +4262,8 @@ body:has(.coming-soon-section) .footer {
         height: 400px;
     }
     
-    .banner h1 {
+    .banner h1,
+    .banner h2.banner-heading {
         font-size: 32px;
     }
     

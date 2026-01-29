@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin/
+Disallow: /config/
+Disallow: /data/
+Disallow: /test_
+Disallow: /debug_
+Disallow: /*.php$
+
+Sitemap: https://pallavisingofficial.com/sitemap.xml

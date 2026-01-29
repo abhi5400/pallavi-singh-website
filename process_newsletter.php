@@ -25,6 +25,12 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $response = ['success' => false, 'message' => ''];
 
 try {
+    // Honeypot: reject if bot filled the hidden field
+    if (!empty(trim($_POST['website_url'] ?? ''))) {
+        header('Content-Type: application/json');
+        echo json_encode(['success' => true, 'message' => 'Thank you for subscribing.']);
+        exit;
+    }
     // Get and sanitize form data
     $email = Database::sanitizeInput($_POST['email'] ?? '');
     $firstName = Database::sanitizeInput($_POST['first_name'] ?? '');

@@ -27,6 +27,19 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $response = ['success' => false, 'message' => ''];
 
 try {
+    // Honeypot: reject if bot filled the hidden field
+    if (!empty(trim($_POST['website_url'] ?? ''))) {
+        echo json_encode(['success' => true, 'message' => 'Thank you for your interest. We will get back to you soon.']);
+        exit;
+    }
+    // Header injection prevention: reject if any text field contains newlines
+    $rawTextFields = ['full_name' => $_POST['full_name'] ?? '', 'email' => $_POST['email'] ?? '', 'city' => $_POST['city'] ?? '', 'contact_number' => $_POST['contact_number'] ?? '', 'issue_challenge' => $_POST['issue_challenge'] ?? '', 'goals' => $_POST['goals'] ?? ''];
+    foreach ($rawTextFields as $val) {
+        if (preg_match('/[\r\n]/', (string) $val)) {
+            echo json_encode(['success' => false, 'message' => 'Invalid input. Please try again.']);
+            exit;
+        }
+    }
     // Get and sanitize form data
     $full_name = Database::sanitizeInput($_POST['full_name'] ?? '');
     $ageRaw = $_POST['age'] ?? '';

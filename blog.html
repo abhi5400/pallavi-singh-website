@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog | Pallavi Singh - Life Coach & Storyteller</title>
     <meta name="description" content="Insights, stories, and wisdom from Pallavi Singh.">
-    <link rel="icon" type="image/x-icon" href="assets/images/pallavi-logo.png">
+    <link rel="canonical" href="https://pallavisingofficial.com/blog.html">
+    <link rel="icon" type="image/x-icon" href="assets/images/Pallavi Singh official.png">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Merriweather:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -78,10 +79,10 @@
                     <h3 class="logo-text">Pallavi Singh</h3>
                     <p>Transformation Coach & Storytelling Expert</p>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="https://www.instagram.com/lifecoachandstorytellerpallavi/" target="_blank"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.facebook.com/lifecoachandstorytellerpallavi" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/lifecoachandstorytellerpallavi/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="javascript:void(0)" aria-label="LinkedIn (coming soon)"><i class="fab fa-linkedin"></i></a>
+                        <a href="javascript:void(0)" aria-label="YouTube (coming soon)"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
                 <div class="footer-section">
@@ -137,7 +138,7 @@
             }
 
             var imgSrc = (post.featured_image || '').trim().replace(/\\\//g, '/');
-            if (!imgSrc) imgSrc = 'assets/images/pallavi-logo.png';
+            if (!imgSrc) imgSrc = 'assets/images/Pallavi Singh official.png';
             else if (!imgSrc.includes('/') && !imgSrc.startsWith('http')) imgSrc = 'assets/images/' + imgSrc;
             else if (!imgSrc.startsWith('assets/') && !imgSrc.startsWith('/') && !imgSrc.startsWith('http')) imgSrc = 'assets/images/' + imgSrc;
 
@@ -158,7 +159,7 @@
                 '    </div>' +
                 '    <h1 class="blog-post-title">' + title + '</h1>' +
                 '  </div>' +
-                '  <img src="' + imgSrc.replace(/"/g, '&quot;') + '" alt="' + title.replace(/"/g, '&quot;') + '" class="blog-post-featured-image" onerror="this.src=\'assets/images/pallavi-logo.png\'; this.onerror=null;">' +
+                '  <img src="' + imgSrc.replace(/"/g, '&quot;') + '" alt="' + title.replace(/"/g, '&quot;') + '" class="blog-post-featured-image" onerror="this.src=\'assets/images/Pallavi Singh official.png\'; this.onerror=null;">' +
                 '  <div class="blog-post-body">' + (post.content || '<p>No content.</p>') + '</div>' +
                 '  <p style="margin-top:40px;"><a href="index.html#blog" class="blog-post-back"><i class="fas fa-arrow-left"></i> Back to Wisdom Vault</a></p>' +
                 '</article>';

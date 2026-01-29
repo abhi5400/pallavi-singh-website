@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 			card.className = 'blog-card';
 			
 			// Process image path: convert escaped slashes to regular slashes
-			let imgSrc = 'assets/images/pallavi-logo.png'; // default fallback
+			let imgSrc = 'assets/images/Pallavi Singh official.png'; // default fallback
 			if (post.featured_image && post.featured_image.trim()) {
 				// Convert escaped slashes (\/) to regular slashes (/)
 				imgSrc = post.featured_image.replace(/\\\//g, '/');
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 			card.innerHTML = `
 				<div class="blog-image">
-					<img src="${imgSrc}" alt="${safeTitle}" class="blog-img" onerror="this.src='assets/images/pallavi-logo.png'; this.onerror=null;">
+					<img src="${imgSrc}" alt="${safeTitle}" class="blog-img" onerror="this.src='assets/images/Pallavi Singh official.png'; this.onerror=null;">
 				</div>
 				<div class="blog-content">
 					${date ? `<div class="blog-meta">

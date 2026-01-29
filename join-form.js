@@ -83,20 +83,40 @@ class JoinFormHandler {
         this.modal.style.display = 'flex';
         document.body.style.overflow = 'hidden'; // Prevent background scrolling
         
-        // Focus on first input
+        // Focus trap: keep focus inside modal
+        this._boundTrapFocus = this.trapFocus.bind(this);
+        this.modal.addEventListener('keydown', this._boundTrapFocus);
+        
+        // Focus on first focusable (skip honeypot)
         setTimeout(() => {
-            const firstInput = this.form.querySelector('input');
-            if (firstInput) firstInput.focus();
+            const focusable = this.modal.querySelectorAll('input:not([type="hidden"]):not([tabindex="-1"]), select, textarea, button, [href]');
+            const first = Array.from(focusable).find(el => el.offsetParent !== null && !el.hasAttribute('aria-hidden'));
+            if (first) first.focus();
         }, 300);
     }
     
     closeModal() {
         this.modal.style.display = 'none';
         document.body.style.overflow = ''; // Restore scrolling
-        
+        if (this._boundTrapFocus) {
+            this.modal.removeEventListener('keydown', this._boundTrapFocus);
+        }
         // Reset form
         this.form.reset();
         this.clearErrors();
+    }
+    
+    trapFocus(e) {
+        if (e.key !== 'Tab') return;
+        const focusable = this.modal.querySelectorAll('input:not([tabindex="-1"]):not([type="hidden"]), select, textarea, button, [href]');
+        const list = Array.from(focusable).filter(el => el.offsetParent !== null && !el.closest('[aria-hidden="true"]'));
+        if (list.length === 0) return;
+        const first = list[0], last = list[list.length - 1];
+        if (e.shiftKey) {
+            if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+        } else {
+            if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+        }
     }
     
     handleKeydown(e) {

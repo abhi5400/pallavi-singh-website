@@ -36,7 +36,7 @@ if (!empty($form_id)) {
     <meta name="description" content="Thank you for joining Pallavi Singh Coaching. Your transformation journey begins now.">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="assets/images/pallavi-logo.png">
+    <link rel="icon" type="image/x-icon" href="assets/images/Pallavi Singh official.png">
     
     <!-- Stylesheets -->
     <link rel="stylesheet" href="styles.css">
