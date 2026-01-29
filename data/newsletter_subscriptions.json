@@ -1,0 +1,15 @@
+[
+    {
+        "email": "abhijeetjha5400@gmail.com",
+        "first_name": "Abhijeet",
+        "last_name": "Jha",
+        "source": "join_form",
+        "subscription_date": "2026-01-29 10:45:48",
+        "ip_address": "::1",
+        "status": "active",
+        "unsubscribe_token": "ad7754e2dde45842d05dc6f656c24462",
+        "id": 1,
+        "created_at": "2026-01-29 10:45:48",
+        "updated_at": "2026-01-29 10:45:48"
+    }
+]

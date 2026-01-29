@@ -34,6 +34,11 @@ try {
     $subject = Database::sanitizeInput($_POST['subject'] ?? '');
     $message = Database::sanitizeInput($_POST['message'] ?? '');
     
+    // Default subject for simple contact forms (e.g. service pages with only name, email, message)
+    if (empty($subject)) {
+        $subject = 'coaching-session';
+    }
+    
     // Validate required fields
     $errors = [];
     
@@ -43,10 +48,6 @@ try {
     
     if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors[] = 'Valid email address is required';
-    }
-    
-    if (empty($subject)) {
-        $errors[] = 'Subject is required';
     }
     
     if (empty($message)) {
@@ -61,8 +62,8 @@ try {
         exit;
     }
     
-    // Get database instance
-    $db = JsonDatabase::getInstance();
+    // Get database instance (MySQL or JSON fallback)
+    $db = Database::getInstance();
     
     // Prepare data for storage
     $contactData = [

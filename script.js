@@ -544,13 +544,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Contact form handling
+// Contact form handling - submit to process_contact.php (skip on connect page which uses contact-form.js)
+if (!document.querySelector('script[src*="contact-form.js"]')) {
 document.getElementById('contactForm')?.addEventListener('submit', function(e) {
     e.preventDefault();
     
-    // Get form data
-    const formData = new FormData(this);
-    const data = Object.fromEntries(formData);
+    var form = this;
+    var formData = new FormData(form);
+    var data = Object.fromEntries(formData);
     
     // Basic validation
     if (!data.name || !data.email || !data.message) {
@@ -558,28 +559,47 @@ document.getElementById('contactForm')?.addEventListener('submit', function(e) {
         return;
     }
     
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(data.email)) {
         alert('Please enter a valid email address.');
         return;
     }
     
-    // Simulate form submission (replace with actual form handling)
-    const submitButton = this.querySelector('button[type="submit"]');
-    const originalText = submitButton.textContent;
+    var submitButton = form.querySelector('button[type="submit"]');
+    var originalText = submitButton.textContent;
+    var loadingSpan = form.querySelector('.btn-loading');
+    var btnTextSpan = form.querySelector('.btn-text');
     
-    submitButton.textContent = 'Sending...';
     submitButton.disabled = true;
+    if (btnTextSpan) btnTextSpan.style.display = 'none';
+    if (loadingSpan) loadingSpan.style.display = 'inline-block';
+    submitButton.textContent = 'Sending...';
     
-    // Simulate API call
-    setTimeout(() => {
-        alert('Thank you for your message! I will get back to you soon.');
-        this.reset();
-        submitButton.textContent = originalText;
+    fetch(form.getAttribute('action') ? form.action : 'process_contact.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(function(res) { return res.json(); })
+    .then(function(result) {
+        if (result.success) {
+            alert(result.message || 'Thank you for your message! I will get back to you soon.');
+            form.reset();
+        } else {
+            alert(result.message || 'Something went wrong. Please try again.');
+        }
+    })
+    .catch(function(err) {
+        console.error('Contact form error:', err);
+        alert('Unable to send your message. Please check your connection and try again.');
+    })
+    .finally(function() {
         submitButton.disabled = false;
-    }, 2000);
+        submitButton.textContent = originalText;
+        if (btnTextSpan) btnTextSpan.style.display = 'inline-block';
+        if (loadingSpan) loadingSpan.style.display = 'none';
+    });
 });
+}
 
 // Navbar scroll effect
 window.addEventListener('scroll', function() {

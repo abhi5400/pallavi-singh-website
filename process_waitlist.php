@@ -48,8 +48,8 @@ try {
         exit;
     }
     
-    // Get database instance
-    $db = JsonDatabase::getInstance();
+    // Get database instance (MySQL or JSON fallback)
+    $db = Database::getInstance();
     
     // Generate unique waitlist ID
     $waitlist_id = 'WAIT-' . date('Ymd') . '-' . strtoupper(substr(uniqid(), -6));

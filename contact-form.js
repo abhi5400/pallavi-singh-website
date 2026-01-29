@@ -42,44 +42,32 @@ class ContactFormHandler {
             return;
         }
         
-        // Submit form data
+        // Submit form data to process_contact.php
         const formData = new FormData(this.form);
+        const self = this;
+        const action = this.form.getAttribute('action') ? this.form.action : 'process_contact.php';
         
-        // Client-side submission (works without PHP server)
-        setTimeout(() => {
-            const mockResponse = {
-                success: true,
-                message: 'Thank you for your message! We\'ll get back to you within 24 hours.',
-                contact_id: 'CONTACT-' + Date.now()
-            };
-            
-            // Log form data to console for debugging
-            console.log('Contact form submitted successfully:', Object.fromEntries(formData));
-            
-            // Store in localStorage for reference
-            try {
-                const submissions = JSON.parse(localStorage.getItem('contact_submissions') || '[]');
-                submissions.push({
-                    id: mockResponse.contact_id,
-                    timestamp: new Date().toISOString(),
-                    data: Object.fromEntries(formData)
-                });
-                localStorage.setItem('contact_submissions', JSON.stringify(submissions));
-                console.log('Form data saved to localStorage');
-            } catch (e) {
-                console.log('Could not save to localStorage:', e);
+        fetch(action, {
+            method: 'POST',
+            body: formData
+        })
+        .then(function(res) { return res.json(); })
+        .then(function(result) {
+            if (result.success) {
+                self.showSuccess({ message: result.message, contact_id: result.contact_id });
+                setTimeout(function() {
+                    self.form.reset();
+                }, 2000);
+            } else {
+                self.showError(result.message || 'Something went wrong. Please try again.');
             }
-            
-            this.showSuccess(mockResponse);
-            this.resetButton(submitBtn, btnText, btnLoading);
-            
-            // Reset form after successful submission
-            setTimeout(() => {
-                this.form.reset();
-                // Optionally redirect to thank you page
-                // window.location.href = 'thank_you.html?id=' + mockResponse.contact_id;
-            }, 3000);
-        }, 1000);
+            self.resetButton(submitBtn, btnText, btnLoading);
+        })
+        .catch(function(err) {
+            console.error('Contact form error:', err);
+            self.showError('Unable to send your message. Please check your connection and try again.');
+            self.resetButton(submitBtn, btnText, btnLoading);
+        });
     }
     
     validateForm() {

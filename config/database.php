@@ -99,28 +99,37 @@ class Database {
     
     /**
      * Update data
-     * For JSON: update($table, $id, $data)
-     * For MySQL: update($table, $data, $where, $whereParams)
+     * Supports both signatures:
+     *   update($table, $id, $data)  - admin pages
+     *   update($table, $data, $where, $whereParams)  - MySQL style
      */
     public function update($table, $data, $where = null, $whereParams = []) {
+        // Normalize: (table, id, data) -> (table, data, 'id = :id', ['id' => $id])
+        if (is_numeric($data) && is_array($where) && empty($whereParams)) {
+            $id = (int) $data;
+            $updateData = $where;
+            $where = 'id = :id';
+            $whereParams = ['id' => $id];
+            $data = $updateData;
+        }
+        
         if ($this->useJson) {
-            // JSON database expects: update($table, $id, $data)
-            // Extract ID from where clause
             $id = null;
-            if (!empty($where)) {
+            if (is_numeric($data) && is_array($where)) {
+                $id = (int) $data;
+                $data = $where;
+            } elseif (!empty($where)) {
                 if (preg_match('/id\s*=\s*\?/', $where) && !empty($whereParams)) {
-                    $id = $whereParams[0];
+                    $id = is_array($whereParams) && isset($whereParams[0]) ? $whereParams[0] : reset($whereParams);
                 } elseif (preg_match('/id\s*=\s*:id/', $where) && isset($whereParams['id'])) {
                     $id = $whereParams['id'];
-                } elseif (preg_match('/id\s*=\s*(\d+)/', $where, $matches)) {
-                    $id = $matches[1];
+                } elseif (preg_match('/id\s*=\s*(\d+)/', (string)$where, $matches)) {
+                    $id = (int)$matches[1];
                 }
             }
-            
             if ($id === null) {
-                throw new Exception("Could not extract ID from where clause for JSON database update");
+                throw new Exception("Could not extract ID for JSON database update");
             }
-            
             return $this->jsonDb->update($table, $id, $data);
         }
         
@@ -129,10 +138,8 @@ class Database {
             $setClause[] = "{$key} = :{$key}";
         }
         $setClause = implode(', ', $setClause);
-        
         $sql = "UPDATE {$table} SET {$setClause} WHERE {$where}";
         $params = array_merge($data, $whereParams);
-        
         $stmt = $this->query($sql, $params);
         return $stmt->rowCount();
     }
@@ -155,7 +162,24 @@ class Database {
      */
     public function select($table, $where = '', $params = [], $orderBy = '', $limit = '') {
         if ($this->useJson) {
-            return $this->jsonDb->getData($table);
+            $data = $this->jsonDb->getData($table);
+            if (!empty($where) && !empty($params)) {
+                $data = $this->filterJsonRecords($data, $where, $params);
+            }
+            if (!empty($orderBy)) {
+                $parts = preg_split('/\s+/', trim($orderBy), 2);
+                $col = $parts[0];
+                $dir = (isset($parts[1]) && strtoupper($parts[1]) === 'ASC') ? 1 : -1;
+                usort($data, function ($a, $b) use ($col, $dir) {
+                    $va = $a[$col] ?? '';
+                    $vb = $b[$col] ?? '';
+                    return $dir * strcmp((string)$va, (string)$vb);
+                });
+            }
+            if ($limit !== '' && is_numeric($limit)) {
+                $data = array_slice($data, 0, (int)$limit);
+            }
+            return $data;
         }
         
         $sql = "SELECT * FROM {$table}";
@@ -225,6 +249,9 @@ class Database {
     public function count($table, $where = '', $params = []) {
         if ($this->useJson) {
             $data = $this->jsonDb->getData($table);
+            if (!empty($where) && !empty($params)) {
+                $data = $this->filterJsonRecords($data, $where, $params);
+            }
             return count($data);
         }
         
@@ -250,6 +277,48 @@ class Database {
         $sql = "DELETE FROM {$table} WHERE {$where}";
         $stmt = $this->query($sql, $params);
         return $stmt->rowCount();
+    }
+    
+    /**
+     * Filter JSON records by simple where clause (for JSON mode)
+     * Supports "col = ?", "col = :col", "DATE(col) = ?"
+     */
+    private function filterJsonRecords($data, $where, $params) {
+        $where = trim($where);
+        $value = is_array($params) && isset($params[0]) ? $params[0] : (isset($params['status']) ? $params['status'] : reset($params));
+        if ($value === false) return $data;
+        if (preg_match('/DATE\s*\(\s*(\w+)\s*\)\s*=\s*\?/', $where, $m)) {
+            $col = $m[1];
+            $wantDate = $value;
+            return array_values(array_filter($data, function ($r) use ($col, $wantDate) {
+                $v = $r[$col] ?? '';
+                $d = is_string($v) ? substr($v, 0, 10) : date('Y-m-d', strtotime($v));
+                return $d === $wantDate;
+            }));
+        }
+        if (preg_match('/(\w+)\s+LIKE\s+\?/', $where, $m)) {
+            $col = $m[1];
+            $escaped = preg_quote($value, '/');
+            $pattern = str_replace(['\%', '\_'], ['.*', '.'], $escaped);
+            return array_values(array_filter($data, function ($r) use ($col, $pattern) {
+                $v = isset($r[$col]) ? (string)$r[$col] : '';
+                return (bool)preg_match('/^' . $pattern . '$/', $v);
+            }));
+        }
+        if (preg_match('/(\w+)\s*=\s*\?/', $where, $m)) {
+            $col = $m[1];
+            return array_values(array_filter($data, function ($r) use ($col, $value) {
+                return isset($r[$col]) && (string)$r[$col] === (string)$value;
+            }));
+        }
+        if (preg_match('/(\w+)\s*=\s*:(\w+)/', $where, $m) && isset($params[$m[2]])) {
+            $col = $m[1];
+            $value = $params[$m[2]];
+            return array_values(array_filter($data, function ($r) use ($col, $value) {
+                return isset($r[$col]) && (string)$r[$col] === (string)$value;
+            }));
+        }
+        return $data;
     }
     
     /**

@@ -10,6 +10,9 @@ function syncBlogPostsToJson() {
     try {
         $db = Database::getInstance();
         $allPosts = $db->getData('blog_posts');
+        if (!is_array($allPosts)) {
+            $allPosts = [];
+        }
         
         // Decode JSON fields if using MySQL
         if (!$db->isUsingJson()) {

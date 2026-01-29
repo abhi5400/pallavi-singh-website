@@ -58,8 +58,9 @@ try {
         $errors[] = 'City is required';
     }
     
+    // State is optional
     if (empty($state)) {
-        $errors[] = 'State/Province is required';
+        $state = 'Not specified';
     }
     
     if (empty($contact_number)) {
@@ -84,8 +85,8 @@ try {
         exit;
     }
     
-    // Get database instance
-    $db = JsonDatabase::getInstance();
+    // Get database instance (MySQL or JSON fallback)
+    $db = Database::getInstance();
     
     // Generate unique form ID
     $form_id = 'JOIN-' . date('Ymd') . '-' . strtoupper(substr(uniqid(), -6));

@@ -126,30 +126,55 @@ class JoinFormHandler {
             return;
         }
         
-        // Submit form data
+        // Submit form data to process_join.php
         const formData = new FormData(this.form);
+        const self = this;
+        const submitUrl = this.form.action || 'process_join.php';
         
-        // Simulate successful form submission (works without PHP)
-        setTimeout(() => {
-            const mockResponse = {
-                success: true,
-                message: 'Thank you for joining! Your form has been submitted successfully.',
-                form_id: 'JOIN-' + Date.now(),
-                redirect_url: 'thank_you.html'
-            };
-            
-            this.showSuccess(mockResponse);
-            
-            // Log form data to console for debugging
-            console.log('Form submitted successfully:', Object.fromEntries(formData));
-            
-            // Close modal and redirect to thank you page
-            setTimeout(() => {
-                this.closeModal();
-                // Create a simple thank you page if it doesn't exist
-                this.createThankYouPage(mockResponse.form_id);
-            }, 2000);
-        }, 1000);
+        fetch(submitUrl, {
+            method: 'POST',
+            body: formData
+        })
+        .then(function(res) {
+            if (!res.ok) {
+                // Server error or 404 (e.g. PHP not running on Live Server)
+                var msg = 'The form server is not responding. ';
+                if (res.status === 404 || res.type === 'basic') {
+                    msg += 'If testing locally, run a PHP server from the project folder: php -S localhost:8000 then open http://localhost:8000';
+                } else {
+                    msg += 'Please try again later or contact us.';
+                }
+                throw new Error(msg);
+            }
+            return res.text().then(function(text) {
+                try {
+                    return JSON.parse(text);
+                } catch (e) {
+                    throw new Error('Invalid response from server. If testing locally, run with PHP: php -S localhost:8000');
+                }
+            });
+        })
+        .then(function(result) {
+            if (result.success) {
+                self.showSuccess(result);
+                setTimeout(function() {
+                    self.closeModal();
+                    if (result.redirect_url) {
+                        window.location.href = result.redirect_url;
+                    } else {
+                        self.createThankYouPage(result.form_id || 'JOIN-' + Date.now());
+                    }
+                }, 2000);
+            } else {
+                self.resetButton(submitBtn, btnText, btnLoading);
+                self.showError(result.message || 'Something went wrong. Please try again.');
+            }
+        })
+        .catch(function(err) {
+            console.error('Join form error:', err);
+            self.resetButton(submitBtn, btnText, btnLoading);
+            self.showError(err.message || 'Unable to submit. Please check your connection and try again.');
+        });
     }
     
     validateForm() {
@@ -198,14 +223,10 @@ class JoinFormHandler {
             errorCount++;
         }
         
-        // Validate State
+        // Validate State (optional)
         const stateField = this.form.querySelector('input[name="state"]');
-        if (!stateField.value.trim()) {
-            this.showFieldError(stateField, 'State/Province is required');
-            isValid = false;
-            errorCount++;
-        } else if (stateField.value.trim().length < 2) {
-            this.showFieldError(stateField, 'State/Province name must be at least 2 characters');
+        if (stateField && stateField.value.trim() && stateField.value.trim().length < 2) {
+            this.showFieldError(stateField, 'State/Province name must be at least 2 characters if provided');
             isValid = false;
             errorCount++;
         }
@@ -648,10 +669,8 @@ class JoinFormHandler {
                 break;
                 
             case 'state':
-                if (!value) {
-                    this.showFieldError(field, 'State/Province is required');
-                } else if (value.length < 2) {
-                    this.showFieldError(field, 'State/Province name must be at least 2 characters');
+                if (value && value.length < 2) {
+                    this.showFieldError(field, 'State/Province name must be at least 2 characters if provided');
                 }
                 break;
                 

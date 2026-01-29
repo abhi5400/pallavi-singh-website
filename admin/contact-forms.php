@@ -60,6 +60,7 @@ try {
     
 } catch (Exception $e) {
     $error = "Database error: " . $e->getMessage();
+    $allContacts = [];
 }
 
 // Set page variables

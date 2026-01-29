@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | Pallavi Singh - Life Coach & Storyteller</title>
+    <meta name="description" content="Insights, stories, and wisdom from Pallavi Singh.">
+    <link rel="icon" type="image/x-icon" href="assets/images/pallavi-logo.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Merriweather:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .blog-post-container { max-width: 800px; margin: 0 auto; padding: 120px 20px 60px; line-height: 1.8; }
+        .blog-post-header { margin-bottom: 40px; }
+        .blog-post-meta { display: flex; gap: 20px; margin-bottom: 20px; color: #666; font-size: 0.95rem; flex-wrap: wrap; }
+        .blog-post-category { background: #A8D5BA; color: #1A535C; padding: 5px 15px; border-radius: 20px; font-weight: 600; font-size: 0.85rem; }
+        .blog-post-title { font-size: 2.5rem; color: #1A535C; margin-bottom: 20px; line-height: 1.3; font-family: 'Playfair Display', serif; }
+        .blog-post-featured-image { width: 100%; height: 400px; object-fit: cover; border-radius: 15px; margin-bottom: 40px; }
+        .blog-post-body { font-size: 1.1rem; color: #333; }
+        .blog-post-body h2 { font-size: 2rem; color: #1A535C; margin: 40px 0 20px; font-family: 'Playfair Display', serif; }
+        .blog-post-body h3 { font-size: 1.5rem; color: #1A535C; margin: 30px 0 15px; }
+        .blog-post-body p { margin-bottom: 20px; }
+        .blog-post-body ul, .blog-post-body ol { margin: 20px 0; padding-left: 30px; }
+        .blog-post-body li { margin-bottom: 10px; }
+        .blog-post-not-found { text-align: center; padding: 80px 20px; }
+        .blog-post-not-found h1 { color: #1A535C; margin-bottom: 20px; }
+        .blog-post-back { display: inline-block; margin-top: 20px; color: #1A535C; text-decoration: none; font-weight: 600; }
+        .blog-post-back:hover { color: #4ECDC4; }
+        @media (max-width: 768px) {
+            .blog-post-title { font-size: 2rem; }
+            .blog-post-featured-image { height: 250px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html"><img src="assets/images/Pallavi Singh official.png" alt="Pallavi Singh Logo" class="site-logo" /></a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link">About Pallavi</a></li>
+                <li class="nav-dropdown">
+                    <a href="mentorship.html" class="nav-link dropdown-toggle">Services <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="coaching-mentoring.html" class="dropdown-item">Coaching</a></li>
+                        <li><a href="habit-mastery.html" class="dropdown-item">Habit Mastery</a></li>
+                        <li><a href="overcome-anxiety.html" class="dropdown-item">Overcome Anxiety</a></li>
+                        <li><a href="relationship-mentoring.html" class="dropdown-item">Relationship Mentoring</a></li>
+                        <li><a href="storytelling.html" class="dropdown-item">Storytelling</a></li>
+                        <li><a href="public-speaking.html" class="dropdown-item">Public Speaking</a></li>
+                    </ul>
+                </li>
+                <li><a href="https://thestorytree.in" class="nav-link">The Story Tree</a></li>
+                <li><a href="wisdom-vault.html" class="nav-link">Wisdom Vault</a></li>
+                <li><a href="collaborate.html" class="nav-link">Media Coverage</a></li>
+                <li><a href="connect.html" class="nav-link">Connect</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <main id="blogPostContainer" class="blog-post-container">
+        <div class="blog-post-not-found">
+            <p>Loading...</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="logo-text">Pallavi Singh</h3>
+                    <p>Transformation Coach & Storytelling Expert</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/lifecoachandstorytellerpallavi/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Pallavi</a></li>
+                        <li><a href="wisdom-vault.html">Wisdom Vault</a></li>
+                        <li><a href="connect.html">Connect</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="coaching-mentoring.html">Coaching</a></li>
+                        <li><a href="habit-mastery.html">Habit Mastery</a></li>
+                        <li><a href="connect.html">Connect</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Pallavi Singh. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+(function() {
+    const container = document.getElementById('blogPostContainer');
+    if (!container) return;
+
+    const params = new URLSearchParams(window.location.search);
+    const postParam = params.get('post');
+    if (!postParam || !postParam.trim()) {
+        container.innerHTML = '<div class="blog-post-not-found"><h1>Article not found</h1><p>No article was specified.</p><a href="index.html#blog" class="blog-post-back"><i class="fas fa-arrow-left"></i> Back to Wisdom Vault</a></div>';
+        document.title = 'Article not found | Pallavi Singh';
+        return;
+    }
+
+    fetch('data/blog_posts.json', { cache: 'no-store' })
+        .then(function(r) { return r.ok ? r.json() : Promise.reject(new Error('Failed to load')); })
+        .then(function(posts) {
+            const list = Array.isArray(posts) ? posts : [];
+            const isId = /^\d+$/.test(postParam.trim());
+            const post = isId
+                ? list.find(function(p) { return String(p.id) === String(postParam); })
+                : list.find(function(p) { return (p.slug || '').toLowerCase() === postParam.toLowerCase().trim(); });
+
+            if (!post || (post.status || '').toLowerCase() !== 'published') {
+                container.innerHTML = '<div class="blog-post-not-found"><h1>Article not found</h1><p>This article may not exist or is not published yet.</p><a href="index.html#blog" class="blog-post-back"><i class="fas fa-arrow-left"></i> Back to Wisdom Vault</a></div>';
+                document.title = 'Article not found | Pallavi Singh';
+                return;
+            }
+
+            var imgSrc = (post.featured_image || '').trim().replace(/\\\//g, '/');
+            if (!imgSrc) imgSrc = 'assets/images/pallavi-logo.png';
+            else if (!imgSrc.includes('/') && !imgSrc.startsWith('http')) imgSrc = 'assets/images/' + imgSrc;
+            else if (!imgSrc.startsWith('assets/') && !imgSrc.startsWith('/') && !imgSrc.startsWith('http')) imgSrc = 'assets/images/' + imgSrc;
+
+            var category = 'General';
+            if (post.categories && Array.isArray(post.categories) && post.categories.length > 0) category = post.categories[0];
+            else if (typeof post.categories === 'string') category = post.categories;
+
+            var dateStr = post.published_at || post.created_at || '';
+            var formattedDate = dateStr ? new Date(dateStr).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : '';
+            var title = (post.title || 'Untitled').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+            container.innerHTML =
+                '<article class="blog-post-article">' +
+                '  <div class="blog-post-header">' +
+                '    <div class="blog-post-meta">' +
+                '      <span class="blog-post-category">' + (category.replace(/</g, '&lt;').replace(/>/g, '&gt;')) + '</span>' +
+                (formattedDate ? '      <span><i class="fas fa-calendar"></i> ' + formattedDate + '</span>' : '') +
+                '    </div>' +
+                '    <h1 class="blog-post-title">' + title + '</h1>' +
+                '  </div>' +
+                '  <img src="' + imgSrc.replace(/"/g, '&quot;') + '" alt="' + title.replace(/"/g, '&quot;') + '" class="blog-post-featured-image" onerror="this.src=\'assets/images/pallavi-logo.png\'; this.onerror=null;">' +
+                '  <div class="blog-post-body">' + (post.content || '<p>No content.</p>') + '</div>' +
+                '  <p style="margin-top:40px;"><a href="index.html#blog" class="blog-post-back"><i class="fas fa-arrow-left"></i> Back to Wisdom Vault</a></p>' +
+                '</article>';
+
+            document.title = (post.title || 'Blog') + ' | Pallavi Singh';
+            var desc = post.meta_description || post.excerpt || '';
+            if (desc) {
+                var metaDesc = document.querySelector('meta[name="description"]');
+                if (metaDesc) metaDesc.setAttribute('content', desc);
+            }
+        })
+        .catch(function(err) {
+            console.error('Blog load error:', err);
+            container.innerHTML = '<div class="blog-post-not-found"><h1>Unable to load article</h1><p>Please try again later.</p><a href="index.html#blog" class="blog-post-back"><i class="fas fa-arrow-left"></i> Back to Wisdom Vault</a></div>';
+            document.title = 'Error | Pallavi Singh';
+        });
+})();
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

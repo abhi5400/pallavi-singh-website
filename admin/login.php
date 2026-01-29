@@ -57,7 +57,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
                 
                 // Update last login (don't let this block login)
                 try {
-                    $db->update('admin_users', ['last_login' => date('Y-m-d H:i:s')], 'id = ?', [$user['id']]);
+                    $db->update('admin_users', ['last_login' => date('Y-m-d H:i:s')], 'id = :id', ['id' => $user['id']]);
                 } catch (Exception $e) {
                     error_log("Failed to update last login: " . $e->getMessage());
                 }

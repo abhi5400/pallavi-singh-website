@@ -24,20 +24,20 @@ try {
     $contactCount = $db->count('contact_submissions');
     $bookingCount = $db->count('booking_submissions');
     $journeyCount = $db->count('journey_submissions');
-    $newsletterCount = $db->count('newsletter_subscriptions', ['status' => 'active']);
+    $newsletterCount = $db->count('newsletter_subscriptions', 'status = ?', ['active']);
     
     // Get analytics data
-    $analyticsData = $db->getData('analytics');
+    $analyticsData = $db->getData('analytics') ?: [];
     
     // Calculate monthly data
     $currentMonth = date('Y-m');
     $lastMonth = date('Y-m', strtotime('-1 month'));
     
-    $currentMonthContacts = $db->count('contact_submissions', ['submission_date' => $currentMonth]);
-    $lastMonthContacts = $db->count('contact_submissions', ['submission_date' => $lastMonth]);
+    $currentMonthContacts = $db->count('contact_submissions', 'submission_date LIKE ?', [$currentMonth . '%']);
+    $lastMonthContacts = $db->count('contact_submissions', 'submission_date LIKE ?', [$lastMonth . '%']);
     
-    $currentMonthBookings = $db->count('booking_submissions', ['submission_date' => $currentMonth]);
-    $lastMonthBookings = $db->count('booking_submissions', ['submission_date' => $lastMonth]);
+    $currentMonthBookings = $db->count('booking_submissions', 'submission_date LIKE ?', [$currentMonth . '%']);
+    $lastMonthBookings = $db->count('booking_submissions', 'submission_date LIKE ?', [$lastMonth . '%']);
     
     // Calculate growth percentages
     $contactGrowth = $lastMonthContacts > 0 ? (($currentMonthContacts - $lastMonthContacts) / $lastMonthContacts) * 100 : 0;

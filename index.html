@@ -16,7 +16,7 @@
       gtag('config', 'G-HZM0K6N3WG');
     </script>
     
-    <!-- Open Graph Meta Tags -->
+    <!-- Open Graph Meta Tags -->   
     <meta property="og:title" content="Pallavi Singh - Life Coach & Storyteller" />
     <meta property="og:description" content="Transform your life through personalized coaching, storytelling, and mentorship with Pallavi Singh." />
     <meta property="og:type" content="website" />
@@ -51,6 +51,15 @@
                 }
             } catch(e) {}
         })();
+    </script>
+    <!-- Live Server notice: forms need PHP -->
+    <div id="php-server-notice" style="display:none; position:fixed; top:0; left:0; right:0; z-index:9999; background:#1A535C; color:#fff; padding:10px 16px; text-align:center; font-size:14px; box-shadow:0 2px 8px rgba(0,0,0,0.2);">
+        <span>Forms (Join, Contact, etc.) need a PHP server. </span>
+        <strong>Double-click <code style="background:rgba(255,255,255,0.2); padding:2px 6px;">start_server.bat</code></strong> in your project folder, then use <a href="http://localhost:8000" style="color:#4ECDC4;">http://localhost:8000</a>
+        <button type="button" onclick="this.parentElement.style.display='none'; try{ localStorage.setItem('ps_php_notice_dismiss','1'); }catch(e){}" style="margin-left:12px; background:rgba(255,255,255,0.2); border:none; color:#fff; padding:4px 10px; cursor:pointer; border-radius:4px;">Dismiss</button>
+    </div>
+    <script>
+        (function(){ if (window.location.port === '5500' && !localStorage.getItem('ps_php_notice_dismiss')) { document.getElementById('php-server-notice').style.display = 'block'; } })();
     </script>
     <!-- Navigation -->
     <nav class="navbar">

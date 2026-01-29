@@ -61,13 +61,18 @@ if ($_POST) {
         
         if (isset($_POST['update_post'])) {
             $postId = $_POST['post_id'];
+            $db = Database::getInstance();
+            
+            // When publishing, set published_at only if first time (keep original date when re-saving)
+            $existing = $db->findById('blog_posts', $postId);
+            $publishedAt = null;
+            if ($_POST['status'] === 'published') {
+                $publishedAt = (!empty($existing['published_at'])) ? $existing['published_at'] : date('Y-m-d H:i:s');
+            }
             
             // Prepare categories and tags arrays
             $categories = array_map('trim', explode(',', $_POST['category']));
             $tags = array_map('trim', explode(',', $_POST['tags'] ?? ''));
-            
-            // For MySQL, encode arrays as JSON; for JSON database, keep as arrays
-            $db = Database::getInstance();
             $categoriesValue = $db->isUsingJson() ? $categories : json_encode($categories);
             $tagsValue = $db->isUsingJson() ? $tags : json_encode($tags);
             
@@ -80,12 +85,12 @@ if ($_POST) {
                 'tags' => $tagsValue,
                 'featured_image' => trim($_POST['featured_image'] ?? ''),
                 'status' => $_POST['status'],
-                'published_at' => $_POST['status'] === 'published' ? date('Y-m-d H:i:s') : null,
+                'published_at' => $publishedAt,
                 'meta_title' => trim($_POST['meta_title'] ?? ''),
                 'meta_description' => trim($_POST['meta_description'] ?? '')
             ];
             
-            $db->update('blog_posts', $updateData, 'id = ?', [$postId]);
+            $db->update('blog_posts', $updateData, 'id = :id', ['id' => $postId]);
             
             // Sync to JSON file for frontend
             require_once 'sync_blog_json.php';

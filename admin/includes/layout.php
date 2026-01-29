@@ -130,7 +130,7 @@ $userInitials = strtoupper(substr($user['full_name'], 0, 1));
                         <i class="fas fa-user-cog"></i>
                         <span>Users</span>
                     </a>
-                    <a href="backup.php" class="nav-item <?php echo $currentPage === 'backup' ? 'active' : ''; ?>">
+                    <a href="settings.php" class="nav-item <?php echo $currentPage === 'backup' ? 'active' : ''; ?>" title="Backup &amp; export in Settings">
                         <i class="fas fa-database"></i>
                         <span>Backup</span>
                     </a>
@@ -185,13 +185,13 @@ $userInitials = strtoupper(substr($user['full_name'], 0, 1));
                             <i class="fas fa-chevron-down"></i>
                         </button>
                         <div class="user-menu-dropdown">
-                            <a href="profile.php" class="dropdown-item">
-                                <i class="fas fa-user"></i> Profile
+                            <a href="settings.php" class="dropdown-item">
+                                <i class="fas fa-user"></i> Profile &amp; Settings
                             </a>
                             <a href="settings.php" class="dropdown-item">
                                 <i class="fas fa-cog"></i> Settings
                             </a>
-                            <a href="help.php" class="dropdown-item">
+                            <a href="settings.php" class="dropdown-item">
                                 <i class="fas fa-question-circle"></i> Help
                             </a>
                             <a href="?logout=1" class="dropdown-item">

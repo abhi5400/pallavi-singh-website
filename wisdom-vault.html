@@ -129,10 +129,13 @@
             <div class="newsletter-content">
                 <h2>Join Pallavi's Circle</h2>
                 <p>Stay updated with the latest insights, wisdom, and transformation stories delivered to your inbox.</p>
-                <form class="newsletter-form">
-                    <input type="email" placeholder="Enter your email address" required>
+                <form class="newsletter-form" id="newsletterForm" method="POST" action="process_newsletter.php">
+                    <input type="email" name="email" id="newsletter-email" placeholder="Enter your email address" required>
+                    <input type="hidden" name="first_name" value="">
+                    <input type="hidden" name="last_name" value="">
                     <button type="submit" class="btn btn-primary">Subscribe</button>
                 </form>
+                <div id="newsletter-message" class="newsletter-message" style="display:none; margin-top:12px; padding:12px; border-radius:8px;"></div>
                 <p class="newsletter-note">No spam, just valuable content. Unsubscribe anytime.</p>
             </div>
         </div>
@@ -195,6 +198,41 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="script.js"></script>
     <script src="blogs.js"></script>
+    <script>
+    (function() {
+        var form = document.getElementById('newsletterForm');
+        var msgEl = document.getElementById('newsletter-message');
+        if (!form || !msgEl) return;
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            var btn = form.querySelector('button[type="submit"]');
+            var originalText = btn.textContent;
+            btn.disabled = true;
+            btn.textContent = 'Subscribing...';
+            msgEl.style.display = 'none';
+            var fd = new FormData(form);
+            fetch(form.action || 'process_newsletter.php', { method: 'POST', body: fd })
+                .then(function(r) { return r.json(); })
+                .then(function(res) {
+                    msgEl.style.display = 'block';
+                    msgEl.textContent = res.message || (res.success ? 'Thank you for subscribing!' : 'Something went wrong.');
+                    msgEl.style.background = res.success ? '#d4edda' : '#f8d7da';
+                    msgEl.style.color = res.success ? '#155724' : '#721c24';
+                    if (res.success) form.reset();
+                })
+                .catch(function() {
+                    msgEl.style.display = 'block';
+                    msgEl.textContent = 'Unable to subscribe. Please try again.';
+                    msgEl.style.background = '#f8d7da';
+                    msgEl.style.color = '#721c24';
+                })
+                .finally(function() {
+                    btn.disabled = false;
+                    btn.textContent = originalText;
+                });
+        });
+    })();
+    </script>
     
 </body>
 </html>

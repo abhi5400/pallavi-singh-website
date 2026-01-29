@@ -56,12 +56,10 @@ try {
             echo json_encode($response);
             exit;
         } else {
-            // Reactivate existing subscription
-            $db->update('newsletter_subscriptions', 
-                ['status' => 'active', 'first_name' => $firstName, 'last_name' => $lastName], 
-                'email = ?', 
-                [$email]
-            );
+            // Reactivate existing subscription (use id for update so JSON/MySQL both work)
+            $existingRecord = $existingSubscriptions[0];
+            $updateData = ['status' => 'active', 'first_name' => $firstName, 'last_name' => $lastName];
+            $db->update('newsletter_subscriptions', $updateData, 'id = :id', ['id' => $existingRecord['id']]);
             $response['success'] = true;
             $response['message'] = 'Welcome back! Your newsletter subscription has been reactivated.';
         }
@@ -72,7 +70,7 @@ try {
             'first_name' => $firstName,
             'last_name' => $lastName,
             'source' => 'website',
-            'submission_date' => date('Y-m-d H:i:s'),
+            'subscription_date' => date('Y-m-d H:i:s'),
             'ip_address' => Database::getClientIP(),
             'status' => 'active',
             'unsubscribe_token' => bin2hex(random_bytes(32))
